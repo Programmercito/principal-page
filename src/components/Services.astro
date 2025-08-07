@@ -1,0 +1,36 @@
+---
+import ServiceCard from './ServiceCard.astro';
+---
+
+<section id="services" class="py-20 bg-gray-800">
+  <div class="container mx-auto px-6">
+    <h2 class="text-4xl font-bold text-center text-white mb-12">Mis Servicios</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <ServiceCard
+        icon="mdi:web"
+        title="Desarrollo Web"
+        description="Diseño y desarrollo sitios web y aplicaciones web a medida. Desde landing pages estáticas hasta e-commerce y sistemas complejos, enfocados en el rendimiento y la experiencia de usuario."
+      />
+      <ServiceCard
+        icon="mdi:cogs"
+        title="Sistemas ERP"
+        description="Implemento y personalizo sistemas de planificación de recursos empresariales (ERP) para integrar y automatizar los procesos clave de tu negocio, mejorando la eficiencia y la toma de decisiones."
+      />
+      <ServiceCard
+        icon="mdi:server-network"
+        title="VPS & Hosting"
+        description="Ofrezco soluciones de alojamiento web y servidores privados virtuales (VPS) de alto rendimiento. Garantizo seguridad, escalabilidad y un soporte técnico cercano para tus proyectos online."
+      />
+      <ServiceCard
+        icon="mdi:account-group"
+        title="Consultoría Informática"
+        description="Brindo asesoramiento tecnológico estratégico para alinear la tecnología con tus objetivos de negocio. Te ayudo a elegir las herramientas y arquitecturas adecuadas para optimizar tu inversión."
+      />
+      <ServiceCard
+        icon="mdi:bullhorn"
+        title="Marketing Digital"
+        description="Potencio tu presencia en línea a través de la gestión estratégica de redes sociales, SEO y campañas publicitarias. Mi objetivo es aumentar tu visibilidad y atraer más clientes."
+      />
+    </div>
+  </div>
+</section>

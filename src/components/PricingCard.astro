@@ -1,0 +1,20 @@
+---
+interface Props {
+  title: string;
+  features: string[];
+  isFeatured: boolean;
+}
+
+const { title, features, isFeatured } = Astro.props;
+---
+
+<div class:list={['bg-gray-800 p-8 rounded-lg shadow-lg text-center', { 'border-2 border-cyan-400': isFeatured }]}>
+  <h3 class="text-2xl font-bold text-white mb-4">{title}</h3>
+  <p class="text-3xl font-bold text-cyan-400 mb-6">Consúltanos</p>
+  <ul class="text-gray-400 mb-8 space-y-2">
+    {features.map(feature => <li>{feature}</li>)}
+  </ul>
+  <a href="#contact" class:list={['font-bold py-3 px-8 rounded-full transition-colors', { 'bg-cyan-500 hover:bg-cyan-600 text-white': isFeatured, 'bg-gray-700 hover:bg-gray-600 text-white': !isFeatured }]}>
+    Consultar
+  </a>
+</div>
