@@ -1,0 +1,34 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  href: string;
+  label: string;
+  icon?: string;
+  className?: string;
+}
+
+const { href, label, icon, className } = Astro.props;
+---
+
+<a
+  href={href}
+  class:list={[
+    "btn",
+    className,
+  ]}
+>
+  {icon && <Icon name={icon} class="w-6 h-6 inline-block mr-2" />}
+  {label}
+</a>
+
+<style>
+  .btn {
+    @apply inline-block bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-bold py-4 px-8 rounded-full transition-all duration-300 ease-in-out transform hover:scale-105;
+    box-shadow: 0 4px 15px rgba(0, 188, 212, 0.3);
+  }
+
+  .btn:hover {
+    box-shadow: 0 8px 25px rgba(0, 188, 212, 0.4);
+  }
+</style>
