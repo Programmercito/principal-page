@@ -4,18 +4,87 @@ import Button from './Button.astro';
 ---
 
 <section id="home" class="relative h-screen flex items-center justify-center text-center bg-gray-900 text-white overflow-hidden">
-  <div class="absolute inset-0 bg-black opacity-50"></div>
-  <div class="z-10">
+  <!-- Animated Aurora Background -->
+  <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
+    <div class="aurora-shape shape-1"></div>
+    <div class="aurora-shape shape-2"></div>
+    <div class="aurora-shape shape-3"></div>
+  </div>
+  
+  <div class="z-10 relative">
     <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-4">Desarrollador Web Full-Stack</h1>
     <p class="text-lg md:text-2xl mb-8">Creando soluciones web a medida, desde el front-end hasta el back-end.</p>
     <div class="flex justify-center space-x-4">
-      <Button href="#services" label="Ver Servicios" />
+      <Button href="#services" label="Ver Servicios" className="hero-button-primary" />
       <Button href="#contact" label="Contáctame" />
     </div>
   </div>
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2">
+  
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
     <a href="#services" aria-label="Bajar a la sección de servicios">
       <Icon name="mdi:arrow-down-bold-circle-outline" class="w-10 h-10 animate-bounce" />
     </a>
   </div>
 </section>
+
+<style>
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(34, 211, 238, 0.4), 0 4px 15px rgba(0, 188, 212, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 35px rgba(34, 211, 238, 0.7), 0 8px 25px rgba(0, 188, 212, 0.4);
+    }
+  }
+
+  .hero-button-primary {
+    animation: pulse-glow 3s infinite ease-in-out;
+  }
+
+  .aurora-shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.3;
+  }
+
+  .shape-1 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, #22d3ee, transparent 60%);
+    top: -100px;
+    left: -100px;
+    animation: move-aurora-1 15s infinite alternate ease-in-out;
+  }
+
+  .shape-2 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, #3b82f6, transparent 60%);
+    bottom: -50px;
+    right: -50px;
+    animation: move-aurora-2 18s infinite alternate ease-in-out;
+  }
+  
+  .shape-3 {
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, #818cf8, transparent 60%);
+    bottom: 100px;
+    left: 20%;
+    animation: move-aurora-3 20s infinite alternate ease-in-out;
+  }
+
+  @keyframes move-aurora-1 {
+    from { transform: translate(-10%, -10%) rotate(0deg); }
+    to { transform: translate(10%, 10%) rotate(30deg); }
+  }
+  @keyframes move-aurora-2 {
+    from { transform: translate(5%, 15%) rotate(0deg); }
+    to { transform: translate(-15%, -5%) rotate(45deg); }
+  }
+  @keyframes move-aurora-3 {
+    from { transform: translate(10%, 5%) rotate(0deg); }
+    to { transform: translate(-5%, -10%) rotate(-40deg); }
+  }
+</style>

@@ -1,19 +1,24 @@
 ---
-import { Icon } from 'astro-icon/components';
 import Button from './Button.astro';
 
 interface Props {
-  icon: string;
+  img: string;
   title: string;
   description: string;
+  link: string;
 }
 
-const { icon, title, description } = Astro.props;
+const { img, title, description, link } = Astro.props;
 ---
 
 <div class="fade-in-element p-8 rounded-lg text-center h-full flex flex-col bg-black/20 backdrop-blur-lg border border-white/20 shadow-xl transition-colors duration-300 hover:bg-black/30">
-  <Icon name={icon} class="w-16 h-16 mx-auto mb-6 text-cyan-400" />
+  <img src={img} alt={`Imagen de ${title}`} class="w-48 h-48 mx-auto mb-6 rounded-md object-cover transition-all duration-300 [filter:drop-shadow(0_0_8px_rgba(34,211,238,0.5))] hover:[filter:drop-shadow(0_0_15px_rgba(34,211,238,0.8))]">
   <h3 class="text-2xl font-bold text-white mb-4">{title}</h3>
   <p class="text-gray-400 mb-6 flex-grow">{description}</p>
-  <Button href="#contact" label="Ver más" className="mt-auto" />
+  <Button 
+    href={link}
+    label="Ver Proyecto"
+    target="_blank"
+    className="mt-auto"
+  />
 </div>

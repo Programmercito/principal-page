@@ -6,13 +6,15 @@ interface Props {
   label: string;
   icon?: string;
   className?: string;
+  target?: string;
 }
 
-const { href, label, icon, className } = Astro.props;
+const { href, label, icon, className, target } = Astro.props;
 ---
 
 <a
   href={href}
+  target={target}
   class:list={[
     "btn",
     className,
