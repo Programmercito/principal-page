@@ -1,9 +1,10 @@
 ---
 interface Props {
 	title: string;
+  description?: string;
 }
 
-const { title } = Astro.props;
+const { title, description = "Desarrollador Web Full-Stack. Creando soluciones web a medida para impulsar tu negocio." } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -13,33 +14,142 @@ const { title } = Astro.props;
 	<meta name="viewport" content="width=device-width" />
 	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 	<meta name="generator" content={Astro.generator} />
+  <meta name="description" content={description} />
 	<title>{title}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --tw-bg-opacity: 1;
-      background-color: rgb(17 24 39 / var(--tw-bg-opacity));
-      background-image: url("data:image/svg+xml,%3csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='1' cy='1' r='1' fill='rgba(255,255,255,0.05)'/%3e%3c/svg%3e");
+      --color-bg-primary: #020817;
+      --color-bg-secondary: #0d1227;
+      --color-cyan: #22d3ee;
+      --color-blue: #3b82f6;
+      --color-purple: #8b5cf6;
+      --font-primary: 'Inter', sans-serif;
+      --font-display: 'Space Grotesk', sans-serif;
     }
-    html.scroll-smooth {
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
       scroll-behavior: smooth;
+      background-color: var(--color-bg-primary);
+      font-family: var(--font-primary);
+    }
+
+    body {
+      background-color: var(--color-bg-primary);
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(34, 211, 238, 0.08), transparent),
+        url("data:image/svg+xml,%3csvg width='30' height='30' viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='1' cy='1' r='0.5' fill='rgba(255,255,255,0.03)'/%3e%3c/svg%3e");
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #020817;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(to bottom, #22d3ee, #3b82f6);
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(to bottom, #06b6d4, #2563eb);
     }
   </style>
   <style is:global>
 		.fade-in-element {
 			opacity: 0;
-			transform: translateY(20px);
-			transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+			transform: translateY(30px);
+			transition: opacity 0.7s ease-out, transform 0.7s ease-out;
 		}
 		.fade-in-element.is-visible {
 			opacity: 1;
 			transform: translateY(0);
 		}
+    .fade-in-left {
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+    .fade-in-left.is-visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Sections: offset for fixed header */
+    section[id] {
+      scroll-margin-top: 80px;
+    }
+
+    /* Gradient text utility */
+    .gradient-text {
+      background: linear-gradient(135deg, #22d3ee, #3b82f6, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Glow effects */
+    .glow-cyan {
+      box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+    }
+
+    /* Section titles */
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.75rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #22d3ee, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: #94a3b8;
+      text-align: center;
+      margin-bottom: 4rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @media (max-width: 768px) {
+      .section-title {
+        font-size: 2rem;
+      }
+      .section-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 2.5rem;
+      }
+    }
 	</style>
 </head>
 <body>
 	<slot />
   <script>
 		document.addEventListener('DOMContentLoaded', () => {
+			// Stagger animations per-section, not globally
+			const sections = document.querySelectorAll('section');
+			sections.forEach(section => {
+				const items = section.querySelectorAll('.fade-in-element, .fade-in-left');
+				items.forEach((el, i) => {
+					(el as HTMLElement).style.transitionDelay = `${i * 0.08}s`;
+				});
+			});
+
 			const observer = new IntersectionObserver((entries) => {
 				entries.forEach(entry => {
 					if (entry.isIntersecting) {
@@ -48,13 +158,12 @@ const { title } = Astro.props;
 					}
 				});
 			}, {
-				threshold: 0.1
+				threshold: 0.05,
+				rootMargin: '0px 0px -40px 0px'
 			});
 
-			const elementsToFadeIn = document.querySelectorAll('.fade-in-element');
-			elementsToFadeIn.forEach(el => {
-				observer.observe(el);
-			});
+			const elementsToFadeIn = document.querySelectorAll('.fade-in-element, .fade-in-left');
+			elementsToFadeIn.forEach(el => observer.observe(el));
 		});
 	</script>
 </body>

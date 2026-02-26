@@ -1,19 +1,155 @@
 ---
 import { Icon } from 'astro-icon/components';
-import Button from './Button.astro';
 
 interface Props {
   icon: string;
   title: string;
   description: string;
+  gradient?: string;
 }
 
-const { icon, title, description } = Astro.props;
+const { icon, title, description, gradient = 'from-cyan-500 to-blue-500' } = Astro.props;
 ---
 
-<div class="fade-in-element p-8 rounded-lg text-center h-full flex flex-col bg-black/20 backdrop-blur-lg border border-white/20 shadow-xl transition-colors duration-300 hover:bg-black/30">
-  <Icon name={icon} class="w-16 h-16 mx-auto mb-6 text-cyan-400" />
-  <h3 class="text-2xl font-bold text-white mb-4">{title}</h3>
-  <p class="text-gray-400 mb-6 flex-grow">{description}</p>
-  <Button href="#contact" label="Ver más" className="mt-auto" />
+<div class="service-card fade-in-element group">
+  <!-- Top glow line -->
+  <div class={`card-top-line bg-gradient-to-r ${gradient}`}></div>
+
+  <!-- Icon container -->
+  <div class="icon-wrap">
+    <div class={`icon-bg bg-gradient-to-br ${gradient}`}></div>
+    <Icon name={icon} class="service-icon" />
+  </div>
+
+  <h3 class="service-title">{title}</h3>
+  <p class="service-desc">{description}</p>
+
+  <!-- Arrow indicator -->
+  <div class="service-arrow">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M5 12h14m-7-7 7 7-7 7"/>
+    </svg>
+  </div>
 </div>
+
+<style>
+  .service-card {
+    position: relative;
+    padding: 2rem;
+    border-radius: 16px;
+    background: rgba(13, 18, 39, 0.6);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100%;
+    overflow: hidden;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: default;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% -20%, rgba(34, 211, 238, 0.06), transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  .service-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(34, 211, 238, 0.25);
+    box-shadow:
+      0 20px 50px rgba(0, 0, 0, 0.35),
+      0 0 30px rgba(34, 211, 238, 0.07);
+  }
+
+  .service-card:hover::before {
+    opacity: 1;
+  }
+
+  .card-top-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .service-card:hover .card-top-line {
+    opacity: 1;
+  }
+
+  .icon-wrap {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .icon-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.15;
+    transition: opacity 0.3s ease;
+  }
+
+  .service-card:hover .icon-bg {
+    opacity: 0.25;
+  }
+
+  .service-icon {
+    width: 28px;
+    height: 28px;
+    color: #22d3ee;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+
+  .service-card:hover .service-icon {
+    transform: scale(1.15);
+    color: #67e8f9;
+  }
+
+  .service-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: -0.01em;
+    transition: color 0.3s ease;
+  }
+
+  .service-card:hover .service-title {
+    color: #22d3ee;
+  }
+
+  .service-desc {
+    font-size: 0.875rem;
+    color: #94a3b8;
+    line-height: 1.65;
+    flex: 1;
+  }
+
+  .service-arrow {
+    color: #334155;
+    transition: color 0.3s ease, transform 0.3s ease;
+    margin-top: auto;
+  }
+
+  .service-card:hover .service-arrow {
+    color: #22d3ee;
+    transform: translateX(4px);
+  }
+</style>

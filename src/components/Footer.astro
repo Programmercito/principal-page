@@ -3,31 +3,208 @@ import { Icon } from 'astro-icon/components';
 const year = new Date().getFullYear();
 ---
 
-<footer class="bg-gray-900 text-center py-8">
-  <div class="container mx-auto px-6">
-    <!-- Social Icons -->
-    <div class="flex justify-center space-x-6 mb-6">
-      <a href="#" aria-label="GitHub" class="social-link">
-        <Icon name="mdi:github" class="w-8 h-8" />
-      </a>
-      <a href="#" aria-label="LinkedIn" class="social-link">
-        <Icon name="mdi:linkedin" class="w-8 h-8" />
-      </a>
-      <a href="#" aria-label="Twitter" class="social-link">
-        <Icon name="mdi:twitter" class="w-8 h-8" />
-      </a>
+<footer class="relative pt-16 pb-8 overflow-hidden">
+  <div class="footer-bg"></div>
+
+  <div class="container mx-auto px-6 relative z-10">
+    <!-- Top divider -->
+    <div class="footer-divider"></div>
+
+    <div class="footer-content">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <a href="/" class="footer-logo">
+          Devcito<span>Solutions</span>
+        </a>
+        <p class="footer-tagline">
+          Desarrollando el futuro digital,<br>un proyecto a la vez.
+        </p>
+      </div>
+
+      <!-- Links -->
+      <div class="footer-nav-group">
+        <p class="footer-nav-title">Navegación</p>
+        <div class="footer-nav-links">
+          <a href="#services">Servicios</a>
+          <a href="#productos">Proyectos</a>
+          <a href="#about">Sobre mí</a>
+          <a href="#contact">Contacto</a>
+        </div>
+      </div>
+
+      <!-- Social -->
+      <div class="footer-social-group">
+        <p class="footer-nav-title">Redes Sociales</p>
+        <div class="footer-social-icons">
+          <a href="https://github.com/programmercito" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="footer-social-link">
+            <Icon name="mdi:github" class="w-5 h-5" />
+          </a>
+          <a href="https://www.linkedin.com/in/joaquin-h-m/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="footer-social-link">
+            <Icon name="mdi:linkedin" class="w-5 h-5" />
+          </a>
+          <a href="https://x.com/programmercito" target="_blank" rel="noopener noreferrer" aria-label="Twitter X" class="footer-social-link">
+            <Icon name="simple-icons:x" class="w-4 h-4" />
+          </a>
+          <a href="https://portafolio.devcito.org/" target="_blank" rel="noopener noreferrer" aria-label="Portafolio" class="footer-social-link">
+            <Icon name="mdi:briefcase" class="w-5 h-5" />
+          </a>
+        </div>
+      </div>
     </div>
-    
-    <p class="text-gray-500 text-lg">&copy; {year} By <span class="font-bold text-cyan-400">Devcito</span></p>
+
+    <!-- Bottom bar -->
+    <div class="footer-bottom">
+      <div class="footer-bottom-line"></div>
+      <div class="footer-bottom-content">
+        <p class="footer-copyright">
+          &copy; {year} · Hecho con <span class="text-red-400">❤</span> por <a href="/" class="text-cyan-400 hover:text-cyan-300 font-semibold">Devcito</a>
+        </p>
+        <a href="/policy.html" class="footer-policy-link">Política de Privacidad</a>
+      </div>
+    </div>
   </div>
 </footer>
 
 <style>
-  .social-link {
-    @apply text-gray-400 transition-all duration-300;
+  .footer-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 100%, rgba(34, 211, 238, 0.04), transparent),
+      rgba(2, 8, 23, 0.8);
+    pointer-events: none;
   }
-  .social-link:hover {
-    @apply text-cyan-400;
-    transform: scale(1.1);
+
+  .footer-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.2), rgba(139, 92, 246, 0.2), transparent);
+    margin-bottom: 3rem;
+  }
+
+  .footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  @media (max-width: 768px) {
+    .footer-content {
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .footer-brand {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer-content {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .footer-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: white;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    display: inline-block;
+    margin-bottom: 0.75rem;
+  }
+
+  .footer-logo span {
+    color: #22d3ee;
+  }
+
+  .footer-tagline {
+    font-size: 0.875rem;
+    color: #475569;
+    line-height: 1.6;
+  }
+
+  .footer-nav-title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #334155;
+    margin-bottom: 1rem;
+  }
+
+  .footer-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .footer-nav-links a {
+    font-size: 0.9rem;
+    color: #64748b;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .footer-nav-links a:hover {
+    color: #22d3ee;
+  }
+
+  .footer-social-icons {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #64748b;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .footer-social-link:hover {
+    background: rgba(34, 211, 238, 0.1);
+    border-color: rgba(34, 211, 238, 0.3);
+    color: #22d3ee;
+    transform: translateY(-3px);
+  }
+
+  .footer-bottom-line {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.05);
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-bottom-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .footer-copyright {
+    font-size: 0.8rem;
+    color: #334155;
+  }
+
+  .footer-policy-link {
+    font-size: 0.8rem;
+    color: #334155;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .footer-policy-link:hover {
+    color: #22d3ee;
   }
 </style>

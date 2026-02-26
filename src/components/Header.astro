@@ -3,91 +3,274 @@ import { Icon } from 'astro-icon/components';
 ---
 
 <header id="main-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
-  <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-    <div class="text-2xl font-bold text-white">
-      <a href="/">Devcito<span class="text-cyan-400">Solutions</span></a>
-    </div>
-    <nav class="hidden md:flex space-x-2">
-      <a href="#services" class="nav-link">Servicios</a>
-      <a href="#productos" class="nav-link">Productos</a>
-      <a href="#about" class="nav-link">Sobre Mí</a>
-      <a href="#contact" class="nav-link">Contacto</a>
-    </nav>
-    <div class="md:hidden">
-      <button id="menu-btn" class="text-white focus:outline-none">
-        <Icon name="mdi:menu" class="w-6 h-6" />
+  <div class="header-inner">
+    <div class="container mx-auto px-6 py-4 flex items-center" style="position: relative;">
+      <!-- Logo (left) -->
+      <div class="header-logo">
+        <a href="/" class="logo-link">
+          <span class="logo-icon">D</span>
+          Devcito<span class="logo-accent">Solutions</span>
+        </a>
+      </div>
+
+      <!-- Desktop Nav (absolutely centered) -->
+      <nav class="desktop-nav hidden md:flex items-center space-x-1">
+        <a href="#services" class="nav-link">Servicios</a>
+        <a href="#productos" class="nav-link">Proyectos</a>
+        <a href="#about" class="nav-link">Sobre Mí</a>
+        <a href="#contact" class="nav-link nav-cta">Contacto</a>
+      </nav>
+
+      <!-- Mobile menu button (right, only on mobile) -->
+      <button id="menu-btn" class="mobile-menu-btn md:hidden ml-auto" aria-label="Abrir menú">
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
       </button>
     </div>
   </div>
-  <div id="mobile-menu" class="hidden md:hidden">
-    <nav class="flex flex-col items-center space-y-4 py-4">
-      <a href="#services" class="text-gray-300 hover:text-cyan-400 transition-colors">Servicios</a>
-      <a href="#productos" class="text-gray-300 hover:text-cyan-400 transition-colors">Productos</a>
-      <a href="#about" class="text-gray-300 hover:text-cyan-400 transition-colors">Sobre Mí</a>
-      <a href="#contact" class="text-gray-300 hover:text-cyan-400 transition-colors">Contacto</a>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="mobile-menu hidden md:hidden">
+    <nav class="flex flex-col items-center space-y-4 py-6">
+      <a href="#services" class="mobile-link">Servicios</a>
+      <a href="#productos" class="mobile-link">Proyectos</a>
+      <a href="#about" class="mobile-link">Sobre Mí</a>
+      <a href="#contact" class="mobile-link mobile-link-cta">Contacto</a>
     </nav>
   </div>
 </header>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // Mobile menu script
-    const menuBtn = document.getElementById('menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
+    const menuBtn = document.getElementById('menu-btn') as HTMLButtonElement;
+    const mobileMenu = document.getElementById('mobile-menu') as HTMLDivElement;
     const navLinks = mobileMenu.querySelectorAll('a');
+    const header = document.getElementById('main-header') as HTMLElement;
+    const menuBars = menuBtn.querySelectorAll('.menu-bar') as NodeListOf<HTMLElement>;
+
+    let menuOpen = false;
 
     menuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-      // Add scrolled background to mobile menu if header is scrolled
-      if (document.getElementById('main-header').classList.contains('header-scrolled')) {
-        mobileMenu.classList.add('header-scrolled-mobile');
+      menuOpen = !menuOpen;
+      mobileMenu.classList.toggle('hidden', !menuOpen);
+      mobileMenu.classList.toggle('open', menuOpen);
+
+      // Animate hamburger
+      if (menuOpen) {
+        menuBars[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+        menuBars[1].style.opacity = '0';
+        menuBars[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+      } else {
+        menuBars[0].style.transform = '';
+        menuBars[1].style.opacity = '';
+        menuBars[2].style.transform = '';
       }
     });
 
     navLinks.forEach(link => {
       link.addEventListener('click', () => {
+        menuOpen = false;
         mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('open');
+        menuBars[0].style.transform = '';
+        menuBars[1].style.opacity = '';
+        menuBars[2].style.transform = '';
       });
     });
 
-    // Scrolled header script
-    const header = document.getElementById('main-header');
-    const scrollThreshold = 50;
-
+    // Scrolled header
     const handleScroll = () => {
-      if (window.scrollY > scrollThreshold) {
+      if (window.scrollY > 50) {
         header.classList.add('header-scrolled');
       } else {
         header.classList.remove('header-scrolled');
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Run on load to set initial state
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    // Active nav link highlighting
+    const sections = document.querySelectorAll('section[id]');
+    const desktopLinks = document.querySelectorAll('.nav-link');
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          desktopLinks.forEach(link => {
+            link.classList.remove('nav-link-active');
+            if (link.getAttribute('href') === `#${entry.target.id}`) {
+              link.classList.add('nav-link-active');
+            }
+          });
+        }
+      });
+    }, { threshold: 0.4 });
+
+    sections.forEach(section => sectionObserver.observe(section));
   });
 </script>
 
 <style>
-  .header-scrolled {
-    @apply bg-gray-900/80 backdrop-blur-md shadow-lg;
+  .header-inner {
+    transition: all 0.3s ease;
   }
 
-  /* The mobile menu needs its own background when it's open and the page is scrolled */
-  #mobile-menu.header-scrolled-mobile,
-  .header-scrolled #mobile-menu {
-    @apply bg-gray-900/95 backdrop-blur-md;
+  .header-scrolled .header-inner {
+    background: rgba(2, 8, 23, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(34, 211, 238, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .header-logo {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: white;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    transition: opacity 0.2s ease;
+  }
+
+  .logo-link:hover {
+    opacity: 0.9;
+  }
+
+  .logo-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #22d3ee, #3b82f6);
+    font-size: 1rem;
+    font-weight: 900;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .logo-accent {
+    color: #22d3ee;
   }
 
   .nav-link {
-    @apply text-gray-300 relative py-2 px-4 rounded-full;
+    position: relative;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #94a3b8;
     text-decoration: none;
-    transition: color 0.3s ease, background-color 0.3s ease;
-    border: 2px solid transparent;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: all 0.25s ease;
+    letter-spacing: 0.01em;
   }
 
-  .nav-link:hover {
-    @apply text-cyan-400;
-    border-color: #22d3ee; /* cyan-400 */
-    background-color: rgba(34, 211, 238, 0.1);
+  .nav-link:hover, .nav-link-active {
+    color: #22d3ee;
+    background: rgba(34, 211, 238, 0.08);
+    border-color: rgba(34, 211, 238, 0.2);
+  }
+
+  /* Centered nav using absolute position */
+  .desktop-nav {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .nav-cta {
+    color: #22d3ee !important;
+    font-weight: 600 !important;
+    background: transparent;
+    border-color: transparent;
+  }
+
+  .nav-cta:hover {
+    background: rgba(34, 211, 238, 0.1) !important;
+    border-color: rgba(34, 211, 238, 0.3) !important;
+    box-shadow: 0 0 20px rgba(34, 211, 238, 0.12);
+  }
+
+  /* Hamburger -- hidden on desktop, shown only on mobile */
+  .mobile-menu-btn {
+    display: none; /* hidden by default (desktop) */
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  @media (max-width: 767px) {
+    .mobile-menu-btn {
+      display: flex; /* show only on mobile */
+    }
+
+    /* On mobile: hide desktop nav, show just the hamburger */
+    .desktop-nav {
+      display: none !important;
+    }
+  }
+
+  .menu-bar {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #94a3b8;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+  }
+
+  /* Mobile menu */
+  .mobile-menu {
+    background: rgba(2, 8, 23, 0.95);
+    backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(34, 211, 238, 0.1);
+  }
+
+  .mobile-link {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .mobile-link:hover {
+    color: #22d3ee;
+  }
+
+  .mobile-link-cta {
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    padding: 10px 28px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(34, 211, 238, 0.15), rgba(59, 130, 246, 0.15));
+    border: 1px solid rgba(34, 211, 238, 0.3);
+    color: #22d3ee !important;
+  }
+
+  .mobile-menu.open {
+    animation: slide-down 0.2s ease;
+  }
+
+  @keyframes slide-down {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 </style>

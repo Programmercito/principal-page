@@ -3,10 +3,286 @@ import { Icon } from 'astro-icon/components';
 import Button from './Button.astro';
 ---
 
-<section id="contact" class="py-20 bg-gray-900">
-  <div class="container mx-auto px-6 text-center">
-    <h2 class="text-4xl font-bold mb-8 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">¿Hablamos?</h2>
-    <p class="text-gray-400 mb-8">Estoy listo para ayudarte a llevar tu proyecto al siguiente nivel. ¡Envíame un correo!</p>
-    <Button href="mailto:devcitobo@outlook.com" label="devcitobo@outlook.com" icon="mdi:email" />
+<section id="contact" class="py-28 relative overflow-hidden">
+  <div class="contact-bg"></div>
+
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="contact-wrapper fade-in-element">
+      <!-- Glow top line -->
+      <div class="contact-top-line"></div>
+
+      <!-- Section badge -->
+      <span class="section-label-contact">Contacto</span>
+
+      <h2 class="contact-title">¿Listo para empezar tu<br><span class="gradient-text">próximo proyecto</span>?</h2>
+
+      <p class="contact-subtitle">
+        Estoy disponible para nuevos proyectos y colaboraciones.<br>
+        ¡Hablemos y hagamos algo increíble juntos!
+      </p>
+
+      <!-- Contact options -->
+      <div class="contact-options">
+        <a href="mailto:devcitobo@outlook.com" class="contact-opt-primary" id="email-contact-btn">
+          <div class="contact-opt-icon">
+            <Icon name="mdi:email-outline" class="w-6 h-6" />
+          </div>
+          <div class="contact-opt-info">
+            <span class="contact-opt-label">Correo electrónico</span>
+            <span class="contact-opt-value">devcitobo@outlook.com</span>
+          </div>
+          <div class="contact-opt-arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14m-7-7 7 7-7 7"/>
+            </svg>
+          </div>
+        </a>
+
+        <div class="contact-divider"><span>o también en</span></div>
+
+        <div class="contact-social-row">
+          <a href="https://github.com/programmercito" target="_blank" rel="noopener noreferrer" class="contact-social-btn" aria-label="GitHub">
+            <Icon name="mdi:github" class="w-6 h-6" />
+          </a>
+          <a href="https://www.linkedin.com/in/joaquin-h-m/" target="_blank" rel="noopener noreferrer" class="contact-social-btn" aria-label="LinkedIn">
+            <Icon name="mdi:linkedin" class="w-6 h-6" />
+          </a>
+          <a href="https://x.com/programmercito" target="_blank" rel="noopener noreferrer" class="contact-social-btn" aria-label="Twitter X">
+            <Icon name="simple-icons:x" class="w-5 h-5" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Decorative elements inside the card -->
+      <div class="contact-deco-1"></div>
+      <div class="contact-deco-2"></div>
+    </div>
   </div>
 </section>
+
+<style>
+  .contact-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(34, 211, 238, 0.05), transparent);
+    pointer-events: none;
+  }
+
+  .contact-wrapper {
+    max-width: 680px;
+    margin: 0 auto;
+    background: rgba(13, 18, 39, 0.7);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 3.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .contact-wrapper:hover {
+    border-color: rgba(34, 211, 238, 0.2);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4), 0 0 40px rgba(34, 211, 238, 0.06);
+  }
+
+  .contact-top-line {
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.6), rgba(139, 92, 246, 0.6), transparent);
+  }
+
+  .section-label-contact {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #22d3ee;
+    background: rgba(34, 211, 238, 0.1);
+    border: 1px solid rgba(34, 211, 238, 0.2);
+    border-radius: 20px;
+    padding: 4px 16px;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: white;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #22d3ee, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .contact-subtitle {
+    color: #64748b;
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  .contact-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .contact-opt-primary {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    border-radius: 14px;
+    background: rgba(34, 211, 238, 0.06);
+    border: 1px solid rgba(34, 211, 238, 0.2);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    group: true;
+  }
+
+  .contact-opt-primary:hover {
+    background: rgba(34, 211, 238, 0.12);
+    border-color: rgba(34, 211, 238, 0.5);
+    box-shadow: 0 0 30px rgba(34, 211, 238, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .contact-opt-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(59, 130, 246, 0.2));
+    border: 1px solid rgba(34, 211, 238, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #22d3ee;
+    flex-shrink: 0;
+  }
+
+  .contact-opt-info {
+    flex: 1;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .contact-opt-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #22d3ee;
+  }
+
+  .contact-opt-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .contact-opt-arrow {
+    color: #22d3ee;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+  }
+
+  .contact-opt-primary:hover .contact-opt-arrow {
+    opacity: 1;
+    transform: translateX(4px);
+  }
+
+  .contact-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: #334155;
+    font-size: 0.8rem;
+  }
+
+  .contact-divider::before,
+  .contact-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .contact-social-row {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .contact-social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #64748b;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .contact-social-btn:hover {
+    background: rgba(34, 211, 238, 0.1);
+    border-color: rgba(34, 211, 238, 0.3);
+    color: #22d3ee;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(34, 211, 238, 0.1);
+  }
+
+  /* Decorative blobs inside card */
+  .contact-deco-1 {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(34, 211, 238, 0.07), transparent);
+    top: -80px;
+    right: -60px;
+    pointer-events: none;
+  }
+
+  .contact-deco-2 {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.07), transparent);
+    bottom: -60px;
+    left: -40px;
+    pointer-events: none;
+  }
+
+  @media (max-width: 640px) {
+    .contact-wrapper {
+      padding: 2rem 1.5rem;
+    }
+    .contact-title {
+      font-size: 1.75rem;
+    }
+    .contact-opt-value {
+      font-size: 0.85rem;
+    }
+  }
+</style>

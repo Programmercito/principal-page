@@ -2,16 +2,139 @@
 import ProductCard from './ProductCard.astro';
 ---
 
-<section id="productos" class="py-20 bg-gray-900">
-  <div class="container mx-auto px-6">
-    <h2 class="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Nuestros Productos</h2>
-    <div class="max-w-md mx-auto">
+<section id="productos" class="py-28 relative overflow-hidden">
+  <!-- Background decoration -->
+  <div class="section-bg-glow"></div>
+
+  <div class="container mx-auto px-6 relative z-10">
+    <!-- Section header -->
+    <div class="text-center mb-16 fade-in-element">
+      <span class="section-label">Proyectos Destacados</span>
+      <h2 class="section-title">Ejemplos de lo que Construimos</h2>
+      <p class="section-subtitle">
+        Software real en producción. Mirá algunas de las soluciones que hemos creado para nuestros clientes.
+      </p>
+    </div>
+
+    <!-- Products grid -->
+    <div class="products-grid">
       <ProductCard
         title="Cafecitos System"
-        description="Un sistema de registro de ordenes y generacion y calculo de ganancias y comisiones para un cafes y restaurantes."
+        description="Sistema de registro de órdenes con generación automática de reportes de ganancias y comisiones para cafés y restaurantes. Gestión completa desde la mesa hasta la caja."
         img="/images/waiter.png"
         link="https://cafecito.devcito.org"
+        tags={["Laravel", "MySQL", "Web App"]}
+        badge="En vivo"
+        badgeColor="cyan"
       />
+      <ProductCard
+        title="Cotizaciones Pro"
+        description="Sistema de cotizaciones profesionales para empresas. Genera, gestiona y envía presupuestos detallados con cálculo automático de totales, impuestos y descuentos."
+        img="/images/cotizaciones.svg"
+        link="https://cotizaciones.devcito.org"
+        tags={["Go", "Angular", "Web App"]}
+        badge="En vivo"
+        badgeColor="purple"
+      />
+      <ProductCard
+        title="Cine Online"
+        description="Plataforma de selección de películas y reserva de entradas de cine. Explora carteleras, selecciona asientos y compra tus tickets de manera fácil y rápida."
+        img="/images/cine.svg"
+        link="https://cine.devcito.org"
+        tags={["Angular", "Web App"]}
+        badge="En vivo"
+        badgeColor="amber"
+      />
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center mt-16 fade-in-element">
+      <p class="text-gray-500 mb-4 text-sm">¿Querés ver más proyectos?</p>
+      <a href="https://portafolio.devcito.org/" target="_blank" rel="noopener noreferrer" class="portfolio-link">
+        Ver Portafolio Completo
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 inline-block ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+          <polyline points="15 3 21 3 21 9"/>
+          <line x1="10" y1="14" x2="21" y2="3"/>
+        </svg>
+      </a>
     </div>
   </div>
 </section>
+
+<style>
+  .section-bg-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(ellipse at center, rgba(34, 211, 238, 0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #22d3ee;
+    background: rgba(34, 211, 238, 0.1);
+    border: 1px solid rgba(34, 211, 238, 0.2);
+    border-radius: 20px;
+    padding: 4px 16px;
+    margin-bottom: 1rem;
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 1024px) {
+    .products-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .products-grid {
+      grid-template-columns: 1fr;
+      max-width: 420px;
+    }
+  }
+
+  .portfolio-link {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #22d3ee;
+    text-decoration: none;
+    border: 1px solid rgba(34, 211, 238, 0.3);
+    border-radius: 30px;
+    padding: 10px 24px;
+    background: rgba(34, 211, 238, 0.05);
+    transition: all 0.3s ease;
+    letter-spacing: 0.02em;
+  }
+
+  .portfolio-link:hover {
+    background: rgba(34, 211, 238, 0.12);
+    border-color: rgba(34, 211, 238, 0.6);
+    box-shadow: 0 0 20px rgba(34, 211, 238, 0.15);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    .products-grid {
+      grid-template-columns: 1fr;
+      max-width: 400px;
+    }
+  }
+</style>

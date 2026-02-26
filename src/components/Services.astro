@@ -2,31 +2,85 @@
 import ServiceCard from './ServiceCard.astro';
 ---
 
-<section id="services" class="py-20 bg-gray-800">
-  <div class="container mx-auto px-6">
-    <h2 class="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Nuestros Servicios</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<section id="services" class="py-28 relative overflow-hidden">
+  <!-- Background -->
+  <div class="services-bg"></div>
+
+  <div class="container mx-auto px-6 relative z-10">
+    <!-- Section header -->
+    <div class="text-center mb-16 fade-in-element">
+      <span class="section-label">¿Qué hacemos?</span>
+      <h2 class="section-title">Nuestros Servicios</h2>
+      <p class="section-subtitle">
+        Soluciones digitales integrales para llevar tu negocio al siguiente nivel.
+      </p>
+    </div>
+
+    <div class="services-grid">
       <ServiceCard
         icon="mdi:web"
         title="Desarrollo Web"
-        description="Diseño y desarrollo sitios web y aplicaciones web a medida. Desde landing pages estáticas hasta e-commerce y sistemas complejos, enfocados en el rendimiento y la experiencia de usuario."
+        description="Diseño y desarrollo sitios web y aplicaciones web a medida. Desde landing pages estáticas hasta e-commerce y sistemas complejos, enfocados en rendimiento y experiencia de usuario."
+        gradient="from-cyan-500 to-teal-500"
       />
       <ServiceCard
         icon="mdi:cogs"
         title="Sistemas ERP"
-        description="Implemento y personalizo sistemas de planificación de recursos empresariales (ERP) para integrar y automatizar los procesos clave de tu negocio, mejorando la eficiencia y la toma de decisiones."
+        description="Implemento y personalizo sistemas de planificación de recursos empresariales para integrar y automatizar los procesos clave de tu negocio, mejorando eficiencia y toma de decisiones."
+        gradient="from-blue-500 to-indigo-500"
       />
-      
       <ServiceCard
         icon="mdi:account-group"
-        title="Consultoría Informática"
-        description="Brindo asesoramiento tecnológico estratégico para alinear la tecnología con tus objetivos de negocio. Te ayudo a elegir las herramientas y arquitecturas adecuadas para optimizar tu inversión."
+        title="Consultoría IT"
+        description="Asesoramiento tecnológico estratégico para alinear la tecnología con tus objetivos de negocio. Te ayudo a elegir herramientas y arquitecturas adecuadas para optimizar tu inversión."
+        gradient="from-purple-500 to-violet-500"
       />
       <ServiceCard
         icon="mdi:bullhorn"
         title="Marketing Digital"
-        description="Potencio tu presencia en línea a través de la gestión estratégica de redes sociales, SEO y campañas publicitarias. Mi objetivo es aumentar tu visibilidad y atraer más clientes."
+        description="Potencio tu presencia en línea a través de gestión estratégica de redes sociales, SEO y campañas publicitarias. Mi objetivo es aumentar tu visibilidad y atraer más clientes."
+        gradient="from-rose-500 to-pink-500"
       />
     </div>
   </div>
 </section>
+
+<style>
+  .services-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 0% 50%, rgba(34, 211, 238, 0.04), transparent),
+      radial-gradient(ellipse 60% 80% at 100% 50%, rgba(139, 92, 246, 0.04), transparent),
+      rgba(13, 18, 39, 0.3);
+    pointer-events: none;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #22d3ee;
+    background: rgba(34, 211, 238, 0.1);
+    border: 1px solid rgba(34, 211, 238, 0.2);
+    border-radius: 20px;
+    padding: 4px 16px;
+    margin-bottom: 1rem;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 640px) {
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

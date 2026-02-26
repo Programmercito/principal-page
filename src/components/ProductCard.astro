@@ -1,24 +1,313 @@
 ---
-import Button from './Button.astro';
 
 interface Props {
   img: string;
   title: string;
   description: string;
   link: string;
+  tags?: string[];
+  badge?: string;
+  badgeColor?: 'cyan' | 'purple' | 'amber';
 }
 
-const { img, title, description, link } = Astro.props;
+const { img, title, description, link, tags = [], badge, badgeColor = 'cyan' } = Astro.props;
+
+const badgeColors = {
+  cyan: 'badge-cyan',
+  purple: 'badge-purple',
+  amber: 'badge-amber',
+};
 ---
 
-<div class="fade-in-element p-8 rounded-lg text-center h-full flex flex-col bg-black/20 backdrop-blur-lg border border-white/20 shadow-xl transition-colors duration-300 hover:bg-black/30">
-  <img src={img} alt={`Imagen de ${title}`} class="w-48 h-48 mx-auto mb-6 rounded-md object-cover transition-all duration-300 [filter:drop-shadow(0_0_8px_rgba(34,211,238,0.5))] hover:[filter:drop-shadow(0_0_15px_rgba(34,211,238,0.8))]">
-  <h3 class="text-2xl font-bold text-white mb-4">{title}</h3>
-  <p class="text-gray-400 mb-6 flex-grow">{description}</p>
-  <Button 
-    href={link}
-    label="Ver Proyecto"
-    target="_blank"
-    className="mt-auto"
-  />
+<div class="product-card fade-in-element group">
+  <!-- Glowing border effect -->
+  <div class="card-glow"></div>
+
+  <!-- Image section -->
+  <div class="card-image-wrap">
+    <img src={img} alt={`Imagen de ${title}`} class="card-image" />
+    <div class="card-image-overlay"></div>
+    {badge && (
+      <span class={`card-badge ${badgeColors[badgeColor]}`}>{badge}</span>
+    )}
+  </div>
+
+  <!-- Content -->
+  <div class="card-content">
+    <h3 class="card-title">{title}</h3>
+    <p class="card-description">{description}</p>
+
+    <!-- Tags -->
+    {tags.length > 0 && (
+      <div class="card-tags">
+        {tags.map(tag => (
+          <span class="card-tag">{tag}</span>
+        ))}
+      </div>
+    )}
+
+    <div class="card-footer">
+      <a href={link} target="_blank" rel="noopener noreferrer" class="card-btn-premium">
+        <span class="card-btn-shimmer"></span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="card-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="m10 15 3-3-3-3"/>
+        </svg>
+        Ver Proyecto
+      </a>
+      <a href={link} target="_blank" rel="noopener noreferrer" class="card-arrow-link" aria-label={`Abrir ${title} en nueva pestaña`}>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+          <polyline points="15 3 21 3 21 9"/>
+          <line x1="10" y1="14" x2="21" y2="3"/>
+        </svg>
+      </a>
+    </div>
+  </div>
 </div>
+
+<style>
+  .product-card {
+    position: relative;
+    background: rgba(13, 18, 39, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .product-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(34, 211, 238, 0.3);
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.4),
+      0 0 40px rgba(34, 211, 238, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .card-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.6), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .product-card:hover .card-glow {
+    opacity: 1;
+  }
+
+  .card-image-wrap {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(34, 211, 238, 0.05), rgba(139, 92, 246, 0.05));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-image {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 12px;
+    filter: drop-shadow(0 0 12px rgba(34, 211, 238, 0.4));
+    transition: all 0.4s ease;
+    z-index: 2;
+    position: relative;
+  }
+
+  .product-card:hover .card-image {
+    filter: drop-shadow(0 0 24px rgba(34, 211, 238, 0.7));
+    transform: scale(1.05);
+  }
+
+  .card-image-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 50% 50%, rgba(34, 211, 238, 0.06), transparent),
+      linear-gradient(180deg, transparent 60%, rgba(13, 18, 39, 0.8) 100%);
+    z-index: 1;
+  }
+
+  .card-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    z-index: 3;
+  }
+
+  .badge-cyan {
+    background: rgba(34, 211, 238, 0.15);
+    border: 1px solid rgba(34, 211, 238, 0.4);
+    color: #22d3ee;
+  }
+  .badge-purple {
+    background: rgba(139, 92, 246, 0.15);
+    border: 1px solid rgba(139, 92, 246, 0.4);
+    color: #a78bfa;
+  }
+  .badge-amber {
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid rgba(245, 158, 11, 0.4);
+    color: #fbbf24;
+  }
+
+  .card-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 0.75rem;
+  }
+
+  .card-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: -0.01em;
+    transition: color 0.3s ease;
+  }
+
+  .product-card:hover .card-title {
+    color: #22d3ee;
+  }
+
+  .card-description {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .card-tag {
+    font-size: 0.7rem;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #64748b;
+    letter-spacing: 0.05em;
+    transition: all 0.2s ease;
+  }
+
+  .product-card:hover .card-tag {
+    border-color: rgba(34, 211, 238, 0.2);
+    color: #94a3b8;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  /* Premium card button */
+  .card-btn-premium {
+    position: relative;
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 0.6rem 1.25rem;
+    border-radius: 50px;
+    text-decoration: none;
+    overflow: hidden;
+    color: white;
+    background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 55%, #8b5cf6 100%);
+    box-shadow:
+      0 0 18px rgba(34, 211, 238, 0.35),
+      0 3px 12px rgba(59, 130, 246, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    animation: card-btn-pulse 3s ease-in-out infinite;
+  }
+
+  .card-btn-icon {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+  }
+
+  /* Shimmer sweep */
+  .card-btn-shimmer {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 55%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transform: skewX(-20deg);
+    animation: card-shimmer 3.5s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes card-shimmer {
+    0%       { left: -100%; }
+    40%, 100% { left: 160%; }
+  }
+
+  @keyframes card-btn-pulse {
+    0%, 100% { box-shadow: 0 0 18px rgba(34,211,238,0.35), 0 3px 12px rgba(59,130,246,0.3), inset 0 1px 0 rgba(255,255,255,0.15); }
+    50%       { box-shadow: 0 0 32px rgba(34,211,238,0.55), 0 6px 20px rgba(59,130,246,0.45), inset 0 1px 0 rgba(255,255,255,0.18); }
+  }
+
+  .card-btn-premium:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow:
+      0 0 35px rgba(34, 211, 238, 0.6),
+      0 8px 25px rgba(59, 130, 246, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .card-arrow-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #64748b;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .card-arrow-link:hover {
+    background: rgba(34, 211, 238, 0.1);
+    border-color: rgba(34, 211, 238, 0.4);
+    color: #22d3ee;
+    transform: rotate(-5deg) scale(1.1);
+  }
+</style>
