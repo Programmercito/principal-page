@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Background -->
+  <rect width="200" height="200" rx="20" fill="url(#bg_cine)"/>
+  
+  <!-- Film reel top left -->
+  <circle cx="40" cy="38" r="22" fill="rgba(245,158,11,0.1)" stroke="rgba(245,158,11,0.4)" stroke-width="1.5"/>
+  <circle cx="40" cy="38" r="8" fill="rgba(245,158,11,0.2)" stroke="rgba(245,158,11,0.5)" stroke-width="1"/>
+  <circle cx="40" cy="38" r="2" fill="rgba(245,158,11,0.8)"/>
+  <!-- Spokes -->
+  <line x1="40" y1="16" x2="40" y2="30" stroke="rgba(245,158,11,0.4)" stroke-width="1.5"/>
+  <line x1="40" y1="46" x2="40" y2="60" stroke="rgba(245,158,11,0.4)" stroke-width="1.5"/>
+  <line x1="18" y1="38" x2="32" y2="38" stroke="rgba(245,158,11,0.4)" stroke-width="1.5"/>
+  <line x1="48" y1="38" x2="62" y2="38" stroke="rgba(245,158,11,0.4)" stroke-width="1.5"/>
+  <line x1="24" y1="24" x2="34" y2="34" stroke="rgba(245,158,11,0.4)" stroke-width="1.5"/>
+  <line x1="46" y1="42" x2="56" y2="52" stroke="rgba(245,158,11,0.4)" stroke-width="1.5"/>
+  <line x1="56" y1="24" x2="46" y2="34" stroke="rgba(245,158,11,0.4)" stroke-width="1.5"/>
+  <line x1="34" y1="42" x2="24" y2="52" stroke="rgba(245,158,11,0.4)" stroke-width="1.5"/>
+  
+  <!-- Film strip horizontal -->
+  <rect x="30" y="80" width="140" height="70" rx="6" fill="rgba(245,158,11,0.08)" stroke="rgba(245,158,11,0.3)" stroke-width="1"/>
+  
+  <!-- Film sprocket holes top -->
+  <rect x="35" y="83" width="8" height="7" rx="2" fill="rgba(0,0,0,0.5)"/>
+  <rect x="50" y="83" width="8" height="7" rx="2" fill="rgba(0,0,0,0.5)"/>
+  <rect x="65" y="83" width="8" height="7" rx="2" fill="rgba(0,0,0,0.5)"/>
+  <rect x="80" y="83" width="8" height="7" rx="2" fill="rgba(0,0,0,0.5)"/>
+  <rect x="95" y="83" width="8" height="7" rx="2" fill="rgba(0,0,0,0.5)"/>
+  <rect x="110" y="83" width="8" height="7" rx="2" fill="rgba(0,0,0,0.5)"/>
+  <rect x="125" y="83" width="8" height="7" rx="2" fill="rgba(0,0,0,0.5)"/>
+  <rect x="140" y="83" width="8" height="7" rx="2" fill="rgba(0,0,0,0.5)"/>
+  <rect x="155" y="83" width="8" height="7" rx="2" fill="rgba(0,0,0,0.5)"/>
+  
+  <!-- Film sprocket holes bottom -->
+  <rect x="35" y="140" width="8" height="7" rx="2" fill="rgba(0,0,0,0.5)"/>
+  <rect x="50" y="140" width="8" height="7" rx="2" fill="rgba(0,0,0,0.5)"/>
+  <rect x="65" y="140" width="8" height="7" rx="2" fill="rgba(0,0,0,0.5)"/>
+  <rect x="80" y="140" width="8" height="7" rx="2" fill="rgba(0,0,0,0.5)"/>
+  <rect x="95" y="140" width="8" height="7" rx="2" fill="rgba(0,0,0,0.5)"/>
+  <rect x="110" y="140" width="8" height="7" rx="2" fill="rgba(0,0,0,0.5)"/>
+  <rect x="125" y="140" width="8" height="7" rx="2" fill="rgba(0,0,0,0.5)"/>
+  <rect x="140" y="140" width="8" height="7" rx="2" fill="rgba(0,0,0,0.5)"/>
+  <rect x="155" y="140" width="8" height="7" rx="2" fill="rgba(0,0,0,0.5)"/>
+  
+  <!-- Frame inside film strip -->
+  <rect x="44" y="96" width="112" height="38" rx="3" fill="url(#frame_grad)"/>
+  
+  <!-- Play button in center -->
+  <circle cx="100" cy="115" r="16" fill="rgba(245,158,11,0.2)" stroke="rgba(245,158,11,0.6)" stroke-width="1.5"/>
+  <path d="M95 107 L95 123 L111 115 Z" fill="rgba(245,158,11,0.9)"/>
+  
+  <!-- Stars -->
+  <text x="155" y="75" font-size="14" fill="rgba(245,158,11,0.8)">★</text>
+  <text x="167" y="65" font-size="10" fill="rgba(245,158,11,0.5)">★</text>
+  <text x="170" y="78" font-size="8" fill="rgba(245,158,11,0.4)">★</text>
+  
+  <!-- Seat rows at bottom -->
+  <g opacity="0.6">
+    <rect x="55" y="163" width="12" height="8" rx="3" fill="rgba(245,158,11,0.4)"/>
+    <rect x="71" y="163" width="12" height="8" rx="3" fill="rgba(245,158,11,0.4)"/>
+    <rect x="87" y="163" width="12" height="8" rx="3" fill="rgba(34,211,238,0.7)"/>
+    <rect x="103" y="163" width="12" height="8" rx="3" fill="rgba(245,158,11,0.4)"/>
+    <rect x="119" y="163" width="12" height="8" rx="3" fill="rgba(245,158,11,0.4)"/>
+    <rect x="135" y="163" width="12" height="8" rx="3" fill="rgba(245,158,11,0.4)"/>
+    
+    <rect x="63" y="175" width="12" height="8" rx="3" fill="rgba(245,158,11,0.3)"/>
+    <rect x="79" y="175" width="12" height="8" rx="3" fill="rgba(34,211,238,0.5)"/>
+    <rect x="95" y="175" width="12" height="8" rx="3" fill="rgba(34,211,238,0.5)"/>
+    <rect x="111" y="175" width="12" height="8" rx="3" fill="rgba(245,158,11,0.3)"/>
+    <rect x="127" y="175" width="12" height="8" rx="3" fill="rgba(245,158,11,0.3)"/>
+  </g>
+  
+  <defs>
+    <radialGradient id="bg_cine" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#1a0f00"/>
+      <stop offset="100%" stop-color="#0a0800"/>
+    </radialGradient>
+    <linearGradient id="frame_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(245,158,11,0.15)"/>
+      <stop offset="100%" stop-color="rgba(139,92,246,0.1)"/>
+    </linearGradient>
+  </defs>
+</svg>
