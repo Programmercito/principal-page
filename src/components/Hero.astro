@@ -11,33 +11,36 @@ import { Icon } from 'astro-icon/components';
     <div class="aurora-shape shape-2"></div>
     <div class="aurora-shape shape-3"></div>
     <div class="aurora-shape shape-4"></div>
-    <!-- Particle grid -->
-    <canvas id="particles-canvas" class="absolute inset-0 w-full h-full opacity-30"></canvas>
+    <div class="aurora-shape shape-5"></div>
+    <!-- Grid lines -->
+    <div class="hero-grid"></div>
+    <!-- Particle canvas -->
+    <canvas id="particles-canvas" class="absolute inset-0 w-full h-full opacity-40"></canvas>
   </div>
 
   <div class="z-10 relative px-6 max-w-5xl mx-auto pt-28 pb-20">
     <!-- Badge -->
-    <div class="inline-flex items-center gap-2 bg-white/5 border border-white/10 backdrop-blur-md rounded-full px-4 py-2 mb-8 fade-in-element">
-      <span class="w-2 h-2 bg-green-400 rounded-full animate-ping-slow"></span>
+    <div class="inline-flex items-center gap-2 badge-pill mb-8 fade-in-element" style="animation-delay:0s">
+      <span class="w-2 h-2 bg-green-400 rounded-full pulse-dot"></span>
       <span class="text-sm text-gray-300 font-medium">Disponible para nuevos proyectos</span>
     </div>
 
     <!-- Main heading -->
-    <h1 class="hero-title mb-6 fade-in-element">
-      Desarrollo Web
+    <h1 class="hero-title mb-6 fade-in-element" style="animation-delay:0.1s">
+      Sistemas digitales
       <br>
-      <span class="gradient-text-hero">Full-Stack</span>
+      <span class="gradient-text-hero animated-gradient">para tu negocio</span>
       <br>
-      <span class="text-hero-sub">que Impacta</span>
+      <span class="text-hero-sub">sin complicaciones</span>
     </h1>
 
-    <p class="text-xl md:text-2xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed fade-in-element">
-      Transformo ideas en <span class="text-cyan-400 font-semibold">soluciones digitales</span> de alto rendimiento. 
-      Desde landing pages hasta sistemas empresariales completos.
+    <p class="text-xl md:text-2xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed fade-in-element" style="animation-delay:0.2s">
+      Creamos <span class="text-cyan-400 font-semibold highlight-word">software, páginas web y sistemas</span> a medida
+      para que tu empresa venda más, trabaje mejor y gane tiempo.
     </p>
 
     <!-- CTA Buttons -->
-    <div class="hero-btns fade-in-element">
+    <div class="hero-btns fade-in-element" style="animation-delay:0.3s">
       <a href="#productos" class="hbtn hbtn-primary" id="hero-cta-projects">
         <span class="hbtn-shimmer"></span>
         <svg xmlns="http://www.w3.org/2000/svg" class="hbtn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -55,89 +58,115 @@ import { Icon } from 'astro-icon/components';
     </div>
 
     <!-- Stats row -->
-    <div class="grid grid-cols-3 gap-6 max-w-lg mx-auto fade-in-element">
+    <div class="stats-row fade-in-element" style="animation-delay:0.4s">
       <div class="stat-item">
-        <span class="stat-number">10+</span>
+        <div class="stat-value">
+          <span class="stat-number" data-target="10">0</span><span class="stat-number">+</span>
+        </div>
         <span class="stat-label">Proyectos</span>
       </div>
-      <div class="stat-item border-x border-white/10">
-        <span class="stat-number">5+</span>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-value">
+          <span class="stat-number" data-target="5">0</span><span class="stat-number">+</span>
+        </div>
         <span class="stat-label">Años exp.</span>
       </div>
+      <div class="stat-divider"></div>
       <div class="stat-item">
-        <span class="stat-number">100%</span>
+        <div class="stat-value">
+          <span class="stat-number">100%</span>
+        </div>
         <span class="stat-label">Dedicación</span>
       </div>
     </div>
+
+    <!-- Tech stack pills -->
+    <div class="tech-stack fade-in-element" style="animation-delay:0.5s">
+      <span class="tech-pill">Laravel</span>
+      <span class="tech-pill">Angular</span>
+      <span class="tech-pill">Go</span>
+      <span class="tech-pill">Java</span>
+      <span class="tech-pill">MySQL</span>
+      <span class="tech-pill">Docker</span>
+    </div>
   </div>
 
-  <!-- Scroll indicator -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 opacity-60">
-    <span class="text-xs text-gray-500 tracking-widest uppercase">Scroll</span>
-    <a href="#services" aria-label="Bajar a la sección de servicios" class="scroll-arrow">
-      <Icon name="mdi:chevron-down" class="w-6 h-6 animate-bounce text-cyan-400" />
-    </a>
-  </div>
+
 </section>
 
 <script>
-  // Particles canvas animation
+  // === PARTICLES ===
   const canvas = document.getElementById('particles-canvas') as HTMLCanvasElement;
   if (canvas) {
     const ctx = canvas.getContext('2d')!;
-    let particles: { x: number; y: number; vx: number; vy: number; r: number; alpha: number }[] = [];
+    type Particle = { x: number; y: number; vx: number; vy: number; r: number; alpha: number; hue: number };
+    let particles: Particle[] = [];
+    let mouse = { x: -9999, y: -9999 };
 
-    const resize = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-    };
+    const resize = () => { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; };
     resize();
     window.addEventListener('resize', resize);
+    window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
 
-    for (let i = 0; i < 80; i++) {
+    for (let i = 0; i < 100; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        r: Math.random() * 1.5 + 0.5,
-        alpha: Math.random() * 0.5 + 0.2,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        r: Math.random() * 1.8 + 0.4,
+        alpha: Math.random() * 0.5 + 0.15,
+        hue: Math.random() > 0.7 ? 280 : 190,
       });
     }
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particles.forEach(p => {
-        p.x += p.vx;
-        p.y += p.vy;
+        const dx = mouse.x - p.x, dy = mouse.y - p.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < 140) {
+          p.x -= dx * 0.012;
+          p.y -= dy * 0.012;
+        }
+        p.x += p.vx; p.y += p.vy;
         if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
         if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(34, 211, 238, ${p.alpha})`;
+        ctx.fillStyle = `hsla(${p.hue}, 90%, 70%, ${p.alpha})`;
         ctx.fill();
       });
-
-      // Draw connections
       particles.forEach((a, i) => {
         particles.slice(i + 1).forEach(b => {
           const dist = Math.hypot(a.x - b.x, a.y - b.y);
-          if (dist < 120) {
+          if (dist < 130) {
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = `rgba(34, 211, 238, ${0.08 * (1 - dist / 120)})`;
-            ctx.lineWidth = 0.5;
+            ctx.strokeStyle = `rgba(34,211,238,${0.09*(1-dist/130)})`;
+            ctx.lineWidth = 0.6;
             ctx.stroke();
           }
         });
       });
-
       requestAnimationFrame(animate);
     };
     animate();
   }
+
+  // === COUNTER ANIMATION ===
+  document.querySelectorAll('[data-target]').forEach(el => {
+    const target = parseInt((el as HTMLElement).dataset.target!);
+    let current = 0;
+    const step = target / 40;
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) { current = target; clearInterval(timer); }
+      el.textContent = Math.floor(current).toString();
+    }, 40);
+  });
 </script>
 
 <style>
@@ -145,9 +174,21 @@ import { Icon } from 'astro-icon/components';
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 60% 70% at 50% 0%, rgba(34, 211, 238, 0.12) 0%, transparent 60%),
-      radial-gradient(ellipse 40% 50% at 80% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse 70% 80% at 50% -10%, rgba(34, 211, 238, 0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 50% at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+      radial-gradient(ellipse 30% 40% at 10% 60%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
       #020817;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(34, 211, 238, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(34, 211, 238, 0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
   }
 
   .aurora-shape {
@@ -158,79 +199,124 @@ import { Icon } from 'astro-icon/components';
   }
 
   .shape-1 {
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(34, 211, 238, 0.15), transparent 60%);
-    top: -200px;
-    left: -150px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(34, 211, 238, 0.18), transparent 60%);
+    top: -250px; left: -200px;
     animation: float-1 18s infinite alternate ease-in-out;
   }
-
   .shape-2 {
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(59, 130, 246, 0.12), transparent 60%);
-    bottom: -100px;
-    right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.14), transparent 60%);
+    bottom: -150px; right: -150px;
     animation: float-2 22s infinite alternate ease-in-out;
   }
-
   .shape-3 {
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(139, 92, 246, 0.1), transparent 60%);
-    bottom: 20%;
-    left: 20%;
+    width: 350px; height: 350px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.12), transparent 60%);
+    bottom: 20%; left: 20%;
     animation: float-3 25s infinite alternate ease-in-out;
   }
-
   .shape-4 {
-    width: 200px;
-    height: 200px;
-    background: radial-gradient(circle, rgba(34, 211, 238, 0.08), transparent 60%);
-    top: 30%;
-    right: 15%;
+    width: 250px; height: 250px;
+    background: radial-gradient(circle, rgba(34, 211, 238, 0.1), transparent 60%);
+    top: 30%; right: 10%;
     animation: float-1 20s infinite alternate-reverse ease-in-out;
+  }
+  .shape-5 {
+    width: 180px; height: 180px;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.08), transparent 60%);
+    top: 15%; left: 8%;
+    animation: float-2 28s infinite alternate-reverse ease-in-out;
   }
 
   @keyframes float-1 {
     from { transform: translate(0, 0) scale(1); }
-    to { transform: translate(60px, 40px) scale(1.1); }
+    to { transform: translate(60px, 40px) scale(1.12); }
   }
   @keyframes float-2 {
     from { transform: translate(0, 0) scale(1); }
-    to { transform: translate(-40px, -30px) scale(1.05); }
+    to { transform: translate(-40px, -30px) scale(1.06); }
   }
   @keyframes float-3 {
     from { transform: translate(0, 0) rotate(0deg); }
     to { transform: translate(30px, -40px) rotate(30deg); }
   }
 
+  /* Badge */
+  .badge-pill {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(34, 211, 238, 0.2);
+    backdrop-filter: blur(12px);
+    border-radius: 100px;
+    padding: 8px 20px;
+    box-shadow: 0 0 20px rgba(34, 211, 238, 0.08), inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+
+  .pulse-dot {
+    animation: pulse-green 2s ease-in-out infinite;
+    display: inline-block;
+  }
+  @keyframes pulse-green {
+    0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(74,222,128,0.5); }
+    50% { opacity: 0.8; transform: scale(1.3); box-shadow: 0 0 0 6px rgba(74,222,128,0); }
+  }
+
+  /* Title */
   .hero-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(3rem, 8vw, 6rem);
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(3rem, 8vw, 6.5rem);
     font-weight: 800;
     line-height: 1.05;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
     color: white;
   }
 
   .gradient-text-hero {
-    background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 50%, #8b5cf6 100%);
+    background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 45%, #8b5cf6 80%, #ec4899 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    background-size: 200% 200%;
+  }
+
+  .animated-gradient {
+    animation: gradient-shift 4s ease infinite;
+  }
+
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
 
   .text-hero-sub {
     font-size: 0.65em;
     font-weight: 400;
     color: #94a3b8;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
   }
 
-  /* === HERO BUTTONS === */
+  .highlight-word {
+    position: relative;
+  }
+  .highlight-word::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #22d3ee, #3b82f6);
+    border-radius: 2px;
+    animation: underline-pulse 2s ease-in-out infinite;
+  }
+  @keyframes underline-pulse {
+    0%, 100% { opacity: 0.5; transform: scaleX(0.9); }
+    50% { opacity: 1; transform: scaleX(1); }
+  }
+
+  /* CTA Buttons */
   .hero-btns {
     display: flex;
     flex-wrap: wrap;
@@ -245,11 +331,11 @@ import { Icon } from 'astro-icon/components';
     align-items: center;
     justify-content: center;
     gap: 0.6rem;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 1rem;
     font-weight: 600;
     letter-spacing: 0.01em;
-    padding: 0.875rem 2rem;
+    padding: 0.9rem 2.2rem;
     border-radius: 50px;
     text-decoration: none;
     overflow: hidden;
@@ -257,93 +343,85 @@ import { Icon } from 'astro-icon/components';
     transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
   }
 
-  .hbtn-icon {
-    width: 18px;
-    height: 18px;
-    flex-shrink: 0;
-  }
+  .hbtn-icon { width: 18px; height: 18px; flex-shrink: 0; }
 
-  /* Primary: gradient + shimmer sweep + pulse glow */
   .hbtn-primary {
-    background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 60%, #8b5cf6 100%);
+    background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 55%, #8b5cf6 100%);
     color: white;
-    box-shadow:
-      0 0 25px rgba(34, 211, 238, 0.45),
-      0 4px 20px rgba(59, 130, 246, 0.35),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 30px rgba(34, 211, 238, 0.5), 0 4px 20px rgba(59, 130, 246, 0.4), inset 0 1px 0 rgba(255,255,255,0.2);
     animation: hero-pulse 3s ease-in-out infinite;
   }
-
   .hbtn-primary:hover {
-    transform: translateY(-4px) scale(1.03);
-    box-shadow:
-      0 0 45px rgba(34, 211, 238, 0.65),
-      0 10px 35px rgba(59, 130, 246, 0.5),
-      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    transform: translateY(-5px) scale(1.04);
+    box-shadow: 0 0 55px rgba(34, 211, 238, 0.7), 0 12px 40px rgba(59, 130, 246, 0.55), inset 0 1px 0 rgba(255,255,255,0.25);
   }
 
-  /* Shimmer sweep animation */
   .hbtn-shimmer {
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 60%;
-    height: 100%;
+    position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
     transform: skewX(-20deg);
     animation: shimmer-sweep 3.5s ease-in-out infinite;
     pointer-events: none;
   }
-
-  @keyframes shimmer-sweep {
-    0% { left: -100%; }
-    40%, 100% { left: 170%; }
-  }
+  @keyframes shimmer-sweep { 0% { left: -100%; } 40%, 100% { left: 170%; } }
 
   @keyframes hero-pulse {
-    0%, 100% {
-      box-shadow: 0 0 25px rgba(34, 211, 238, 0.45), 0 4px 20px rgba(59, 130, 246, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
-    }
-    50% {
-      box-shadow: 0 0 50px rgba(34, 211, 238, 0.65), 0 8px 30px rgba(59, 130, 246, 0.55), inset 0 1px 0 rgba(255,255,255,0.2);
-    }
+    0%, 100% { box-shadow: 0 0 30px rgba(34,211,238,0.5), 0 4px 20px rgba(59,130,246,0.4), inset 0 1px 0 rgba(255,255,255,0.2); }
+    50% { box-shadow: 0 0 55px rgba(34,211,238,0.7), 0 8px 35px rgba(59,130,246,0.55), inset 0 1px 0 rgba(255,255,255,0.2); }
   }
 
-  /* Secondary: glassmorphism pill with gradient border */
   .hbtn-glass {
     background: rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     color: #e2e8f0;
-    /* Simulate gradient border with box-shadow */
-    box-shadow:
-      0 0 0 1px rgba(34, 211, 238, 0.35),
-      inset 0 1px 0 rgba(255, 255, 255, 0.08),
-      0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 0 1px rgba(34,211,238,0.35), inset 0 1px 0 rgba(255,255,255,0.08), 0 4px 15px rgba(0,0,0,0.2);
+  }
+  .hbtn-glass:hover {
+    background: rgba(34,211,238,0.08);
+    color: #22d3ee;
+    transform: translateY(-5px) scale(1.04);
+    box-shadow: 0 0 0 1px rgba(34,211,238,0.6), inset 0 1px 0 rgba(255,255,255,0.12), 0 0 35px rgba(34,211,238,0.22), 0 12px 35px rgba(0,0,0,0.3);
   }
 
-  .hbtn-glass:hover {
-    background: rgba(34, 211, 238, 0.08);
-    color: #22d3ee;
-    transform: translateY(-4px) scale(1.03);
-    box-shadow:
-      0 0 0 1px rgba(34, 211, 238, 0.6),
-      inset 0 1px 0 rgba(255, 255, 255, 0.12),
-      0 0 30px rgba(34, 211, 238, 0.2),
-      0 10px 30px rgba(0, 0, 0, 0.25);
+  /* Stats */
+  .stats-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 380px;
+    margin: 0 auto 2.5rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px;
+    padding: 1rem 1.5rem;
+    backdrop-filter: blur(10px);
+  }
+
+  .stat-divider {
+    width: 1px;
+    height: 36px;
+    background: rgba(255,255,255,0.08);
   }
 
   .stat-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0.75rem;
+  }
+
+  .stat-value {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0;
+    line-height: 1;
   }
 
   .stat-number {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 2rem;
-    font-weight: 700;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.9rem;
+    font-weight: 800;
     background: linear-gradient(135deg, #22d3ee, #3b82f6);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -352,19 +430,50 @@ import { Icon } from 'astro-icon/components';
   }
 
   .stat-label {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: #64748b;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-top: 0.25rem;
   }
 
-  @keyframes ping-slow {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(1.3); }
+  /* Tech stack */
+  .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0;
   }
-  .animate-ping-slow {
-    animation: ping-slow 2s ease-in-out infinite;
-    display: inline-block;
+
+  .tech-pill {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 5px 14px;
+    border-radius: 100px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: #64748b;
+    transition: all 0.25s ease;
+    cursor: default;
   }
+  .tech-pill:hover {
+    background: rgba(34,211,238,0.1);
+    border-color: rgba(34,211,238,0.3);
+    color: #22d3ee;
+    transform: translateY(-2px);
+  }
+
+  /* Fade in animations */
+  .fade-in-element {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fade-in-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  @keyframes fade-in-up {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+
 </style>

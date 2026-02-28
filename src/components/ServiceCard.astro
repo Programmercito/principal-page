@@ -6,46 +6,52 @@ interface Props {
   title: string;
   description: string;
   gradient?: string;
+  accentColor?: string;
 }
 
-const { icon, title, description, gradient = 'from-cyan-500 to-blue-500' } = Astro.props;
+const { icon, title, description, gradient = 'from-cyan-500 to-blue-500', accentColor = '#22d3ee' } = Astro.props;
 ---
 
-<div class="service-card fade-in-element group">
+<div class="service-card fade-in-element group" style={`--accent: ${accentColor}`}>
+  <!-- Animated border glow -->
+  <div class="card-border-glow"></div>
   <!-- Top glow line -->
   <div class={`card-top-line bg-gradient-to-r ${gradient}`}></div>
+  <!-- Corner accent -->
+  <div class="card-corner"></div>
 
   <!-- Icon container -->
   <div class="icon-wrap">
     <div class={`icon-bg bg-gradient-to-br ${gradient}`}></div>
+    <div class="icon-ring"></div>
     <Icon name={icon} class="service-icon" />
   </div>
 
   <h3 class="service-title">{title}</h3>
   <p class="service-desc">{description}</p>
 
-  <!-- Arrow indicator -->
-  <div class="service-arrow">
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M5 12h14m-7-7 7 7-7 7"/>
-    </svg>
+  <!-- Dots decoration -->
+  <div class="service-dots">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
   </div>
 </div>
 
 <style>
   .service-card {
     position: relative;
-    padding: 2rem;
-    border-radius: 16px;
-    background: rgba(13, 18, 39, 0.6);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 2.25rem;
+    border-radius: 20px;
+    background: rgba(8, 14, 32, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     display: flex;
     flex-direction: column;
     gap: 1rem;
     height: 100%;
     overflow: hidden;
-    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.35s ease, box-shadow 0.35s ease;
     cursor: default;
   }
 
@@ -53,7 +59,7 @@ const { icon, title, description, gradient = 'from-cyan-500 to-blue-500' } = Ast
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 80% 60% at 50% -20%, rgba(34, 211, 238, 0.06), transparent);
+    background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(34, 211, 238, 0.05), transparent 70%);
     opacity: 0;
     transition: opacity 0.4s ease;
     pointer-events: none;
@@ -61,95 +67,141 @@ const { icon, title, description, gradient = 'from-cyan-500 to-blue-500' } = Ast
 
   .service-card:hover {
     transform: translateY(-6px);
-    border-color: rgba(34, 211, 238, 0.25);
+    border-color: rgba(34, 211, 238, 0.22);
     box-shadow:
       0 20px 50px rgba(0, 0, 0, 0.35),
-      0 0 30px rgba(34, 211, 238, 0.07);
+      0 0 20px rgba(34, 211, 238, 0.04),
+      inset 0 1px 0 rgba(255,255,255,0.05);
   }
 
-  .service-card:hover::before {
-    opacity: 1;
+  .service-card:hover::before { opacity: 1; }
+
+  /* Subtle top border glow on hover */
+  .card-border-glow {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 10%, rgba(34,211,238,0.5) 50%, transparent 90%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 2;
   }
+  .service-card:hover .card-border-glow { opacity: 1; }
 
   .card-top-line {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 0; left: 0; right: 0;
     height: 2px;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.35s ease;
+    z-index: 1;
   }
+  .service-card:hover .card-top-line { opacity: 1; }
 
-  .service-card:hover .card-top-line {
-    opacity: 1;
+  /* Corner decoration */
+  .card-corner {
+    position: absolute;
+    top: 0; right: 0;
+    width: 80px; height: 80px;
+    background: radial-gradient(circle at top right, rgba(34,211,238,0.08), transparent 70%);
+    border-radius: 0 20px 0 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
   }
+  .service-card:hover .card-corner { opacity: 1; }
 
+  /* Icon */
   .icon-wrap {
     position: relative;
-    width: 56px;
-    height: 56px;
-    border-radius: 14px;
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     flex-shrink: 0;
+    z-index: 1;
+  }
+
+  .icon-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: border-color 0.3s ease;
+  }
+  .service-card:hover .icon-ring {
+    border-color: rgba(34,211,238,0.3);
   }
 
   .icon-bg {
     position: absolute;
     inset: 0;
-    opacity: 0.15;
+    opacity: 0.18;
     transition: opacity 0.3s ease;
   }
-
-  .service-card:hover .icon-bg {
-    opacity: 0.25;
-  }
+  .service-card:hover .icon-bg { opacity: 0.3; }
 
   .service-icon {
-    width: 28px;
-    height: 28px;
+    width: 30px; height: 30px;
     color: #22d3ee;
-    position: relative;
-    z-index: 1;
-    transition: transform 0.3s ease, color 0.3s ease;
+    position: relative; z-index: 1;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s ease, filter 0.3s ease;
   }
-
   .service-card:hover .service-icon {
-    transform: scale(1.15);
+    transform: scale(1.2) rotate(-5deg);
     color: #67e8f9;
+    filter: drop-shadow(0 0 8px rgba(34,211,238,0.6));
   }
 
   .service-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.2rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.25rem;
     font-weight: 700;
     color: white;
     letter-spacing: -0.01em;
     transition: color 0.3s ease;
+    z-index: 1;
+    position: relative;
   }
-
-  .service-card:hover .service-title {
-    color: #22d3ee;
-  }
+  .service-card:hover .service-title { color: #22d3ee; }
 
   .service-desc {
     font-size: 0.875rem;
     color: #94a3b8;
-    line-height: 1.65;
+    line-height: 1.7;
     flex: 1;
+    z-index: 1;
+    position: relative;
   }
 
-  .service-arrow {
-    color: #334155;
-    transition: color 0.3s ease, transform 0.3s ease;
+  .service-dots {
+    display: flex;
+    gap: 4px;
+    align-items: center;
     margin-top: auto;
+    z-index: 1;
+    position: relative;
   }
 
-  .service-card:hover .service-arrow {
-    color: #22d3ee;
-    transform: translateX(4px);
+  .dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    transition: all 0.3s ease;
   }
+  .service-card:hover .dot:nth-child(1) { background: #22d3ee; transform: scale(1.3); }
+  .service-card:hover .dot:nth-child(2) { background: #3b82f6; transform: scale(1.1); transition-delay: 0.05s; }
+  .service-card:hover .dot:nth-child(3) { background: #8b5cf6; transition-delay: 0.1s; }
+
+  /* Fade-in (scoped) */
+  .fade-in-element {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: srv-fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  @keyframes srv-fade-up { to { opacity: 1; transform: translateY(0); } }
 </style>

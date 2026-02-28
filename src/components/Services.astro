@@ -16,34 +16,48 @@ import ServiceCard from './ServiceCard.astro';
       </p>
     </div>
 
-    <div class="services-grid">
-      <ServiceCard
-        icon="mdi:web"
-        title="Desarrollo Web"
-        description="Diseño y desarrollo sitios web y aplicaciones web a medida. Desde landing pages estáticas hasta e-commerce y sistemas complejos, enfocados en rendimiento y experiencia de usuario."
-        gradient="from-cyan-500 to-teal-500"
-      />
-      <ServiceCard
-        icon="mdi:cogs"
-        title="Sistemas ERP"
-        description="Implemento y personalizo sistemas de planificación de recursos empresariales para integrar y automatizar los procesos clave de tu negocio, mejorando eficiencia y toma de decisiones."
-        gradient="from-blue-500 to-indigo-500"
-      />
-      <ServiceCard
-        icon="mdi:account-group"
-        title="Consultoría IT"
-        description="Asesoramiento tecnológico estratégico para alinear la tecnología con tus objetivos de negocio. Te ayudo a elegir herramientas y arquitecturas adecuadas para optimizar tu inversión."
-        gradient="from-purple-500 to-violet-500"
-      />
-      <ServiceCard
-        icon="mdi:bullhorn"
-        title="Marketing Digital"
-        description="Potencio tu presencia en línea a través de gestión estratégica de redes sociales, SEO y campañas publicitarias. Mi objetivo es aumentar tu visibilidad y atraer más clientes."
-        gradient="from-rose-500 to-pink-500"
-      />
+    <!-- Scroll hint (mobile only) -->
+    <div class="scroll-hint">
+      <span>deslizá para ver más</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M5 12h14m-7-7 7 7-7 7"/>
+      </svg>
+    </div>
+
+    <!-- Cards track -->
+    <div class="services-track-wrap">
+      <div class="services-track">
+        <div class="service-slide"><ServiceCard icon="mdi:web" title="Desarrollo Web" description="Desarrollo sitios web, aplicaciones y sistemas a medida. Desde landing pages hasta plataformas empresariales complejas, enfocados en rendimiento, escalabilidad y experiencia de usuario." gradient="from-cyan-500 to-teal-500" accentColor="#22d3ee" /></div>
+        <div class="service-slide"><ServiceCard icon="mdi:cogs" title="Sistemas ERP" description="Implemento y personalizo sistemas ERP para integrar y automatizar los procesos clave de tu empresa: inventario, facturación, RRHH y más, en una sola plataforma centralizada." gradient="from-blue-500 to-indigo-500" accentColor="#3b82f6" /></div>
+        <div class="service-slide"><ServiceCard icon="mdi:robot-outline" title="Automatización de Procesos" description="Identifico tareas repetitivas y las automatizo con scripts, bots y flujos inteligentes. Reducí costos operativos, errores humanos y ganás tiempo para lo que realmente importa." gradient="from-purple-500 to-violet-500" accentColor="#8b5cf6" /></div>
+        <div class="service-slide"><ServiceCard icon="mdi:monitor-dashboard" title="Consultoría Informática" description="Asesoramiento tecnológico integral para empresas y negocios. Te ayudo a elegir herramientas, arquitecturas y soluciones digitales alineadas a tus objetivos y presupuesto." gradient="from-rose-500 to-pink-500" accentColor="#f43f5e" /></div>
+        <div class="service-slide"><ServiceCard icon="mdi:bullhorn" title="Marketing Digital" description="Potencio tu presencia en línea a través de gestión estratégica de redes sociales, SEO y campañas publicitarias. Aumentá tu visibilidad y atraé más clientes." gradient="from-amber-500 to-orange-500" accentColor="#f59e0b" /></div>
+      </div>
+    </div>
+
+    <!-- Mobile dots indicator -->
+    <div class="mobile-dots" id="svc-dots">
+      <span class="mdot active"></span>
+      <span class="mdot"></span>
+      <span class="mdot"></span>
+      <span class="mdot"></span>
+      <span class="mdot"></span>
     </div>
   </div>
 </section>
+
+<script>
+  // Update active dot on mobile scroll
+  const track = document.querySelector('.services-track') as HTMLElement;
+  const dots = document.querySelectorAll('.mdot');
+  if (track && dots.length) {
+    track.addEventListener('scroll', () => {
+      const slideWidth = track.scrollWidth / dots.length;
+      const active = Math.round(track.scrollLeft / slideWidth);
+      dots.forEach((d, i) => d.classList.toggle('active', i === active));
+    }, { passive: true });
+  }
+</script>
 
 <style>
   .services-bg {
@@ -70,17 +84,99 @@ import ServiceCard from './ServiceCard.astro';
     margin-bottom: 1rem;
   }
 
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.25rem;
-    max-width: 1100px;
+  /* Scroll hint — mobile only */
+  .scroll-hint {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: #475569;
+    letter-spacing: 0.04em;
+    margin-bottom: 1rem;
+  }
+
+  /* Track wrapper */
+  .services-track-wrap {
+    max-width: 1400px;
     margin: 0 auto;
   }
 
-  @media (max-width: 640px) {
-    .services-grid {
-      grid-template-columns: 1fr;
+  /* Desktop: single row, all 5 equal width */
+  .services-track {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+  }
+
+  .service-slide {
+    min-width: 0; /* prevent overflow */
+    display: flex;
+  }
+
+  /* Mobile dots — hidden on desktop */
+  .mobile-dots {
+    display: none;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 1.25rem;
+  }
+
+  .mdot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  .mdot.active {
+    background: #22d3ee;
+    width: 20px;
+    border-radius: 4px;
+    box-shadow: 0 0 8px rgba(34,211,238,0.5);
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    .scroll-hint {
+      display: flex;
+    }
+
+    .services-track-wrap {
+      /* negative margin to bleed to edges for the swipe feel */
+      margin-left: -1.5rem;
+      margin-right: -1.5rem;
+      overflow: hidden;
+    }
+
+    .services-track {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      gap: 1rem;
+      padding: 0.5rem 1.5rem 1rem;
+      /* hide scrollbar */
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .services-track::-webkit-scrollbar { display: none; }
+
+    .service-slide {
+      flex: 0 0 80vw;
+      max-width: 340px;
+      scroll-snap-align: center;
+    }
+
+    .mobile-dots {
+      display: flex;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .service-slide {
+      flex: 0 0 85vw;
     }
   }
 </style>
