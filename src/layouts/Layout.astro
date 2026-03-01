@@ -2,9 +2,18 @@
 interface Props {
 	title: string;
   description?: string;
+  image?: string;
+  type?: string;
 }
 
-const { title, description = "Desarrollador Web Full-Stack. Creando soluciones web a medida para impulsar tu negocio." } = Astro.props;
+const { 
+  title, 
+  description = "Desarrollador Web Full-Stack y Consultor de TI. Creando soluciones a medida, automatización de procesos y páginas web modernas para impulsar tu negocio.", 
+  image = "/og-image.webp",
+  type = "website"
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url);
 ---
 
 <!DOCTYPE html>
@@ -14,8 +23,33 @@ const { title, description = "Desarrollador Web Full-Stack. Creando soluciones w
 	<meta name="viewport" content="width=device-width" />
 	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 	<meta name="generator" content={Astro.generator} />
-  <meta name="description" content={description} />
+  
+  <!-- SEO Básico -->
 	<title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="author" content="Devcito" />
+  <meta name="keywords" content="desarrollador web, full-stack, automatización de procesos, consultoría ti, diseño web, desarrollo de software, landing pages, devcito" />
+  <meta name="robots" content="index, follow" />
+  <!-- Theme Color para móviles -->
+  <meta name="theme-color" content="#020817" />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href={canonicalURL} />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content={type} />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={new URL(image, canonicalURL)} />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content={canonicalURL} />
+  <meta property="twitter:title" content={title} />
+  <meta property="twitter:description" content={description} />
+  <meta property="twitter:image" content={new URL(image, canonicalURL)} />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
