@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Background -->
+  <rect width="200" height="200" rx="20" fill="url(#bg_serieb)"/>
+
+  <!-- Banknote body -->
+  <rect x="30" y="55" width="140" height="75" rx="8" fill="rgba(16,185,129,0.1)" stroke="rgba(16,185,129,0.45)" stroke-width="1.5"/>
+
+  <!-- Banknote inner border -->
+  <rect x="38" y="62" width="124" height="61" rx="5" fill="none" stroke="rgba(16,185,129,0.2)" stroke-width="1" stroke-dasharray="4 3"/>
+
+  <!-- Banknote header strip -->
+  <rect x="30" y="55" width="140" height="16" rx="8" fill="rgba(16,185,129,0.2)"/>
+  <rect x="30" y="63" width="140" height="8" fill="rgba(16,185,129,0.2)"/>
+
+  <!-- Bolivia text in header -->
+  <text x="100" y="67" text-anchor="middle" font-family="sans-serif" font-size="7" font-weight="bold" fill="rgba(16,185,129,0.9)" letter-spacing="3">BOLIVIA</text>
+
+  <!-- Serie B label -->
+  <rect x="55" y="78" width="46" height="14" rx="4" fill="rgba(16,185,129,0.15)" stroke="rgba(16,185,129,0.4)" stroke-width="1"/>
+  <text x="78" y="88" text-anchor="middle" font-family="sans-serif" font-size="8" font-weight="bold" fill="rgba(16,185,129,0.9)">SERIE B</text>
+
+  <!-- Denomination -->
+  <text x="140" y="100" text-anchor="middle" font-family="sans-serif" font-size="22" font-weight="bold" fill="rgba(16,185,129,0.6)">Bs</text>
+
+  <!-- Banknote serial line -->
+  <rect x="48" y="104" width="60" height="3" rx="1" fill="rgba(255,255,255,0.15)"/>
+  <rect x="48" y="110" width="45" height="3" rx="1" fill="rgba(255,255,255,0.1)"/>
+
+  <!-- Security pattern (wavy lines) -->
+  <path d="M30 120 Q50 115 70 120 Q90 125 110 120 Q130 115 150 120 Q160 122 170 120" stroke="rgba(16,185,129,0.15)" stroke-width="1" fill="none"/>
+  <path d="M30 124 Q50 119 70 124 Q90 129 110 124 Q130 119 150 124 Q160 126 170 124" stroke="rgba(16,185,129,0.1)" stroke-width="1" fill="none"/>
+
+  <!-- Shield / verification icon (center-bottom) -->
+  <g transform="translate(100, 158)">
+    <!-- Shield shape -->
+    <path d="M0 -22 L-18 -14 L-18 2 Q-18 16 0 22 Q18 16 18 2 L18 -14 Z" 
+          fill="rgba(16,185,129,0.15)" stroke="rgba(16,185,129,0.6)" stroke-width="1.5"/>
+    <!-- Inner shield glow -->
+    <path d="M0 -16 L-12 -10 L-12 1 Q-12 12 0 16 Q12 12 12 1 L12 -10 Z" 
+          fill="rgba(16,185,129,0.1)"/>
+    <!-- Checkmark -->
+    <path d="M-6 0 L-2 5 L7 -5" stroke="rgba(16,185,129,0.9)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+
+  <!-- Warning / X mark (top-right) for invalid bills -->
+  <g transform="translate(168, 38)">
+    <circle cx="0" cy="0" r="14" fill="rgba(239,68,68,0.12)" stroke="rgba(239,68,68,0.4)" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="8" fill="rgba(239,68,68,0.08)"/>
+    <path d="M-4 -4 L4 4 M4 -4 L-4 4" stroke="rgba(239,68,68,0.8)" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- Magnifying glass (top-left) for scanning -->
+  <g transform="translate(34, 38)">
+    <circle cx="0" cy="0" r="10" fill="rgba(16,185,129,0.08)" stroke="rgba(16,185,129,0.5)" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="5" fill="rgba(16,185,129,0.15)"/>
+    <line x1="7" y1="7" x2="15" y2="15" stroke="rgba(16,185,129,0.5)" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Sparkle decorations -->
+  <text x="155" y="55" font-size="10" fill="rgba(16,185,129,0.6)">✦</text>
+  <text x="28" y="150" font-size="8" fill="rgba(16,185,129,0.4)">✦</text>
+  <text x="172" y="170" font-size="7" fill="rgba(16,185,129,0.3)">✦</text>
+
+  <!-- Small floating dots -->
+  <circle cx="22" cy="80" r="1.5" fill="rgba(16,185,129,0.3)"/>
+  <circle cx="178" cy="140" r="1" fill="rgba(16,185,129,0.25)"/>
+  <circle cx="160" cy="50" r="1.5" fill="rgba(16,185,129,0.2)"/>
+
+  <defs>
+    <radialGradient id="bg_serieb" cx="50%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#001a12"/>
+      <stop offset="100%" stop-color="#000d0a"/>
+    </radialGradient>
+  </defs>
+</svg>

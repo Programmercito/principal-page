@@ -45,6 +45,15 @@ import ProductCard from './ProductCard.astro';
         badge="En vivo"
         badgeColor="amber"
       />
+      <ProductCard
+        title="Serie B Verificador"
+        description="Verificá si un billete de la Serie B en Bolivia es válido o inválido. Consultá rápidamente el estado de tus billetes antes de aceptarlos."
+        img="/images/serieb.svg"
+        link="https://serieb.devcito.org"
+        tags={["Web App"]}
+        badge="En vivo"
+        badgeColor="emerald"
+      />
     </div>
 
     <!-- CTA -->
@@ -90,9 +99,9 @@ import ProductCard from './ProductCard.astro';
 
   .products-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
-    max-width: 1100px;
+    max-width: 900px;
     margin: 0 auto;
   }
 

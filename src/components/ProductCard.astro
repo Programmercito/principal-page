@@ -7,7 +7,7 @@ interface Props {
   link: string;
   tags?: string[];
   badge?: string;
-  badgeColor?: 'cyan' | 'purple' | 'amber';
+  badgeColor?: 'cyan' | 'purple' | 'amber' | 'emerald';
 }
 
 const { img, title, description, link, tags = [], badge, badgeColor = 'cyan' } = Astro.props;
@@ -16,6 +16,7 @@ const badgeColors = {
   cyan: 'badge-cyan',
   purple: 'badge-purple',
   amber: 'badge-amber',
+  emerald: 'badge-emerald',
 };
 ---
 
@@ -237,6 +238,14 @@ const badgeColors = {
     box-shadow: 0 0 12px rgba(245,158,11,0.12);
   }
   .badge-amber .badge-dot { background: #fbbf24; }
+
+  .badge-emerald {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.45);
+    color: #34d399;
+    box-shadow: 0 0 12px rgba(16,185,129,0.15);
+  }
+  .badge-emerald .badge-dot { background: #34d399; }
 
   .card-content {
     padding: 1.5rem;
