@@ -9,7 +9,7 @@ interface Props {
   accentColor?: string;
 }
 
-const { icon, title, description, gradient = 'from-emerald-500 to-cyan-500', accentColor = '#10b981' } = Astro.props;
+const { icon, title, description, gradient = 'from-[var(--color-cyan)] to-[var(--color-blue)]', accentColor = 'var(--color-cyan)' } = Astro.props;
 ---
 
 <div class="service-card fade-in-element group" style={`--accent: ${accentColor}`}>
@@ -43,25 +43,26 @@ const { icon, title, description, gradient = 'from-emerald-500 to-cyan-500', acc
     position: relative;
     padding: 2.25rem;
     border-radius: 20px;
-    background: rgba(9, 9, 11, 0.7);
+    background: var(--color-card-bg);
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--color-card-border);
     display: flex;
     flex-direction: column;
     gap: 1rem;
     height: 100%;
     overflow: hidden;
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
     cursor: default;
     box-sizing: border-box;
     width: 100%;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
   }
 
   .service-card::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(16, 185, 129, 0.05), transparent 70%);
+    background: radial-gradient(ellipse 70% 50% at 50% 0%, var(--color-accent-glow), transparent 70%);
     opacity: 0;
     transition: opacity 0.4s ease;
     pointer-events: none;
@@ -69,10 +70,10 @@ const { icon, title, description, gradient = 'from-emerald-500 to-cyan-500', acc
 
   .service-card:hover {
     transform: translateY(-6px);
-    border-color: rgba(16, 185, 129, 0.22);
+    border-color: var(--color-cyan);
     box-shadow:
-      0 20px 50px rgba(0, 0, 0, 0.35),
-      0 0 20px rgba(16, 185, 129, 0.04),
+      0 20px 50px rgba(0, 0, 0, 0.12),
+      0 0 20px var(--color-accent-glow),
       inset 0 1px 0 rgba(255,255,255,0.05);
   }
 
@@ -83,7 +84,7 @@ const { icon, title, description, gradient = 'from-emerald-500 to-cyan-500', acc
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent 10%, rgba(34,211,238,0.5) 50%, transparent 90%);
+    background: linear-gradient(90deg, transparent 10%, var(--color-blue) 50%, transparent 90%);
     opacity: 0;
     transition: opacity 0.4s ease;
     pointer-events: none;
@@ -106,7 +107,7 @@ const { icon, title, description, gradient = 'from-emerald-500 to-cyan-500', acc
     position: absolute;
     top: 0; right: 0;
     width: 80px; height: 80px;
-    background: radial-gradient(circle at top right, rgba(34,211,238,0.08), transparent 70%);
+    background: radial-gradient(circle at top right, var(--color-accent-glow), transparent 70%);
     border-radius: 0 20px 0 0;
     pointer-events: none;
     opacity: 0;
@@ -132,11 +133,11 @@ const { icon, title, description, gradient = 'from-emerald-500 to-cyan-500', acc
     position: absolute;
     inset: 0;
     border-radius: 16px;
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid var(--color-border);
     transition: border-color 0.3s ease;
   }
   .service-card:hover .icon-ring {
-    border-color: rgba(34,211,238,0.3);
+    border-color: var(--color-blue);
   }
 
   .icon-bg {
@@ -149,35 +150,36 @@ const { icon, title, description, gradient = 'from-emerald-500 to-cyan-500', acc
 
   .service-icon {
     width: 30px; height: 30px;
-    color: #10b981;
+    color: var(--color-cyan);
     position: relative; z-index: 1;
     transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s ease, filter 0.3s ease;
   }
   .service-card:hover .service-icon {
     transform: scale(1.2) rotate(-5deg);
-    color: #6befc3;
-    filter: drop-shadow(0 0 8px rgba(16,185,129,0.6));
+    color: var(--color-blue);
+    filter: drop-shadow(0 0 8px var(--color-accent-shadow));
   }
 
   .service-title {
     font-family: 'Outfit', sans-serif;
     font-size: 1.25rem;
     font-weight: 700;
-    color: white;
+    color: var(--color-text-primary);
     letter-spacing: -0.01em;
     transition: color 0.3s ease;
     z-index: 1;
     position: relative;
   }
-  .service-card:hover .service-title { color: #10b981; }
+  .service-card:hover .service-title { color: var(--color-cyan); }
 
   .service-desc {
     font-size: 0.875rem;
-    color: #94a3b8;
+    color: var(--color-text-secondary);
     line-height: 1.7;
     flex: 1;
     z-index: 1;
     position: relative;
+    transition: color 0.3s ease;
   }
 
   .service-dots {
@@ -192,12 +194,12 @@ const { icon, title, description, gradient = 'from-emerald-500 to-cyan-500', acc
   .dot {
     width: 5px; height: 5px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.12);
+    background: var(--color-border);
     transition: all 0.3s ease;
   }
-  .service-card:hover .dot:nth-child(1) { background: #10b981; transform: scale(1.3); }
-  .service-card:hover .dot:nth-child(2) { background: #06b6d4; transform: scale(1.1); transition-delay: 0.05s; }
-  .service-card:hover .dot:nth-child(3) { background: #8b5cf6; transition-delay: 0.1s; }
+  .service-card:hover .dot:nth-child(1) { background: var(--color-cyan); transform: scale(1.3); }
+  .service-card:hover .dot:nth-child(2) { background: var(--color-blue); transform: scale(1.1); transition-delay: 0.05s; }
+  .service-card:hover .dot:nth-child(3) { background: var(--color-purple); transition-delay: 0.1s; }
 
   /* Fade-in (scoped) */
   .fade-in-element {

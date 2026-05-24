@@ -60,7 +60,7 @@ const year = new Date().getFullYear();
       <div class="footer-bottom-line"></div>
       <div class="footer-bottom-content">
         <p class="footer-copyright">
-          &copy; {year} · Hecho con <span class="text-red-400">❤</span> por <a href="/" class="text-cyan-400 hover:text-cyan-300 font-semibold">Devcito</a>
+          &copy; {year} · Hecho con <span class="text-red-400">❤</span> por <a href="/" style="color: var(--color-cyan)" class="font-semibold hover:opacity-80">Devcito</a>
         </p>
         <a href="/policy.html" class="footer-policy-link">Política de Privacidad</a>
       </div>
@@ -73,14 +73,15 @@ const year = new Date().getFullYear();
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 80% 60% at 50% 100%, rgba(16, 185, 129, 0.04), transparent),
-      rgba(3, 7, 18, 0.8);
+      radial-gradient(ellipse 80% 60% at 50% 100%, var(--gradient-body-orb), transparent),
+      var(--color-bg-primary);
     pointer-events: none;
+    transition: var(--theme-transition);
   }
 
   .footer-divider {
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.2), rgba(139, 92, 246, 0.2), transparent);
+    background: linear-gradient(90deg, transparent, var(--color-cyan), var(--color-sky), transparent);
     margin-bottom: 3rem;
   }
 
@@ -111,21 +112,23 @@ const year = new Date().getFullYear();
     font-family: 'Outfit', sans-serif;
     font-size: 1.5rem;
     font-weight: 800;
-    color: white;
+    color: var(--color-text-primary);
     text-decoration: none;
     letter-spacing: -0.02em;
     display: inline-block;
     margin-bottom: 0.75rem;
+    transition: var(--theme-transition);
   }
 
   .footer-logo span {
-    color: #10b981;
+    color: var(--color-cyan);
   }
 
   .footer-tagline {
     font-size: 0.875rem;
-    color: #475569;
+    color: var(--color-text-muted);
     line-height: 1.6;
+    transition: var(--theme-transition);
   }
 
   .footer-nav-title {
@@ -133,8 +136,9 @@ const year = new Date().getFullYear();
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #334155;
+    color: var(--color-text-muted);
     margin-bottom: 1rem;
+    transition: var(--theme-transition);
   }
 
   .footer-nav-links {
@@ -145,13 +149,13 @@ const year = new Date().getFullYear();
 
   .footer-nav-links a {
     font-size: 0.9rem;
-    color: #64748b;
+    color: var(--color-text-secondary);
     text-decoration: none;
     transition: color 0.2s ease;
   }
 
   .footer-nav-links a:hover {
-    color: #10b981;
+    color: var(--color-cyan);
   }
 
   .footer-social-icons {
@@ -167,24 +171,25 @@ const year = new Date().getFullYear();
     width: 40px;
     height: 40px;
     border-radius: 10px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    color: #64748b;
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, border-color 0.3s ease;
   }
 
   .footer-social-link:hover {
-    background: rgba(16, 185, 129, 0.1);
-    border-color: rgba(16, 185, 129, 0.3);
-    color: #10b981;
+    background: var(--color-accent-soft);
+    border-color: var(--color-cyan);
+    color: var(--color-cyan);
     transform: translateY(-3px);
   }
 
   .footer-bottom-line {
     height: 1px;
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--color-border);
     margin-bottom: 1.5rem;
+    transition: var(--theme-transition);
   }
 
   .footer-bottom-content {
@@ -197,17 +202,18 @@ const year = new Date().getFullYear();
 
   .footer-copyright {
     font-size: 0.8rem;
-    color: #334155;
+    color: var(--color-text-muted);
+    transition: var(--theme-transition);
   }
 
   .footer-policy-link {
     font-size: 0.8rem;
-    color: #334155;
+    color: var(--color-text-muted);
     text-decoration: none;
     transition: color 0.2s ease;
   }
 
   .footer-policy-link:hover {
-    color: #10b981;
+    color: var(--color-cyan);
   }
 </style>

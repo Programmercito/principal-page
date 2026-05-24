@@ -22,7 +22,7 @@ import { Icon } from 'astro-icon/components';
     <!-- Badge -->
     <div class="inline-flex items-center gap-2 badge-pill mb-8 fade-in-element" style="animation-delay:0s">
       <span class="w-2 h-2 bg-green-400 rounded-full pulse-dot"></span>
-      <span class="text-sm text-gray-300 font-medium">Disponible para nuevos proyectos</span>
+      <span class="text-sm font-medium" style="color: var(--color-text-secondary)">Disponible para nuevos proyectos</span>
     </div>
 
     <!-- Main heading -->
@@ -31,11 +31,11 @@ import { Icon } from 'astro-icon/components';
       <br>
       <span class="gradient-text-hero animated-gradient">para tu negocio</span>
       <br>
-      <span class="text-hero-sub">sin complicaciones</span>
+      <span class="text-hero-sub" style="color: var(--color-text-secondary)">sin complicaciones</span>
     </h1>
 
-    <p class="text-xl md:text-2xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed fade-in-element" style="animation-delay:0.2s">
-      Creamos <span class="text-cyan-400 font-semibold highlight-word">software, páginas web y sistemas</span> a medida
+    <p class="text-xl md:text-2xl mb-10 max-w-2xl mx-auto leading-relaxed fade-in-element" style="animation-delay:0.2s; color: var(--color-text-secondary)">
+      Creamos <span class="font-semibold highlight-word" style="color: var(--color-cyan)">software, páginas web y sistemas</span> a medida
       para que tu empresa venda más, trabaje mejor y gane tiempo.
     </p>
 
@@ -135,7 +135,11 @@ import { Icon } from 'astro-icon/components';
         if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${p.hue}, 90%, 70%, ${p.alpha})`;
+        
+        // Dynamic styling helper to fetch theme accent
+        const isLight = document.documentElement.classList.contains('light');
+        const particleHue = isLight ? (p.hue === 280 ? 250 : 200) : p.hue;
+        ctx.fillStyle = `hsla(${particleHue}, 90%, 70%, ${p.alpha})`;
         ctx.fill();
       });
       particles.forEach((a, i) => {
@@ -145,7 +149,8 @@ import { Icon } from 'astro-icon/components';
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = `rgba(34,211,238,${0.09*(1-dist/130)})`;
+            const isLight = document.documentElement.classList.contains('light');
+            ctx.strokeStyle = isLight ? `rgba(79,70,229,${0.07*(1-dist/130)})` : `rgba(6,182,212,${0.09*(1-dist/130)})`;
             ctx.lineWidth = 0.6;
             ctx.stroke();
           }
@@ -174,18 +179,19 @@ import { Icon } from 'astro-icon/components';
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 70% 80% at 50% -10%, rgba(16, 185, 129, 0.18) 0%, transparent 60%),
-      radial-gradient(ellipse 40% 50% at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-      radial-gradient(ellipse 30% 40% at 10% 60%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
-      #030712;
+      radial-gradient(ellipse 70% 80% at 50% -10%, var(--gradient-glow-top) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 50% at 80% 80%, var(--gradient-glow-right) 0%, transparent 50%),
+      radial-gradient(ellipse 30% 40% at 10% 60%, var(--gradient-glow-left) 0%, transparent 50%),
+      var(--color-bg-primary);
+    transition: var(--theme-transition);
   }
 
   .hero-grid {
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(rgba(16, 185, 129, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(16, 185, 129, 0.04) 1px, transparent 1px);
+      linear-gradient(var(--grid-line-color) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line-color) 1px, transparent 1px);
     background-size: 60px 60px;
     mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
     -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
@@ -196,35 +202,36 @@ import { Icon } from 'astro-icon/components';
     border-radius: 50%;
     filter: blur(90px);
     pointer-events: none;
+    transition: var(--theme-transition);
   }
 
   .shape-1 {
     width: 700px; height: 700px;
-    background: radial-gradient(circle, rgba(34, 211, 238, 0.18), transparent 60%);
+    background: radial-gradient(circle, var(--color-glow-1), transparent 60%);
     top: -250px; left: -200px;
     animation: float-1 18s infinite alternate ease-in-out;
   }
   .shape-2 {
     width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(59, 130, 246, 0.14), transparent 60%);
+    background: radial-gradient(circle, var(--color-glow-2), transparent 60%);
     bottom: -150px; right: -150px;
     animation: float-2 22s infinite alternate ease-in-out;
   }
   .shape-3 {
     width: 350px; height: 350px;
-    background: radial-gradient(circle, rgba(139, 92, 246, 0.12), transparent 60%);
+    background: radial-gradient(circle, var(--color-glow-3), transparent 60%);
     bottom: 20%; left: 20%;
     animation: float-3 25s infinite alternate ease-in-out;
   }
   .shape-4 {
     width: 250px; height: 250px;
-    background: radial-gradient(circle, rgba(34, 211, 238, 0.1), transparent 60%);
+    background: radial-gradient(circle, var(--color-glow-2), transparent 60%);
     top: 30%; right: 10%;
     animation: float-1 20s infinite alternate-reverse ease-in-out;
   }
   .shape-5 {
     width: 180px; height: 180px;
-    background: radial-gradient(circle, rgba(245, 158, 11, 0.08), transparent 60%);
+    background: radial-gradient(circle, var(--color-glow-1), transparent 60%);
     top: 15%; left: 8%;
     animation: float-2 28s infinite alternate-reverse ease-in-out;
   }
@@ -244,12 +251,13 @@ import { Icon } from 'astro-icon/components';
 
   /* Badge */
   .badge-pill {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(34, 211, 238, 0.2);
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-border);
     backdrop-filter: blur(12px);
     border-radius: 100px;
     padding: 8px 20px;
-    box-shadow: 0 0 20px rgba(34, 211, 238, 0.08), inset 0 1px 0 rgba(255,255,255,0.06);
+    box-shadow: 0 0 20px var(--color-accent-glow), inset 0 1px 0 rgba(255,255,255,0.06);
+    transition: var(--theme-transition);
   }
 
   .pulse-dot {
@@ -268,11 +276,12 @@ import { Icon } from 'astro-icon/components';
     font-weight: 800;
     line-height: 1.05;
     letter-spacing: -0.03em;
-    color: white;
+    color: var(--color-text-primary);
+    transition: var(--theme-transition);
   }
 
   .gradient-text-hero {
-    background: linear-gradient(135deg, #10b981 0%, #06b6d4 45%, #8b5cf6 80%, #ec4899 100%);
+    background: linear-gradient(135deg, var(--color-cyan) 0%, var(--color-blue) 45%, var(--color-purple) 80%, var(--color-pink) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -292,7 +301,6 @@ import { Icon } from 'astro-icon/components';
   .text-hero-sub {
     font-size: 0.65em;
     font-weight: 400;
-    color: #94a3b8;
     letter-spacing: 0.12em;
     text-transform: uppercase;
   }
@@ -307,7 +315,7 @@ import { Icon } from 'astro-icon/components';
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(90deg, #10b981, #06b6d4);
+    background: linear-gradient(90deg, var(--color-cyan), var(--color-blue));
     border-radius: 2px;
     animation: underline-pulse 2s ease-in-out infinite;
   }
@@ -340,20 +348,20 @@ import { Icon } from 'astro-icon/components';
     text-decoration: none;
     overflow: hidden;
     white-space: nowrap;
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, background 0.3s ease;
   }
 
   .hbtn-icon { width: 18px; height: 18px; flex-shrink: 0; }
 
   .hbtn-primary {
-    background: linear-gradient(135deg, #10b981 0%, #06b6d4 55%, #8b5cf6 100%);
+    background: linear-gradient(135deg, var(--color-cyan) 0%, var(--color-blue) 55%, var(--color-purple) 100%);
     color: white;
-    box-shadow: 0 0 30px rgba(16, 185, 129, 0.5), 0 4px 20px rgba(6, 182, 212, 0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+    box-shadow: 0 0 30px var(--color-accent-shadow), inset 0 1px 0 rgba(255,255,255,0.2);
     animation: hero-pulse 3s ease-in-out infinite;
   }
   .hbtn-primary:hover {
     transform: translateY(-5px) scale(1.04);
-    box-shadow: 0 0 55px rgba(16, 185, 129, 0.7), 0 12px 40px rgba(6, 182, 212, 0.55), inset 0 1px 0 rgba(255,255,255,0.25);
+    box-shadow: 0 0 55px var(--color-accent-shadow), inset 0 1px 0 rgba(255,255,255,0.25);
   }
 
   .hbtn-shimmer {
@@ -366,22 +374,24 @@ import { Icon } from 'astro-icon/components';
   @keyframes shimmer-sweep { 0% { left: -100%; } 40%, 100% { left: 170%; } }
 
   @keyframes hero-pulse {
-    0%, 100% { box-shadow: 0 0 30px rgba(16,185,129,0.5), 0 4px 20px rgba(6,182,212,0.4), inset 0 1px 0 rgba(255,255,255,0.2); }
-    50% { box-shadow: 0 0 55px rgba(16,185,129,0.7), 0 8px 35px rgba(6,182,212,0.55), inset 0 1px 0 rgba(255,255,255,0.2); }
+    0%, 100% { box-shadow: 0 0 30px var(--color-accent-shadow), inset 0 1px 0 rgba(255,255,255,0.2); }
+    50% { box-shadow: 0 0 45px var(--color-accent-shadow), inset 0 1px 0 rgba(255,255,255,0.2); }
   }
 
   .hbtn-glass {
-    background: rgba(255, 255, 255, 0.04);
+    background: var(--color-card-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    color: #e2e8f0;
-    box-shadow: 0 0 0 1px rgba(16,185,129,0.35), inset 0 1px 0 rgba(255,255,255,0.08), 0 4px 15px rgba(0,0,0,0.2);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 4px 15px rgba(0,0,0,0.1);
   }
   .hbtn-glass:hover {
-    background: rgba(16,185,129,0.08);
-    color: #10b981;
+    background: var(--color-accent-soft);
+    color: var(--color-cyan);
     transform: translateY(-5px) scale(1.04);
-    box-shadow: 0 0 0 1px rgba(16,185,129,0.6), inset 0 1px 0 rgba(255,255,255,0.12), 0 0 35px rgba(16,185,129,0.22), 0 12px 35px rgba(0,0,0,0.3);
+    border-color: var(--color-cyan);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 0 35px var(--color-accent-glow), 0 12px 35px rgba(0,0,0,0.15);
   }
 
   /* Stats */
@@ -392,17 +402,20 @@ import { Icon } from 'astro-icon/components';
     gap: 2rem;
     max-width: 380px;
     margin: 0 auto 2.5rem;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.07);
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-card-border);
     border-radius: 20px;
     padding: 1rem 1.5rem;
     backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    transition: var(--theme-transition);
   }
 
   .stat-divider {
     width: 1px;
     height: 36px;
-    background: rgba(255,255,255,0.08);
+    background: var(--color-border);
+    transition: var(--theme-transition);
   }
 
   .stat-item {
@@ -422,7 +435,7 @@ import { Icon } from 'astro-icon/components';
     font-family: 'Outfit', sans-serif;
     font-size: 1.9rem;
     font-weight: 800;
-    background: linear-gradient(135deg, #10b981, #06b6d4);
+    background: linear-gradient(135deg, var(--color-cyan), var(--color-blue));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -431,10 +444,11 @@ import { Icon } from 'astro-icon/components';
 
   .stat-label {
     font-size: 0.7rem;
-    color: #64748b;
+    color: var(--color-text-muted);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-top: 0.25rem;
+    transition: var(--theme-transition);
   }
 
   /* Tech stack */
@@ -452,16 +466,16 @@ import { Icon } from 'astro-icon/components';
     letter-spacing: 0.05em;
     padding: 5px 14px;
     border-radius: 100px;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.08);
-    color: #64748b;
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
     transition: all 0.25s ease;
     cursor: default;
   }
   .tech-pill:hover {
-    background: rgba(16,185,129,0.1);
-    border-color: rgba(16,185,129,0.3);
-    color: #10b981;
+    background: var(--color-accent-soft);
+    border-color: var(--color-cyan);
+    color: var(--color-cyan);
     transform: translateY(-2px);
   }
 
@@ -474,6 +488,4 @@ import { Icon } from 'astro-icon/components';
   @keyframes fade-in-up {
     to { opacity: 1; transform: translateY(0); }
   }
-
-
 </style>

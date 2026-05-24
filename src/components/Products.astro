@@ -34,7 +34,7 @@ import ProductCard from './ProductCard.astro';
         link="https://cotizaciones.devcito.org"
         tags={["Go", "Angular", "Web App"]}
         badge="En vivo"
-        badgeColor="purple"
+        badgeColor="blue"
       />
       <ProductCard
         title="Cine Bolivia"
@@ -52,7 +52,7 @@ import ProductCard from './ProductCard.astro';
         link="https://vseriesb.devcito.org"
         tags={["Web App"]}
         badge="En vivo"
-        badgeColor="emerald"
+        badgeColor="sky"
       />
       <ProductCard
         title="Azar Site"
@@ -61,7 +61,7 @@ import ProductCard from './ProductCard.astro';
         link="https://azar.devcito.org"
         tags={["Web App", "Sorteos", "Astro"]}
         badge="En vivo"
-        badgeColor="purple"
+        badgeColor="blue"
       />
       <ProductCard
         title="QR Offline"
@@ -70,7 +70,7 @@ import ProductCard from './ProductCard.astro';
         link="https://qr.devcito.org"
         tags={["JS", "Offline", "Web App"]}
         badge="En vivo"
-        badgeColor="emerald"
+        badgeColor="sky"
       />
       <ProductCard
         title="Themes Devcito"
@@ -79,7 +79,7 @@ import ProductCard from './ProductCard.astro';
         link="https://themes.devcito.org"
         tags={["Diseño", "Tailwind", "Web App"]}
         badge="En vivo"
-        badgeColor="purple"
+        badgeColor="blue"
       />
       <ProductCard
         title="Tools Devcito"
@@ -94,7 +94,7 @@ import ProductCard from './ProductCard.astro';
 
     <!-- CTA -->
     <div class="text-center mt-16 fade-in-element">
-      <p class="text-gray-500 mb-4 text-sm">¿Querés ver más proyectos?</p>
+      <p class="mb-4 text-sm" style="color: var(--color-text-muted)">¿Querés ver más proyectos?</p>
       <a href="https://portafolio.devcito.org/" target="_blank" rel="noopener noreferrer" class="portfolio-link">
         Ver Portafolio Completo
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 inline-block ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -115,8 +115,9 @@ import ProductCard from './ProductCard.astro';
     transform: translate(-50%, -50%);
     width: 800px;
     height: 800px;
-    background: radial-gradient(ellipse at center, rgba(16, 185, 129, 0.04) 0%, transparent 70%);
+    background: radial-gradient(ellipse at center, var(--color-accent-glow) 0%, transparent 70%);
     pointer-events: none;
+    transition: var(--theme-transition);
   }
 
   .section-label {
@@ -125,12 +126,13 @@ import ProductCard from './ProductCard.astro';
     font-weight: 600;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: #10b981;
-    background: rgba(16, 185, 129, 0.1);
-    border: 1px solid rgba(16, 185, 129, 0.2);
+    color: var(--color-cyan);
+    background: var(--color-accent-soft);
+    border: 1px solid var(--color-border);
     border-radius: 20px;
     padding: 4px 16px;
     margin-bottom: 1rem;
+    transition: var(--theme-transition);
   }
 
   .products-grid {
@@ -159,20 +161,20 @@ import ProductCard from './ProductCard.astro';
     align-items: center;
     font-size: 0.9rem;
     font-weight: 600;
-    color: #10b981;
+    color: var(--color-cyan);
     text-decoration: none;
-    border: 1px solid rgba(16, 185, 129, 0.3);
+    border: 1px solid var(--color-border);
     border-radius: 30px;
     padding: 10px 24px;
-    background: rgba(16, 185, 129, 0.05);
+    background: var(--color-accent-soft);
     transition: all 0.3s ease;
     letter-spacing: 0.02em;
   }
 
   .portfolio-link:hover {
-    background: rgba(16, 185, 129, 0.12);
-    border-color: rgba(16, 185, 129, 0.6);
-    box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+    background: var(--color-accent-glow);
+    border-color: var(--color-cyan);
+    box-shadow: 0 0 20px var(--color-accent-glow);
     transform: translateY(-2px);
   }
 

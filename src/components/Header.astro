@@ -21,12 +21,28 @@ import { Icon } from 'astro-icon/components';
         <a href="#contact" class="nav-link nav-cta">Contacto</a>
       </nav>
 
-      <!-- Mobile menu button (right, only on mobile) -->
-      <button id="menu-btn" class="mobile-menu-btn md:hidden ml-auto" aria-label="Abrir menú">
-        <span class="menu-bar"></span>
-        <span class="menu-bar"></span>
-        <span class="menu-bar"></span>
-      </button>
+      <!-- Controls container (ML-auto forces it to the right, on desktop next to nav, on mobile next to menu button) -->
+      <div class="ml-auto flex items-center gap-4">
+        <!-- Theme Toggle Button -->
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar tema">
+          <!-- Sun icon -->
+          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+          </svg>
+          <!-- Moon icon -->
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+          </svg>
+        </button>
+
+        <!-- Mobile menu button -->
+        <button id="menu-btn" class="mobile-menu-btn md:hidden" aria-label="Abrir menú">
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -109,6 +125,23 @@ import { Icon } from 'astro-icon/components';
     }, { threshold: 0.4 });
 
     sections.forEach(section => sectionObserver.observe(section));
+
+    // Theme Toggle Functionality
+    const themeToggles = document.querySelectorAll('#theme-toggle');
+    themeToggles.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const isLight = document.documentElement.classList.contains('light');
+        if (isLight) {
+          document.documentElement.classList.remove('light');
+          document.documentElement.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+          document.documentElement.classList.add('light');
+          localStorage.setItem('theme', 'light');
+        }
+      });
+    });
   });
 </script>
 
@@ -118,11 +151,11 @@ import { Icon } from 'astro-icon/components';
   }
 
   .header-scrolled .header-inner {
-    background: rgba(3, 7, 18, 0.85);
+    background: var(--color-card-bg);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(16, 185, 129, 0.1);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
   }
 
   .header-logo {
@@ -137,7 +170,7 @@ import { Icon } from 'astro-icon/components';
     font-family: 'Outfit', sans-serif;
     font-size: 1.25rem;
     font-weight: 800;
-    color: white;
+    color: var(--color-text-primary);
     text-decoration: none;
     letter-spacing: -0.02em;
     transition: opacity 0.2s ease;
@@ -154,7 +187,7 @@ import { Icon } from 'astro-icon/components';
     width: 32px;
     height: 32px;
     border-radius: 8px;
-    background: linear-gradient(135deg, #10b981, #06b6d4);
+    background: linear-gradient(135deg, var(--color-cyan), var(--color-blue));
     font-size: 1rem;
     font-weight: 900;
     color: white;
@@ -162,14 +195,14 @@ import { Icon } from 'astro-icon/components';
   }
 
   .logo-accent {
-    color: #10b981;
+    color: var(--color-cyan);
   }
 
   .nav-link {
     position: relative;
     font-size: 0.875rem;
     font-weight: 500;
-    color: #94a3b8;
+    color: var(--color-text-secondary);
     text-decoration: none;
     padding: 0.5rem 1rem;
     border-radius: 8px;
@@ -179,9 +212,9 @@ import { Icon } from 'astro-icon/components';
   }
 
   .nav-link:hover, .nav-link-active {
-    color: #10b981;
-    background: rgba(16, 185, 129, 0.08);
-    border-color: rgba(16, 185, 129, 0.2);
+    color: var(--color-cyan);
+    background: var(--color-accent-soft);
+    border-color: var(--color-border);
   }
 
   /* Centered nav using absolute position */
@@ -192,16 +225,16 @@ import { Icon } from 'astro-icon/components';
   }
 
   .nav-cta {
-    color: #10b981 !important;
+    color: var(--color-cyan) !important;
     font-weight: 600 !important;
     background: transparent;
     border-color: transparent;
   }
 
   .nav-cta:hover {
-    background: rgba(16, 185, 129, 0.1) !important;
-    border-color: rgba(16, 185, 129, 0.3) !important;
-    box-shadow: 0 0 20px rgba(16, 185, 129, 0.12);
+    background: var(--color-accent-soft) !important;
+    border-color: var(--color-border) !important;
+    box-shadow: 0 0 20px var(--color-accent-glow);
   }
 
   /* Hamburger -- hidden on desktop, shown only on mobile */
@@ -230,7 +263,7 @@ import { Icon } from 'astro-icon/components';
     display: block;
     width: 24px;
     height: 2px;
-    background: #94a3b8;
+    background: var(--color-text-secondary);
     border-radius: 2px;
     transition: all 0.3s ease;
     transform-origin: center;
@@ -238,21 +271,21 @@ import { Icon } from 'astro-icon/components';
 
   /* Mobile menu */
   .mobile-menu {
-    background: rgba(3, 7, 18, 0.95);
+    background: var(--color-bg-primary);
     backdrop-filter: blur(24px);
-    border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+    border-bottom: 1px solid var(--color-border);
   }
 
   .mobile-link {
     font-size: 1.1rem;
     font-weight: 500;
-    color: #94a3b8;
+    color: var(--color-text-secondary);
     text-decoration: none;
     transition: color 0.2s ease;
   }
 
   .mobile-link:hover {
-    color: #10b981;
+    color: var(--color-cyan);
   }
 
   .mobile-link-cta {
@@ -260,13 +293,67 @@ import { Icon } from 'astro-icon/components';
     font-weight: 600 !important;
     padding: 10px 28px;
     border-radius: 10px;
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(6, 182, 212, 0.15));
-    border: 1px solid rgba(16, 185, 129, 0.3);
-    color: #10b981 !important;
+    background: linear-gradient(135deg, var(--color-accent-soft), var(--color-accent-glow));
+    border: 1px solid var(--color-border);
+    color: var(--color-cyan) !important;
   }
 
   .mobile-menu.open {
     animation: slide-down 0.2s ease;
+  }
+
+  /* Theme Toggle Button Styles */
+  .theme-toggle-btn {
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--color-text-primary);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(8px);
+  }
+
+  .theme-toggle-btn:hover {
+    background: var(--color-accent-soft);
+    border-color: var(--color-cyan);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px var(--color-accent-glow);
+  }
+
+  .theme-toggle-btn .sun-icon {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+
+  .theme-toggle-btn .moon-icon {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
+    transform: rotate(-90deg);
+    opacity: 0;
+  }
+
+  :global(html.light) .theme-toggle-btn .sun-icon {
+    transform: rotate(90deg);
+    opacity: 0;
+  }
+
+  :global(html.light) .theme-toggle-btn .moon-icon {
+    transform: rotate(0deg);
+    opacity: 1;
   }
 
   @keyframes slide-down {

@@ -64,27 +64,29 @@ import Button from './Button.astro';
   .contact-bg {
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(34, 211, 238, 0.05), transparent);
+    background: radial-gradient(ellipse 60% 80% at 50% 50%, var(--gradient-glow-left) 0%, transparent);
     pointer-events: none;
+    transition: var(--theme-transition);
   }
 
   .contact-wrapper {
     max-width: 680px;
     margin: 0 auto;
-    background: rgba(13, 18, 39, 0.7);
+    background: var(--color-card-bg);
     backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--color-card-border);
     border-radius: 24px;
     padding: 3.5rem;
     text-align: center;
     position: relative;
     overflow: hidden;
-    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
   }
 
   .contact-wrapper:hover {
-    border-color: rgba(34, 211, 238, 0.2);
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4), 0 0 40px rgba(34, 211, 238, 0.06);
+    border-color: var(--color-cyan);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.12), 0 0 40px var(--color-accent-glow);
   }
 
   .contact-top-line {
@@ -93,7 +95,7 @@ import Button from './Button.astro';
     left: 10%;
     right: 10%;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.6), rgba(139, 92, 246, 0.6), transparent);
+    background: linear-gradient(90deg, transparent, var(--color-cyan), var(--color-sky), transparent);
   }
 
   .section-label-contact {
@@ -102,36 +104,39 @@ import Button from './Button.astro';
     font-weight: 600;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: #10b981;
-    background: rgba(16, 185, 129, 0.1);
-    border: 1px solid rgba(16, 185, 129, 0.2);
+    color: var(--color-cyan);
+    background: var(--color-accent-soft);
+    border: 1px solid var(--color-border);
     border-radius: 20px;
     padding: 4px 16px;
     margin-bottom: 1.5rem;
+    transition: var(--theme-transition);
   }
 
   .contact-title {
     font-family: 'Outfit', sans-serif;
     font-size: 2.25rem;
     font-weight: 700;
-    color: white;
+    color: var(--color-text-primary);
     line-height: 1.2;
     letter-spacing: -0.02em;
     margin-bottom: 1rem;
+    transition: var(--theme-transition);
   }
 
   .gradient-text {
-    background: linear-gradient(135deg, #10b981, #8b5cf6);
+    background: linear-gradient(135deg, var(--color-cyan), var(--color-sky));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .contact-subtitle {
-    color: #64748b;
+    color: var(--color-text-secondary);
     font-size: 1rem;
     line-height: 1.7;
     margin-bottom: 2.5rem;
+    transition: var(--theme-transition);
   }
 
   .contact-options {
@@ -146,17 +151,16 @@ import Button from './Button.astro';
     gap: 1rem;
     padding: 1.25rem 1.5rem;
     border-radius: 14px;
-    background: rgba(34, 211, 238, 0.06);
-    border: 1px solid rgba(34, 211, 238, 0.2);
+    background: var(--color-accent-soft);
+    border: 1px solid var(--color-border);
     text-decoration: none;
     transition: all 0.3s ease;
-    group: true;
   }
 
   .contact-opt-primary:hover {
-    background: rgba(34, 211, 238, 0.12);
-    border-color: rgba(34, 211, 238, 0.5);
-    box-shadow: 0 0 30px rgba(34, 211, 238, 0.1);
+    background: var(--color-accent-glow);
+    border-color: var(--color-cyan);
+    box-shadow: 0 0 30px var(--color-accent-glow);
     transform: translateY(-2px);
   }
 
@@ -164,13 +168,14 @@ import Button from './Button.astro';
     width: 48px;
     height: 48px;
     border-radius: 12px;
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 182, 212, 0.2));
-    border: 1px solid rgba(16, 185, 129, 0.3);
+    background: linear-gradient(135deg, var(--color-accent-soft), var(--color-accent-glow));
+    border: 1px solid var(--color-border);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #10b981;
+    color: var(--color-cyan);
     flex-shrink: 0;
+    transition: var(--theme-transition);
   }
 
   .contact-opt-info {
@@ -186,18 +191,20 @@ import Button from './Button.astro';
     font-weight: 600;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: #10b981;
+    color: var(--color-cyan);
+    transition: var(--theme-transition);
   }
 
   .contact-opt-value {
     font-size: 1rem;
     font-weight: 600;
-    color: white;
+    color: var(--color-text-primary);
     font-family: 'Outfit', sans-serif;
+    transition: var(--theme-transition);
   }
 
   .contact-opt-arrow {
-    color: #10b981;
+    color: var(--color-cyan);
     opacity: 0.5;
     transition: all 0.3s ease;
   }
@@ -211,8 +218,9 @@ import Button from './Button.astro';
     display: flex;
     align-items: center;
     gap: 1rem;
-    color: #334155;
+    color: var(--color-text-muted);
     font-size: 0.8rem;
+    transition: var(--theme-transition);
   }
 
   .contact-divider::before,
@@ -220,7 +228,8 @@ import Button from './Button.astro';
     content: '';
     flex: 1;
     height: 1px;
-    background: rgba(255, 255, 255, 0.06);
+    background: var(--color-border);
+    transition: var(--theme-transition);
   }
 
   .contact-social-row {
@@ -236,19 +245,19 @@ import Button from './Button.astro';
     width: 52px;
     height: 52px;
     border-radius: 14px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    color: #64748b;
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, border-color 0.3s ease;
   }
 
   .contact-social-btn:hover {
-    background: rgba(16, 185, 129, 0.1);
-    border-color: rgba(16, 185, 129, 0.3);
-    color: #10b981;
+    background: var(--color-accent-soft);
+    border-color: var(--color-cyan);
+    color: var(--color-cyan);
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.1);
+    box-shadow: 0 8px 20px var(--color-accent-glow);
   }
 
   /* Decorative blobs inside card */
@@ -257,7 +266,7 @@ import Button from './Button.astro';
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(34, 211, 238, 0.07), transparent);
+    background: radial-gradient(circle, var(--color-accent-glow), transparent);
     top: -80px;
     right: -60px;
     pointer-events: none;
@@ -268,7 +277,7 @@ import Button from './Button.astro';
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(139, 92, 246, 0.07), transparent);
+    background: radial-gradient(circle, var(--color-accent-glow), transparent);
     bottom: -60px;
     left: -40px;
     pointer-events: none;
