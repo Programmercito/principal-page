@@ -63,6 +63,33 @@ import ProductCard from './ProductCard.astro';
         badge="En vivo"
         badgeColor="purple"
       />
+      <ProductCard
+        title="QR Offline"
+        description="Generador de códigos QR sin conexión. Crea tus códigos QR de forma rápida, segura y 100% privada directamente en tu navegador."
+        img="/images/qr.svg"
+        link="https://qr.devcito.org"
+        tags={["JS", "Offline", "Web App"]}
+        badge="En vivo"
+        badgeColor="emerald"
+      />
+      <ProductCard
+        title="Themes Devcito"
+        description="Generador de paletas y tiras de colores armónicas para aplicaciones web. Personalizá y exportá combinaciones en CSS, Tailwind o HSL al instante."
+        img="/images/themes.svg"
+        link="https://themes.devcito.org"
+        tags={["Diseño", "Tailwind", "Web App"]}
+        badge="En vivo"
+        badgeColor="purple"
+      />
+      <ProductCard
+        title="Tools Devcito"
+        description="Colección de herramientas útiles y utilidades web esenciales para desarrolladores. Formateadores, codificadores y conversores en un solo lugar."
+        img="/images/tools.svg"
+        link="https://tools.devcito.org"
+        tags={["Utilidades", "DevTools", "Web App"]}
+        badge="En vivo"
+        badgeColor="cyan"
+      />
     </div>
 
     <!-- CTA -->
@@ -88,7 +115,7 @@ import ProductCard from './ProductCard.astro';
     transform: translate(-50%, -50%);
     width: 800px;
     height: 800px;
-    background: radial-gradient(ellipse at center, rgba(34, 211, 238, 0.04) 0%, transparent 70%);
+    background: radial-gradient(ellipse at center, rgba(16, 185, 129, 0.04) 0%, transparent 70%);
     pointer-events: none;
   }
 
@@ -98,9 +125,9 @@ import ProductCard from './ProductCard.astro';
     font-weight: 600;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: #22d3ee;
-    background: rgba(34, 211, 238, 0.1);
-    border: 1px solid rgba(34, 211, 238, 0.2);
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
     border-radius: 20px;
     padding: 4px 16px;
     margin-bottom: 1rem;
@@ -132,20 +159,20 @@ import ProductCard from './ProductCard.astro';
     align-items: center;
     font-size: 0.9rem;
     font-weight: 600;
-    color: #22d3ee;
+    color: #10b981;
     text-decoration: none;
-    border: 1px solid rgba(34, 211, 238, 0.3);
+    border: 1px solid rgba(16, 185, 129, 0.3);
     border-radius: 30px;
     padding: 10px 24px;
-    background: rgba(34, 211, 238, 0.05);
+    background: rgba(16, 185, 129, 0.05);
     transition: all 0.3s ease;
     letter-spacing: 0.02em;
   }
 
   .portfolio-link:hover {
-    background: rgba(34, 211, 238, 0.12);
-    border-color: rgba(34, 211, 238, 0.6);
-    box-shadow: 0 0 20px rgba(34, 211, 238, 0.15);
+    background: rgba(16, 185, 129, 0.12);
+    border-color: rgba(16, 185, 129, 0.6);
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
     transform: translateY(-2px);
   }
 

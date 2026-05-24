@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Background -->
+  <rect width="200" height="200" rx="20" fill="url(#bg_themes)"/>
+
+  <!-- Fan of Color Swatches / Stripes -->
+  <g transform="translate(100, 110)">
+    <!-- Swatch 1 (Purple - bottom / back) -->
+    <path d="M-15 -60 L15 -60 L10 20 L-10 20 Z" transform="rotate(-40)" fill="#8b5cf6" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.3))"/>
+    
+    <!-- Swatch 2 (Blue) -->
+    <path d="M-15 -60 L15 -60 L10 20 L-10 20 Z" transform="rotate(-20)" fill="#3b82f6" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.3))"/>
+    
+    <!-- Swatch 3 (Teal/Cyan) -->
+    <path d="M-15 -60 L15 -60 L10 20 L-10 20 Z" transform="rotate(0)" fill="#06b6d4" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.3))"/>
+    
+    <!-- Swatch 4 (Emerald) -->
+    <path d="M-15 -60 L15 -60 L10 20 L-10 20 Z" transform="rotate(20)" fill="#10b981" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.3))"/>
+    
+    <!-- Swatch 5 (Amber) -->
+    <path d="M-15 -60 L15 -60 L10 20 L-10 20 Z" transform="rotate(40)" fill="#fbbf24" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.3))"/>
+
+    <!-- Joint pin / eyelet at the bottom -->
+    <circle cx="0" cy="10" r="6" fill="#f8fafc" stroke="#1e293b" stroke-width="2"/>
+    <circle cx="0" cy="10" r="2" fill="#1e293b"/>
+  </g>
+
+  <!-- Coding / Palette details - color code labels floating -->
+  <rect x="18" y="24" width="46" height="15" rx="4" fill="rgba(139,92,246,0.15)" stroke="rgba(139,92,246,0.4)" stroke-width="1"/>
+  <text x="41" y="34" text-anchor="middle" font-family="monospace" font-size="7" font-weight="bold" fill="#a78bfa">#8B5CF6</text>
+
+  <rect x="136" y="24" width="46" height="15" rx="4" fill="rgba(251,191,36,0.15)" stroke="rgba(251,191,36,0.4)" stroke-width="1"/>
+  <text x="159" y="34" text-anchor="middle" font-family="monospace" font-size="7" font-weight="bold" fill="#fbbf24">#FBBF24</text>
+
+  <!-- Sparkles -->
+  <text x="35" y="150" font-size="10" fill="rgba(139,92,246,0.5)">✦</text>
+  <text x="165" y="145" font-size="8" fill="rgba(251,191,36,0.4)">✦</text>
+
+  <defs>
+    <radialGradient id="bg_themes" cx="50%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#2e1065"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </radialGradient>
+  </defs>
+</svg>

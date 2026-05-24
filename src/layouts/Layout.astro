@@ -31,7 +31,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url);
   <meta name="keywords" content="desarrollador web, full-stack, automatización de procesos, consultoría ti, diseño web, desarrollo de software, landing pages, devcito" />
   <meta name="robots" content="index, follow" />
   <!-- Theme Color para móviles -->
-  <meta name="theme-color" content="#020817" />
+  <meta name="theme-color" content="#030712" />
 
   <!-- Canonical URL -->
   <link rel="canonical" href={canonicalURL} />
@@ -55,10 +55,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url);
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --color-bg-primary: #020817;
-      --color-bg-secondary: #080e20;
-      --color-cyan: #22d3ee;
-      --color-blue: #3b82f6;
+      --color-bg-primary: #030712;
+      --color-bg-secondary: #09090b;
+      --color-cyan: #10b981;
+      --color-blue: #06b6d4;
       --color-purple: #8b5cf6;
       --font-primary: 'Outfit', sans-serif;
       --font-display: 'Outfit', sans-serif;
@@ -75,65 +75,95 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url);
     body {
       background-color: var(--color-bg-primary);
       background-image:
-        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(34, 211, 238, 0.1), transparent),
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(16, 185, 129, 0.1), transparent),
         url("data:image/svg+xml,%3csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='1' cy='1' r='0.6' fill='rgba(255,255,255,0.025)'/%3e%3c/svg%3e");
       color: white;
       overflow-x: hidden;
-      /* Custom cursor */
-      cursor: none;
     }
 
     /* =================================
-       CUSTOM CURSOR
-    ================================= */
+       CUSTOM CURSOR (HIGH-TECH DYNAMIC GLOW)
+       ================================= */
     #cursor-outer {
       position: fixed;
-      width: 36px; height: 36px;
-      border: 2px solid rgba(34, 211, 238, 0.5);
+      top: 0;
+      left: 0;
+      width: 28px;
+      height: 28px;
+      border: 2px solid rgba(16, 185, 129, 0.55);
       border-radius: 50%;
       pointer-events: none;
       z-index: 9999;
-      transition: transform 0.12s ease, border-color 0.3s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
-      transform: translate(-50%, -50%);
+      /* Smooth transitions for size and colors, transform is handled by GPU in JS */
+      transition: border-color 0.25s cubic-bezier(0.25, 1, 0.5, 1), 
+                  width 0.25s cubic-bezier(0.25, 1, 0.5, 1), 
+                  height 0.25s cubic-bezier(0.25, 1, 0.5, 1), 
+                  background-color 0.25s cubic-bezier(0.25, 1, 0.5, 1), 
+                  box-shadow 0.25s cubic-bezier(0.25, 1, 0.5, 1);
       mix-blend-mode: screen;
+      transform: translate3d(-100px, -100px, 0);
+      box-shadow: 0 0 8px rgba(16, 185, 129, 0.15);
     }
 
-    #cursor-inner {
-      position: fixed;
-      width: 8px; height: 8px;
-      background: #22d3ee;
+    /* Dashed rotating outer ring on hover */
+    #cursor-outer::after {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border: 1px dashed rgba(16, 185, 129, 0);
       border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: width 0.2s ease, height 0.2s ease, background 0.2s ease;
-      box-shadow: 0 0 10px rgba(34, 211, 238, 0.8);
+      opacity: 0;
+      transition: opacity 0.25s ease, border-color 0.25s ease;
     }
 
     body.cursor-hover #cursor-outer {
-      width: 56px; height: 56px;
-      border-color: rgba(34, 211, 238, 0.8);
-      background: rgba(34, 211, 238, 0.06);
-    }
-    body.cursor-hover #cursor-inner {
-      width: 6px; height: 6px;
-      background: #67e8f9;
+      width: 48px;
+      height: 48px;
+      border-color: rgba(16, 185, 129, 0.85);
+      background-color: rgba(16, 185, 129, 0.08);
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.35);
     }
 
-    /* Restore cursor on interactive elements */
-    a, button, [data-tilt], input, textarea, select, [role="button"] {
-      cursor: none;
+    body.cursor-hover #cursor-outer::after {
+      border-color: rgba(16, 185, 129, 0.6);
+      opacity: 1;
+      animation: cursor-spin 6s linear infinite;
+    }
+
+    /* Clicking state */
+    body.cursor-clicking #cursor-outer {
+      width: 20px;
+      height: 20px;
+      border-color: #10b981;
+      background-color: rgba(16, 185, 129, 0.25);
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.7);
+    }
+    
+    body.cursor-clicking #cursor-outer::after {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+
+    @keyframes cursor-spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @media (hover: none) {
+      #cursor-outer {
+        display: none;
+      }
     }
 
     /* Custom scrollbar */
     ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: #020817; }
+    ::-webkit-scrollbar-track { background: #030712; }
     ::-webkit-scrollbar-thumb {
-      background: linear-gradient(to bottom, #22d3ee, #8b5cf6);
+      background: linear-gradient(to bottom, #10b981, #8b5cf6);
       border-radius: 3px;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: linear-gradient(to bottom, #06b6d4, #7c3aed);
+      background: linear-gradient(to bottom, #059669, #7c3aed);
     }
   </style>
   <style is:global>
@@ -141,13 +171,20 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url);
     #scroll-progress {
       position: fixed;
       top: 0; left: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #22d3ee, #3b82f6, #8b5cf6);
-      box-shadow: 0 0 12px rgba(34,211,238,0.7);
+      height: 3px;
+      background: linear-gradient(90deg, #10b981, #06b6d4, #8b5cf6, #10b981);
+      background-size: 300% 100%;
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.8);
       z-index: 1000;
       transform-origin: left;
       width: 0%;
       transition: none;
+      animation: progress-flow 4s linear infinite;
+    }
+
+    @keyframes progress-flow {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 300% 0%; }
     }
 
 		/* Fade-in base (scroll reveal) */
@@ -186,7 +223,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url);
 
     /* Gradient text utility */
     .gradient-text {
-      background: linear-gradient(135deg, #22d3ee, #3b82f6, #8b5cf6);
+      background: linear-gradient(135deg, #10b981, #06b6d4, #8b5cf6);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -199,7 +236,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url);
       font-weight: 800;
       text-align: center;
       margin-bottom: 1rem;
-      background: linear-gradient(135deg, #fff 0%, #22d3ee 60%, #3b82f6 100%);
+      background: linear-gradient(135deg, #fff 0%, #10b981 60%, #06b6d4 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -224,7 +261,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url);
 <body>
   <!-- Custom cursor -->
   <div id="cursor-outer"></div>
-  <div id="cursor-inner"></div>
 
   <!-- Scroll progress bar -->
   <div id="scroll-progress"></div>
@@ -233,24 +269,48 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url);
 
   <script>
     // === CUSTOM CURSOR ===
-    const outer = document.getElementById('cursor-outer')!;
-    const inner = document.getElementById('cursor-inner')!;
+    const outer = document.getElementById('cursor-outer');
     let outerX = 0, outerY = 0;
-    let targetX = 0, targetY = 0;
+    let targetX = -100, targetY = -100;
+    let isInitialized = false;
 
     document.addEventListener('mousemove', (e) => {
       targetX = e.clientX;
       targetY = e.clientY;
-      inner.style.left = e.clientX + 'px';
-      inner.style.top = e.clientY + 'px';
+      if (!isInitialized) {
+        outerX = targetX;
+        outerY = targetY;
+        isInitialized = true;
+      }
     });
 
-    // Smooth lag for outer cursor
+    document.addEventListener('mousedown', () => {
+      document.body.classList.add('cursor-clicking');
+    });
+    
+    document.addEventListener('mouseup', () => {
+      document.body.classList.remove('cursor-clicking');
+    });
+
+    // Smooth lag for outer cursor with velocity-based stretching
     const animateCursor = () => {
-      outerX += (targetX - outerX) * 0.15;
-      outerY += (targetY - outerY) * 0.15;
-      outer.style.left = outerX + 'px';
-      outer.style.top = outerY + 'px';
+      if (isInitialized && outer) {
+        const dx = targetX - outerX;
+        const dy = targetY - outerY;
+        
+        outerX += dx * 0.12;
+        outerY += dy * 0.12;
+
+        const velocity = Math.sqrt(dx * dx + dy * dy);
+        const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+        
+        // Stretch based on velocity, limit maximum stretch to 40%
+        const stretch = Math.min(velocity * 0.015, 0.4);
+        const scaleX = 1 + stretch;
+        const scaleY = 1 - stretch;
+
+        outer.style.transform = `translate3d(${outerX}px, ${outerY}px, 0) translate3d(-50%, -50%, 0) rotate(${angle}deg) scale(${scaleX}, ${scaleY})`;
+      }
       requestAnimationFrame(animateCursor);
     };
     animateCursor();

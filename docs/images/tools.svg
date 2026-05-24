@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Background -->
+  <rect width="200" height="200" rx="20" fill="url(#bg_tools)"/>
+
+  <!-- Gear & Code Brackets -->
+  <g transform="translate(100, 100)">
+    <!-- Rotating Gear Outer -->
+    <circle cx="0" cy="0" r="32" fill="rgba(245,158,11,0.12)" stroke="#f59e0b" stroke-width="2.5"/>
+    
+    <!-- Gear teeth (8 teeth) -->
+    <path d="M-6 -38 L6 -38 L8 -30 L-8 -30 Z" fill="#f59e0b"/>
+    <path d="M-6 -38 L6 -38 L8 -30 L-8 -30 Z" transform="rotate(45)" fill="#f59e0b"/>
+    <path d="M-6 -38 L6 -38 L8 -30 L-8 -30 Z" transform="rotate(90)" fill="#f59e0b"/>
+    <path d="M-6 -38 L6 -38 L8 -30 L-8 -30 Z" transform="rotate(135)" fill="#f59e0b"/>
+    <path d="M-6 -38 L6 -38 L8 -30 L-8 -30 Z" transform="rotate(180)" fill="#f59e0b"/>
+    <path d="M-6 -38 L6 -38 L8 -30 L-8 -30 Z" transform="rotate(225)" fill="#f59e0b"/>
+    <path d="M-6 -38 L6 -38 L8 -30 L-8 -30 Z" transform="rotate(270)" fill="#f59e0b"/>
+    <path d="M-6 -38 L6 -38 L8 -30 L-8 -30 Z" transform="rotate(315)" fill="#f59e0b"/>
+
+    <!-- Inner circle -->
+    <circle cx="0" cy="0" r="22" fill="#020617" stroke="rgba(245,158,11,0.4)" stroke-width="1.5"/>
+
+    <!-- Code symbol: < / > -->
+    <path d="M-10 -5 L-16 0 L-10 5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M10 -5 L16 0 L10 5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M-3 10 L3 -10" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- Secondary elements floating: tools -->
+  <!-- Wrench tool floating -->
+  <g transform="translate(48, 52) rotate(-30)">
+    <path d="M-10 -2 L-2 -2 L8 8 L4 12 L-6 2 L-6 -2" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+    <circle cx="-10" cy="-2" r="4" fill="#020617" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+    <path d="M-13 -2 L-9 -2" stroke="#ffffff" stroke-width="1.5"/>
+  </g>
+
+  <!-- Screwdriver tool floating -->
+  <g transform="translate(152, 52) rotate(30)">
+    <rect x="-2" y="-12" width="4" height="16" rx="1" fill="#f59e0b" stroke="rgba(255,255,255,0.2)"/>
+    <line x1="0" y1="4" x2="0" y2="14" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- Sparkles -->
+  <text x="28" y="152" font-size="10" fill="rgba(245,158,11,0.5)">✦</text>
+  <text x="168" y="148" font-size="8" fill="rgba(245,158,11,0.3)">✦</text>
+
+  <defs>
+    <radialGradient id="bg_tools" cx="50%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#78350f"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </radialGradient>
+  </defs>
+</svg>

@@ -28,8 +28,8 @@ import ServiceCard from './ServiceCard.astro';
   <!-- Track — hijo directo de la sección, sin el px-6 del container -->
   <div class="services-track-wrap relative z-10">
     <div class="services-track">
-      <div class="service-slide"><ServiceCard icon="mdi:web" title="Desarrollo Web" description="Desarrollo sitios web, aplicaciones y sistemas a medida. Desde landing pages hasta plataformas empresariales complejas, enfocados en rendimiento, escalabilidad y experiencia de usuario." gradient="from-cyan-500 to-teal-500" accentColor="#22d3ee" /></div>
-      <div class="service-slide"><ServiceCard icon="mdi:cogs" title="Sistemas ERP" description="Implemento y personalizo sistemas ERP para integrar y automatizar los procesos clave de tu empresa: inventario, facturación, RRHH y más, en una sola plataforma centralizada." gradient="from-blue-500 to-indigo-500" accentColor="#3b82f6" /></div>
+      <div class="service-slide"><ServiceCard icon="mdi:web" title="Desarrollo Web" description="Desarrollo sitios web, applications y sistemas a medida. Desde landing pages hasta plataformas empresariales complejas, enfocados en rendimiento, escalabilidad y experiencia de usuario." gradient="from-emerald-500 to-teal-500" accentColor="#10b981" /></div>
+      <div class="service-slide"><ServiceCard icon="mdi:cogs" title="Sistemas ERP" description="Implemento y personalizo sistemas ERP para integrar y automatizar los procesos clave de tu empresa: inventario, facturación, RRHH y más, en una sola plataforma centralizada." gradient="from-cyan-500 to-blue-500" accentColor="#06b6d4" /></div>
       <div class="service-slide"><ServiceCard icon="mdi:robot-outline" title="Automatización de Procesos" description="Identifico tareas repetitivas y las automatizo con scripts, bots y flujos inteligentes. Reducí costos operativos, errores humanos y ganás tiempo para lo que realmente importa." gradient="from-purple-500 to-violet-500" accentColor="#8b5cf6" /></div>
       <div class="service-slide"><ServiceCard icon="mdi:monitor-dashboard" title="Consultoría Informática" description="Asesoramiento tecnológico integral para empresas y negocios. Te ayudo a elegir herramientas, arquitecturas y soluciones digitales alineadas a tus objetivos y presupuesto." gradient="from-rose-500 to-pink-500" accentColor="#f43f5e" /></div>
       <div class="service-slide"><ServiceCard icon="mdi:bullhorn" title="Marketing Digital" description="Potencio tu presencia en línea a través de gestión estratégica de redes sociales, SEO y campañas publicitarias. Aumentá tu visibilidad y atraé más clientes." gradient="from-amber-500 to-orange-500" accentColor="#f59e0b" /></div>
@@ -66,9 +66,9 @@ import ServiceCard from './ServiceCard.astro';
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 60% 80% at 0% 50%, rgba(34, 211, 238, 0.04), transparent),
+      radial-gradient(ellipse 60% 80% at 0% 50%, rgba(16, 185, 129, 0.04), transparent),
       radial-gradient(ellipse 60% 80% at 100% 50%, rgba(139, 92, 246, 0.04), transparent),
-      rgba(13, 18, 39, 0.3);
+      rgba(3, 7, 18, 0.3);
     pointer-events: none;
   }
 
@@ -78,9 +78,9 @@ import ServiceCard from './ServiceCard.astro';
     font-weight: 600;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: #22d3ee;
-    background: rgba(34, 211, 238, 0.1);
-    border: 1px solid rgba(34, 211, 238, 0.2);
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
     border-radius: 20px;
     padding: 4px 16px;
     margin-bottom: 1rem;
@@ -133,10 +133,10 @@ import ServiceCard from './ServiceCard.astro';
     cursor: pointer;
   }
   .mdot.active {
-    background: #22d3ee;
+    background: #10b981;
     width: 20px;
     border-radius: 4px;
-    box-shadow: 0 0 8px rgba(34,211,238,0.5);
+    box-shadow: 0 0 8px rgba(16,185,129,0.5);
   }
 
   /* ── MOBILE ── */
