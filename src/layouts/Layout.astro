@@ -9,7 +9,7 @@ interface Props {
 const { 
   title, 
   description = "Desarrollador Web Full-Stack y Consultor de TI. Creando soluciones a medida, automatización de procesos y páginas web modernas para impulsar tu negocio.", 
-  image = "/og-image.webp",
+  image = "/og-image.svg",
   type = "website"
 } = Astro.props;
 
@@ -324,6 +324,22 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url);
     .fade-slide-right.is-visible {
       opacity: 1;
       transform: translateX(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .fade-in-element,
+      .fade-slide-left,
+      .fade-slide-right {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
     }
 
     /* Sections: offset for fixed header */

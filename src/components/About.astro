@@ -28,51 +28,32 @@ import { Icon } from 'astro-icon/components';
           de APIs, sistemas ERP y consultoría tecnológica estratégica.
         </p>
 
-        <!-- Skills con barras -->
-        <div class="skills-section">
-          <div class="skill-bar-item">
-            <div class="skill-bar-header">
-              <span class="skill-bar-name">Backend (Laravel / Java)</span>
-              <span class="skill-bar-pct">90%</span>
-            </div>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill" style="--pct:90%; --color:var(--color-cyan)"></div>
+        <!-- Tech stack categorizado por área -->
+        <div class="tech-stack-section">
+          <div class="tech-group">
+            <span class="tech-group-label">Backend</span>
+            <div class="tech-chips">
+              {["Java", "Laravel", "Go"].map(s => <span class="skill-chip chip-cyan">{s}</span>)}
             </div>
           </div>
-          <div class="skill-bar-item">
-            <div class="skill-bar-header">
-              <span class="skill-bar-name">Frontend (Angular)</span>
-              <span class="skill-bar-pct">85%</span>
-            </div>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill" style="--pct:85%; --color:var(--color-blue)"></div>
+          <div class="tech-group">
+            <span class="tech-group-label">Frontend</span>
+            <div class="tech-chips">
+              {["Angular", "Astro", "TypeScript"].map(s => <span class="skill-chip chip-blue">{s}</span>)}
             </div>
           </div>
-          <div class="skill-bar-item">
-            <div class="skill-bar-header">
-              <span class="skill-bar-name">Sistemas ERP / APIs</span>
-              <span class="skill-bar-pct">88%</span>
-            </div>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill" style="--pct:88%; --color:var(--color-sky)"></div>
+          <div class="tech-group">
+            <span class="tech-group-label">Bases de datos</span>
+            <div class="tech-chips">
+              {["MySQL", "PostgreSQL"].map(s => <span class="skill-chip chip-sky">{s}</span>)}
             </div>
           </div>
-          <div class="skill-bar-item">
-            <div class="skill-bar-header">
-              <span class="skill-bar-name">DevOps (Docker / Linux)</span>
-              <span class="skill-bar-pct">75%</span>
-            </div>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill" style="--pct:75%; --color:#f59e0b"></div>
+          <div class="tech-group">
+            <span class="tech-group-label">Infraestructura</span>
+            <div class="tech-chips">
+              {["Docker", "Linux", "REST APIs"].map(s => <span class="skill-chip chip-amber">{s}</span>)}
             </div>
           </div>
-        </div>
-
-        <!-- Tech chips -->
-        <div class="skills-wrap">
-          {["Java", "Laravel", "Go", "Angular", "MySQL", "REST APIs", "Docker", "Linux", "Astro"].map(skill => (
-            <span class="skill-chip">{skill}</span>
-          ))}
         </div>
 
         <!-- Social links -->
@@ -243,57 +224,48 @@ import { Icon } from 'astro-icon/components';
     transition: var(--theme-transition);
   }
 
-  /* Skill bars */
-  .skills-section {
+  /* Tech stack categorizando por área */
+  .tech-stack-section {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.1rem;
     margin: 1.75rem 0;
   }
 
-  .skill-bar-item { display: flex; flex-direction: column; gap: 6px; }
-
-  .skill-bar-header {
+  .tech-group {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
+    gap: 0.75rem;
+    flex-wrap: wrap;
   }
 
-  .skill-bar-name {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--color-text-secondary);
-    letter-spacing: 0.02em;
-    transition: var(--theme-transition);
-  }
-
-  .skill-bar-pct {
-    font-size: 0.75rem;
+  .tech-group-label {
+    font-size: 0.7rem;
     font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     color: var(--color-text-muted);
-    font-family: 'Outfit', sans-serif;
+    min-width: 88px;
+    flex-shrink: 0;
+    padding-top: 2px;
     transition: var(--theme-transition);
   }
 
-  .skill-bar-track {
-    height: 6px;
-    background: var(--color-border);
-    border-radius: 10px;
-    overflow: hidden;
-    transition: var(--theme-transition);
+  .tech-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
   }
 
-  .skill-bar-fill {
-    height: 100%;
-    border-radius: 10px;
-    background: linear-gradient(90deg, var(--color), color-mix(in srgb, var(--color) 60%, var(--color-bg-primary) 40%));
-    width: 0;
-    animation: bar-fill 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 0.3s;
-    box-shadow: 0 0 8px color-mix(in srgb, var(--color) 70%, transparent 30%);
-  }
-
-  @keyframes bar-fill { to { width: var(--pct); } }
+  /* chip color variants */
+  .chip-cyan  { color: var(--color-cyan) !important; border-color: color-mix(in srgb, var(--color-cyan) 30%, transparent) !important; background: color-mix(in srgb, var(--color-cyan) 7%, transparent) !important; }
+  .chip-cyan:hover  { border-color: var(--color-cyan) !important; box-shadow: 0 6px 15px color-mix(in srgb, var(--color-cyan) 20%, transparent) !important; }
+  .chip-blue  { color: var(--color-blue) !important; border-color: color-mix(in srgb, var(--color-blue) 30%, transparent) !important; background: color-mix(in srgb, var(--color-blue) 7%, transparent) !important; }
+  .chip-blue:hover  { border-color: var(--color-blue) !important; box-shadow: 0 6px 15px color-mix(in srgb, var(--color-blue) 20%, transparent) !important; }
+  .chip-sky   { color: var(--color-sky) !important; border-color: color-mix(in srgb, var(--color-sky) 30%, transparent) !important; background: color-mix(in srgb, var(--color-sky) 7%, transparent) !important; }
+  .chip-sky:hover   { border-color: var(--color-sky) !important; box-shadow: 0 6px 15px color-mix(in srgb, var(--color-sky) 20%, transparent) !important; }
+  .chip-amber { color: #f59e0b !important; border-color: rgba(245,158,11,0.3) !important; background: rgba(245,158,11,0.07) !important; }
+  .chip-amber:hover { border-color: #f59e0b !important; box-shadow: 0 6px 15px rgba(245,158,11,0.15) !important; }
 
   /* Tech chips */
   .skills-wrap {

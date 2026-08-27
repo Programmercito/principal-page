@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#020617"/>
+      <stop offset="100%" stop-color="#0b0f19"/>
+    </linearGradient>
+    <radialGradient id="glow-top" cx="600" cy="0" r="660" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00f5ff" stop-opacity="0.13"/>
+      <stop offset="100%" stop-color="#00f5ff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow-bl" cx="0" cy="630" r="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#2563eb" stop-opacity="0.11"/>
+      <stop offset="100%" stop-color="#2563eb" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow-br" cx="1200" cy="630" r="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="title-grad" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00f5ff"/>
+      <stop offset="45%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+    <linearGradient id="line-grad" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00f5ff" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#00f5ff" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#00f5ff" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#00f5ff" stroke-width="0.4" stroke-opacity="0.04"/>
+    </pattern>
+  </defs>
+
+  <!-- Backgrounds -->
+  <rect width="1200" height="630" fill="url(#bg-grad)"/>
+  <rect width="1200" height="630" fill="url(#glow-top)"/>
+  <rect width="1200" height="630" fill="url(#glow-bl)"/>
+  <rect width="1200" height="630" fill="url(#glow-br)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- Top accent line -->
+  <rect x="0" y="0" width="1200" height="3" fill="url(#line-grad)"/>
+
+  <!-- Corner orbs -->
+  <circle cx="80" cy="80" r="120" fill="#00f5ff" fill-opacity="0.025"/>
+  <circle cx="1140" cy="560" r="140" fill="#2563eb" fill-opacity="0.03"/>
+
+  <!-- Availability badge -->
+  <rect x="450" y="148" width="300" height="36" rx="18" fill="#00f5ff" fill-opacity="0.06" stroke="#00f5ff" stroke-opacity="0.22" stroke-width="1"/>
+  <circle cx="473" cy="166" r="5" fill="#4ade80"/>
+  <text x="488" y="171" font-family="system-ui,-apple-system,sans-serif" font-size="13.5" font-weight="600" fill="#94a3b8" letter-spacing="0.04em">Disponible para proyectos</text>
+
+  <!-- Main title -->
+  <text x="600" y="275" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="96" font-weight="800" fill="url(#title-grad)" letter-spacing="-0.03em">Devcito</text>
+
+  <!-- Separator -->
+  <line x1="320" y1="308" x2="880" y2="308" stroke="url(#line-grad)" stroke-width="1"/>
+
+  <!-- Subtitle -->
+  <text x="600" y="358" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="22" font-weight="400" fill="#94a3b8" letter-spacing="0.06em">Desarrollo Web · Sistemas ERP · Automatización</text>
+
+  <!-- Tech chips row -->
+  <rect x="224" y="408" width="62" height="28" rx="14" fill="#00f5ff" fill-opacity="0.06" stroke="#00f5ff" stroke-opacity="0.2" stroke-width="1"/>
+  <text x="255" y="427" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600" fill="#00f5ff">Java</text>
+
+  <rect x="298" y="408" width="76" height="28" rx="14" fill="#00f5ff" fill-opacity="0.06" stroke="#00f5ff" stroke-opacity="0.2" stroke-width="1"/>
+  <text x="336" y="427" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600" fill="#00f5ff">Laravel</text>
+
+  <rect x="386" y="408" width="52" height="28" rx="14" fill="#00f5ff" fill-opacity="0.06" stroke="#00f5ff" stroke-opacity="0.2" stroke-width="1"/>
+  <text x="412" y="427" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600" fill="#00f5ff">Go</text>
+
+  <rect x="450" y="408" width="78" height="28" rx="14" fill="#38bdf8" fill-opacity="0.06" stroke="#38bdf8" stroke-opacity="0.2" stroke-width="1"/>
+  <text x="489" y="427" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600" fill="#38bdf8">Angular</text>
+
+  <rect x="540" y="408" width="52" height="28" rx="14" fill="#38bdf8" fill-opacity="0.06" stroke="#38bdf8" stroke-opacity="0.2" stroke-width="1"/>
+  <text x="566" y="427" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600" fill="#38bdf8">Astro</text>
+
+  <rect x="604" y="408" width="66" height="28" rx="14" fill="#38bdf8" fill-opacity="0.06" stroke="#38bdf8" stroke-opacity="0.2" stroke-width="1"/>
+  <text x="637" y="427" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600" fill="#38bdf8">MySQL</text>
+
+  <rect x="682" y="408" width="72" height="28" rx="14" fill="#2563eb" fill-opacity="0.08" stroke="#2563eb" stroke-opacity="0.3" stroke-width="1"/>
+  <text x="718" y="427" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600" fill="#60a5fa">Docker</text>
+
+  <rect x="766" y="408" width="62" height="28" rx="14" fill="#2563eb" fill-opacity="0.08" stroke="#2563eb" stroke-opacity="0.3" stroke-width="1"/>
+  <text x="797" y="427" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600" fill="#60a5fa">Linux</text>
+
+  <rect x="840" y="408" width="62" height="28" rx="14" fill="#2563eb" fill-opacity="0.08" stroke="#2563eb" stroke-opacity="0.3" stroke-width="1"/>
+  <text x="871" y="427" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600" fill="#60a5fa">REST</text>
+
+  <!-- Domain -->
+  <text x="600" y="528" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="17" font-weight="500" fill="#00f5ff" fill-opacity="0.5" letter-spacing="0.12em">devcito.org</text>
+
+  <!-- Bottom accent line -->
+  <rect x="0" y="627" width="1200" height="3" fill="url(#line-grad)"/>
+</svg>
