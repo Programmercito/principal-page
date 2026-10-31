@@ -1,0 +1,109 @@
+---
+const articles = [
+  {
+    title: 'Cómo funciona el algoritmo de colores de Armonic Themes',
+    description: 'Una mirada técnica a la generación de paletas armónicas para temas claros y oscuros.',
+    href: 'https://blog.devcito.org/el-algoritmo-de-colores-de-armonic-themes/',
+  },
+  {
+    title: 'El algoritmo de Azar: cómo funciona el generador de aleatoriedad',
+    description: 'Conocé cómo la herramienta utiliza distintas fuentes de entropía para generar resultados.',
+    href: 'https://blog.devcito.org/el-algoritmo-de-azar-como-funciona-el-generador-de-aleatoriedad/',
+  },
+  {
+    title: 'Google AdSense en Angular con osbo-adsense-angular',
+    description: 'Una introducción a la integración de anuncios en aplicaciones Angular.',
+    href: 'https://blog.devcito.org/adsense-in-angular/',
+  },
+];
+---
+
+<section id="blog" class="py-28 relative">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16">
+      <span class="blog-label">Compartiendo conocimiento</span>
+      <h2 class="section-title">Artículos del Blog</h2>
+      <p class="section-subtitle">
+        Explorá ideas, herramientas y soluciones que utilizo en mis proyectos.
+      </p>
+    </div>
+
+    <div class="blog-grid">
+      {articles.map((article) => (
+        <article class="blog-card">
+          <h3>{article.title}</h3>
+          <p>{article.description}</p>
+          <a href={article.href}>Leer artículo <span aria-hidden="true">→</span></a>
+        </article>
+      ))}
+    </div>
+
+    <div class="text-center mt-12">
+      <a class="blog-all-link" href="https://blog.devcito.org/">Ver todos los artículos</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .blog-label {
+    display: inline-block;
+    color: var(--color-cyan);
+    background: var(--color-accent-soft);
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    padding: 4px 16px;
+    margin-bottom: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .blog-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.75rem;
+    border: 1px solid var(--color-card-border);
+    border-radius: 20px;
+    background: var(--color-card-bg);
+  }
+
+  .blog-card h3 {
+    color: var(--color-text-primary);
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .blog-card p {
+    flex: 1;
+    margin: 1rem 0 1.5rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  .blog-card a, .blog-all-link {
+    color: var(--color-cyan);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .blog-card a:hover, .blog-all-link:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    .blog-grid {
+      grid-template-columns: 1fr;
+      max-width: 500px;
+    }
+  }
+</style>
