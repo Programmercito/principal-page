@@ -52,6 +52,7 @@ const jsonLd = {
       knowsAbout: [
         'Desarrollo web',
         'Sistemas ERP',
+        'Implementación de inteligencia artificial',
         'Automatización de procesos',
         'Consultoría TI',
         'Marketing digital',
@@ -114,7 +115,7 @@ const jsonLd = {
 	<title>{title}</title>
   <meta name="description" content={description} />
   <meta name="author" content="Devcito" />
-  <meta name="keywords" content="desarrollador web bolivia, páginas web bolivia, diseño web santa cruz, desarrollo de software bolivia, sistemas ERP bolivia, automatización de procesos, consultoría ti, landing pages, desarrollador web la paz, devcito" />
+  <meta name="keywords" content="desarrollador web bolivia, páginas web bolivia, diseño web santa cruz, desarrollo de software bolivia, sistemas ERP bolivia, inteligencia artificial para empresas, implementación de IA, automatización de procesos, consultoría ti, landing pages, desarrollador web la paz, devcito" />
   <meta name="robots" content="index, follow" />
   <!-- Región objetivo: Bolivia -->
   <meta name="geo.region" content="BO" />
@@ -397,45 +398,58 @@ const jsonLd = {
       100% { background-position: 300% 0%; }
     }
 
-		/* Fade-in base (scroll reveal) */
-    .fade-in-element {
+    /* Reveal styles are enabled only when the observer is available. */
+    .motion-reveal {
       opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(32px);
     }
-    .fade-in-element.is-visible {
+    section .motion-reveal.is-visible,
+    section .motion-reveal:focus-within {
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease, background-color 0.35s ease;
+    }
+    .motion-reveal.is-visible,
+    .motion-reveal:focus-within {
       opacity: 1;
-      transform: translateY(0);
+      transform: none;
     }
-    .fade-in-left,
-    .fade-slide-left {
-      opacity: 0;
-      transform: translateX(-35px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    .motion-reveal.fade-in-left,
+    .motion-reveal.fade-slide-left {
+      transform: translateX(-32px);
     }
-    .fade-in-left.is-visible,
-    .fade-slide-left.is-visible {
-      opacity: 1;
-      transform: translateX(0);
+    .motion-reveal.fade-slide-right {
+      transform: translateX(32px);
     }
-    .fade-slide-right {
-      opacity: 0;
-      transform: translateX(35px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    .motion-reveal.is-visible,
+    .motion-reveal:focus-within {
+      transform: none;
     }
-    .fade-slide-right.is-visible {
-      opacity: 1;
-      transform: translateX(0);
+
+    @media (prefers-reduced-motion: no-preference) {
+      .motion-reveal.is-visible .section-title,
+      .motion-reveal.is-visible .service-icon {
+        animation: reveal-detail 0.65s 0.12s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+      }
+      .motion-reveal.is-visible .section-subtitle {
+        animation: reveal-detail 0.65s 0.22s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+      }
+      @keyframes reveal-detail {
+        from { opacity: 0; transform: translateY(14px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
+        animation-delay: 0ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+        transition-delay: 0ms !important;
         scroll-behavior: auto !important;
       }
-      .fade-in-element,
+      #cursor-outer { display: none; }
+      .motion-reveal,
+      .fade-in-left,
       .fade-slide-left,
       .fade-slide-right {
         opacity: 1 !important;
@@ -519,6 +533,8 @@ const jsonLd = {
     });
 
     // Smooth lag for outer cursor with velocity-based stretching
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let cursorFrame = 0;
     const animateCursor = () => {
       if (isInitialized && outer) {
         const dx = targetX - outerX;
@@ -529,9 +545,14 @@ const jsonLd = {
 
         outer.style.transform = `translate3d(${outerX}px, ${outerY}px, 0) translate3d(-50%, -50%, 0)`;
       }
-      requestAnimationFrame(animateCursor);
+      cursorFrame = requestAnimationFrame(animateCursor);
     };
-    animateCursor();
+    const updateCursorMotion = () => {
+      cancelAnimationFrame(cursorFrame);
+      if (!reducedMotion.matches && window.matchMedia('(hover: hover)').matches) animateCursor();
+    };
+    updateCursorMotion();
+    reducedMotion.addEventListener('change', updateCursorMotion);
 
     // Hover effect
     const hoverEls = document.querySelectorAll('a, button, [data-tilt], .skill-chip, .tech-pill');
@@ -549,15 +570,8 @@ const jsonLd = {
     }, { passive: true });
 
     // === SCROLL REVEAL ===
-    document.addEventListener('DOMContentLoaded', () => {
-      const sections = document.querySelectorAll('section');
-      sections.forEach(section => {
-        const items = section.querySelectorAll('.fade-in-element, .fade-in-left');
-        items.forEach((el, i) => {
-          (el as HTMLElement).style.transitionDelay = `${i * 0.08}s`;
-        });
-      });
-
+    const setupReveal = () => {
+      if (reducedMotion.matches || !('IntersectionObserver' in window)) return;
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -565,11 +579,20 @@ const jsonLd = {
             observer.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+      }, { threshold: 0.05, rootMargin: '0px 0px -24px 0px' });
 
-      const elementsToFadeIn = document.querySelectorAll('.fade-in-element, .fade-in-left, .fade-slide-left, .fade-slide-right');
-      elementsToFadeIn.forEach(el => observer.observe(el));
-    });
+      document.querySelectorAll<HTMLElement>('section:not(#home) .fade-in-element, section:not(#home) .fade-in-left, section:not(#home) .fade-slide-left, section:not(#home) .fade-slide-right').forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight) return;
+        if (el.matches('.product-card, .service-card')) {
+          const item = el.closest('.service-slide') ?? el;
+          const siblings = Array.from(item.parentElement?.children ?? []);
+          el.style.transitionDelay = `${(siblings.indexOf(item) % 3) * 0.09}s`;
+        }
+        el.classList.add('motion-reveal');
+        observer.observe(el);
+      });
+    };
+    setupReveal();
   </script>
 </body>
 </html>

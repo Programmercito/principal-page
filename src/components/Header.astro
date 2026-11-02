@@ -24,7 +24,7 @@ import { Icon } from 'astro-icon/components';
       </nav>
 
       <!-- Controls container (ML-auto forces it to the right, on desktop next to nav, on mobile next to menu button) -->
-      <div class="ml-auto flex items-center gap-4">
+      <div class="header-controls ml-auto flex items-center gap-4">
         <!-- Theme Toggle Button -->
         <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar tema">
           <!-- Sun icon -->
@@ -150,6 +150,25 @@ import { Icon } from 'astro-icon/components';
 </script>
 
 <style>
+  @media (prefers-reduced-motion: no-preference) {
+    .header-logo,
+    .header-controls,
+    .desktop-nav .nav-link {
+      animation: header-entrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    }
+    .header-controls { animation-delay: 0.15s; }
+    .desktop-nav .nav-link:nth-child(1) { animation-delay: 0.1s; }
+    .desktop-nav .nav-link:nth-child(2) { animation-delay: 0.15s; }
+    .desktop-nav .nav-link:nth-child(3) { animation-delay: 0.2s; }
+    .desktop-nav .nav-link:nth-child(4) { animation-delay: 0.25s; }
+    .desktop-nav .nav-link:nth-child(5) { animation-delay: 0.3s; }
+    .desktop-nav .nav-link:nth-child(6) { animation-delay: 0.35s; }
+    @keyframes header-entrance {
+      from { opacity: 0; transform: translateY(-14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  }
+
   .header-inner {
     transition: all 0.3s ease;
   }

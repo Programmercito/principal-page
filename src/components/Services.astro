@@ -1,5 +1,14 @@
 ---
 import ServiceCard from './ServiceCard.astro';
+
+const services = [
+  { icon: 'mdi:web', title: 'Desarrollo Web', description: 'Desarrollo sitios web, aplicaciones y sistemas a medida. Desde landing pages hasta plataformas empresariales complejas, enfocados en rendimiento, escalabilidad y experiencia de usuario.', gradient: 'from-emerald-500 to-teal-400', accentColor: 'var(--color-cyan)' },
+  { icon: 'mdi:cogs', title: 'Sistemas ERP', description: 'Implemento y personalizo sistemas ERP para integrar y automatizar los procesos clave de tu empresa: inventario, facturación, RRHH y más, en una sola plataforma centralizada.', gradient: 'from-violet-500 to-indigo-500', accentColor: 'var(--color-blue)' },
+  { icon: 'mdi:brain', title: 'Implementación de IA', description: 'Integro inteligencia artificial en tu empresa para asistir a tu equipo, analizar información y optimizar tareas. Diseñamos soluciones adaptadas a tus procesos y objetivos.', gradient: 'from-violet-500 to-indigo-500', accentColor: 'var(--color-purple)' },
+  { icon: 'mdi:robot-outline', title: 'Automatización de Procesos', description: 'Identifico tareas repetitivas y las automatizo con scripts, bots y flujos inteligentes. Reducí costos operativos, errores humanos y ganás tiempo para lo que realmente importa.', gradient: 'from-teal-500 to-cyan-400', accentColor: 'var(--color-purple)' },
+  { icon: 'mdi:monitor-dashboard', title: 'Consultoría Informática', description: 'Asesoramiento tecnológico integral para empresas y negocios. Te ayudo a elegir herramientas, arquitecturas y soluciones digitales alineadas a tus objetivos y presupuesto.', gradient: 'from-teal-500 to-emerald-600', accentColor: 'var(--color-sky)' },
+  { icon: 'mdi:bullhorn', title: 'Marketing Digital', description: 'Potencio tu presencia en línea a través de gestión estratégica de redes sociales, SEO y campañas publicitarias. Aumentá tu visibilidad y atraé más clientes.', gradient: 'from-sky-400 to-blue-600', accentColor: 'var(--color-cobalt)' },
+];
 ---
 
 <section id="services" class="py-28 relative">
@@ -28,22 +37,16 @@ import ServiceCard from './ServiceCard.astro';
   <!-- Track — hijo directo de la sección, sin el px-6 del container -->
   <div class="services-track-wrap relative z-10">
     <div class="services-track">
-      <div class="service-slide"><ServiceCard icon="mdi:web" title="Desarrollo Web" description="Desarrollo sitios web, aplicaciones y sistemas a medida. Desde landing pages hasta plataformas empresariales complejas, enfocados en rendimiento, escalabilidad y experiencia de usuario." gradient="from-emerald-500 to-teal-400" accentColor="var(--color-cyan)" /></div>
-      <div class="service-slide"><ServiceCard icon="mdi:cogs" title="Sistemas ERP" description="Implemento y personalizo sistemas ERP para integrar y automatizar los procesos clave de tu empresa: inventario, facturación, RRHH y más, en una sola plataforma centralizada." gradient="from-violet-500 to-indigo-500" accentColor="var(--color-blue)" /></div>
-      <div class="service-slide"><ServiceCard icon="mdi:robot-outline" title="Automatización de Procesos" description="Identifico tareas repetitivas y las automatizo con scripts, bots y flujos inteligentes. Reducí costos operativos, errores humanos y ganás tiempo para lo que realmente importa." gradient="from-teal-500 to-cyan-400" accentColor="var(--color-purple)" /></div>
-      <div class="service-slide"><ServiceCard icon="mdi:monitor-dashboard" title="Consultoría Informática" description="Asesoramiento tecnológico integral para empresas y negocios. Te ayudo a elegir herramientas, arquitecturas y soluciones digitales alineadas a tus objetivos y presupuesto." gradient="from-teal-500 to-emerald-600" accentColor="var(--color-sky)" /></div>
-      <div class="service-slide"><ServiceCard icon="mdi:bullhorn" title="Marketing Digital" description="Potencio tu presencia en línea a través de gestión estratégica de redes sociales, SEO y campañas publicitarias. Aumentá tu visibilidad y atraé más clientes." gradient="from-sky-400 to-blue-600" accentColor="var(--color-cobalt)" /></div>
+      {services.map(service => (
+        <div class="service-slide"><ServiceCard {...service} /></div>
+      ))}
     </div>
   </div>
 
   <!-- Dots — de vuelta en el container -->
   <div class="container mx-auto px-6 relative z-10">
-    <div class="mobile-dots" id="svc-dots">
-      <span class="mdot active"></span>
-      <span class="mdot"></span>
-      <span class="mdot"></span>
-      <span class="mdot"></span>
-      <span class="mdot"></span>
+    <div class="mobile-dots" id="svc-dots" aria-hidden="true">
+      {services.map((_, i) => <span class:list={['mdot', { active: i === 0 }]}></span>)}
     </div>
   </div>
 </section>
@@ -52,10 +55,16 @@ import ServiceCard from './ServiceCard.astro';
   // Update active dot on mobile scroll
   const track = document.querySelector('.services-track') as HTMLElement;
   const dots = document.querySelectorAll('.mdot');
+  const slides = Array.from(document.querySelectorAll<HTMLElement>('.service-slide'));
   if (track && dots.length) {
     track.addEventListener('scroll', () => {
-      const slideWidth = track.scrollWidth / dots.length;
-      const active = Math.round(track.scrollLeft / slideWidth);
+      const trackRect = track.getBoundingClientRect();
+      const center = trackRect.left + trackRect.width / 2;
+      const active = slides.reduce((closest, slide, index) => {
+        const rect = slide.getBoundingClientRect();
+        const closestRect = slides[closest].getBoundingClientRect();
+        return Math.abs(rect.left + rect.width / 2 - center) < Math.abs(closestRect.left + closestRect.width / 2 - center) ? index : closest;
+      }, 0);
       dots.forEach((d, i) => d.classList.toggle('active', i === active));
     }, { passive: true });
   }
@@ -108,11 +117,12 @@ import ServiceCard from './ServiceCard.astro';
     margin: 0 auto;
   }
 
-  /* Desktop: single row, all 5 equal width */
+  /* Desktop: two balanced rows */
   .services-track {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
+    padding: 0 1.5rem;
   }
 
   .service-slide {
@@ -133,7 +143,6 @@ import ServiceCard from './ServiceCard.astro';
     border-radius: 50%;
     background: var(--color-border);
     transition: all 0.3s ease;
-    cursor: pointer;
   }
   .mdot.active {
     background: var(--color-cyan);

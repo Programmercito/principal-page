@@ -438,17 +438,4 @@ import { Icon } from 'astro-icon/components';
     top: auto; right: auto;
   }
 
-  /* Animations */
-  .fade-slide-left {
-    opacity: 0; transform: translateX(-30px);
-    animation: slide-from-left 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 0.2s;
-  }
-  .fade-slide-right {
-    opacity: 0; transform: translateX(30px);
-    animation: slide-from-right 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 0.35s;
-  }
-  @keyframes slide-from-left { to { opacity: 1; transform: translateX(0); } }
-  @keyframes slide-from-right { to { opacity: 1; transform: translateX(0); } }
 </style>

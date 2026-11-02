@@ -27,11 +27,9 @@ import { Icon } from 'astro-icon/components';
 
     <!-- Main heading -->
     <h1 class="hero-title mb-6 fade-in-element" style="animation-delay:0.1s">
-      Sistemas digitales
-      <br>
-      <span class="gradient-text-hero animated-gradient">para tu negocio</span>
-      <br>
-      <span class="text-hero-sub" style="color: var(--color-text-secondary)">sin complicaciones</span>
+      <span class="hero-line">Sistemas digitales</span>
+      <span class="hero-line gradient-text-hero animated-gradient">para tu negocio</span>
+      <span class="hero-line text-hero-sub" style="color: var(--color-text-secondary)">sin complicaciones</span>
     </h1>
 
     <p class="text-xl md:text-2xl mb-10 max-w-2xl mx-auto leading-relaxed fade-in-element" style="animation-delay:0.2s; color: var(--color-text-secondary)">
@@ -60,14 +58,14 @@ import { Icon } from 'astro-icon/components';
     <div class="stats-row fade-in-element" style="animation-delay:0.4s">
       <div class="stat-item">
         <div class="stat-value">
-          <span class="stat-number" data-target="10">0</span><span class="stat-number">+</span>
+          <span class="stat-number" data-target="10">10</span><span class="stat-number">+</span>
         </div>
         <span class="stat-label">Proyectos</span>
       </div>
       <div class="stat-divider"></div>
       <div class="stat-item">
         <div class="stat-value">
-          <span class="stat-number" data-target="5">0</span><span class="stat-number">+</span>
+          <span class="stat-number" data-target="5">5</span><span class="stat-number">+</span>
         </div>
         <span class="stat-label">Años exp.</span>
       </div>
@@ -97,8 +95,9 @@ import { Icon } from 'astro-icon/components';
 <script>
   // === PARTICLES ===
   const canvas = document.getElementById('particles-canvas') as HTMLCanvasElement;
-  if (canvas) {
-    const ctx = canvas.getContext('2d')!;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const ctx = canvas?.getContext('2d');
+  if (canvas && ctx) {
     type Particle = { x: number; y: number; vx: number; vy: number; r: number; alpha: number; hue: number };
     let particles: Particle[] = [];
     let mouse = { x: -9999, y: -9999 };
@@ -120,6 +119,8 @@ import { Icon } from 'astro-icon/components';
       });
     }
 
+    let frame = 0;
+    let heroVisible = true;
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particles.forEach(p => {
@@ -155,17 +156,40 @@ import { Icon } from 'astro-icon/components';
           }
         });
       });
-      requestAnimationFrame(animate);
+      frame = requestAnimationFrame(animate);
     };
-    animate();
+    const updateParticles = () => {
+      cancelAnimationFrame(frame);
+      if (!reducedMotion.matches && heroVisible && !document.hidden) {
+        animate();
+      } else {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    };
+    reducedMotion.addEventListener('change', updateParticles);
+    document.addEventListener('visibilitychange', updateParticles);
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(([entry]) => {
+        heroVisible = entry.isIntersecting;
+        updateParticles();
+      });
+      observer.observe(canvas);
+    }
+    updateParticles();
   }
 
   // === COUNTER ANIMATION ===
   document.querySelectorAll('[data-target]').forEach(el => {
     const target = parseInt((el as HTMLElement).dataset.target!);
+    if (reducedMotion.matches) return;
     let current = 0;
     const step = target / 40;
     const timer = setInterval(() => {
+      if (reducedMotion.matches) {
+        el.textContent = target.toString();
+        clearInterval(timer);
+        return;
+      }
       current += step;
       if (current >= target) { current = target; clearInterval(timer); }
       el.textContent = Math.floor(current).toString();
@@ -279,6 +303,8 @@ import { Icon } from 'astro-icon/components';
     transition: var(--theme-transition);
   }
 
+  .hero-line { display: block; }
+
   .gradient-text-hero {
     background: linear-gradient(135deg, var(--color-cyan) 0%, var(--color-blue) 45%, var(--color-purple) 80%, var(--color-pink) 100%);
     -webkit-background-clip: text;
@@ -351,6 +377,21 @@ import { Icon } from 'astro-icon/components';
   }
 
   .hbtn-icon { width: 18px; height: 18px; flex-shrink: 0; }
+
+  .hbtn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.22) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform 0.65s ease;
+    pointer-events: none;
+  }
+  .hbtn:hover::after,
+  .hbtn:focus-visible::after { transform: translateX(120%); }
+  .hbtn:hover .hbtn-icon,
+  .hbtn:focus-visible .hbtn-icon { transform: translateX(3px); }
+  .hbtn-icon { transition: transform 0.3s ease; }
 
   .hbtn-primary {
     background: linear-gradient(135deg, var(--color-cyan) 0%, var(--color-blue) 55%, var(--color-purple) 100%);
@@ -464,12 +505,41 @@ import { Icon } from 'astro-icon/components';
   }
 
   /* Fade in animations */
-  .fade-in-element {
-    opacity: 0;
-    transform: translateY(24px);
-    animation: fade-in-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  @media (prefers-reduced-motion: no-preference) {
+    .fade-in-element {
+      animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .hero-line {
+      animation: hero-line-in 0.85s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    }
+    .hero-line:nth-child(1) { animation-delay: 0.16s; }
+    .hero-line:nth-child(2) {
+      animation: hero-line-in 0.85s 0.28s cubic-bezier(0.16, 1, 0.3, 1) backwards, gradient-shift 4s ease infinite;
+    }
+    .hero-line:nth-child(3) { animation-delay: 0.4s; }
+    .hbtn,
+    .tech-pill {
+      animation: hero-detail-in 0.65s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    }
+    .hbtn:nth-child(1) { animation-delay: 0.42s; }
+    .hbtn:nth-child(2) { animation-delay: 0.52s; }
+    .tech-pill:nth-child(1) { animation-delay: 0.64s; }
+    .tech-pill:nth-child(2) { animation-delay: 0.7s; }
+    .tech-pill:nth-child(3) { animation-delay: 0.76s; }
+    .tech-pill:nth-child(4) { animation-delay: 0.82s; }
+    .tech-pill:nth-child(5) { animation-delay: 0.88s; }
+    .tech-pill:nth-child(6) { animation-delay: 0.94s; }
+    @keyframes hero-line-in {
+      from { opacity: 0; transform: translateY(28px) scale(0.98); filter: blur(6px); }
+      to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    }
+    @keyframes hero-detail-in {
+      from { opacity: 0; transform: translateY(14px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
   }
   @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(24px); }
     to { opacity: 1; transform: translateY(0); }
   }
 </style>
