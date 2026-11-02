@@ -90,7 +90,6 @@ const badgeColors = {
   .product-card {
     position: relative;
     background: var(--color-card-bg);
-    backdrop-filter: blur(20px);
     border: 1px solid var(--color-card-border);
     border-radius: 22px;
     overflow: hidden;
@@ -100,15 +99,12 @@ const badgeColors = {
     transition: border-color 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
     transform-style: preserve-3d;
     will-change: transform;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
   }
 
   .product-card:hover {
     border-color: var(--color-cyan);
-    box-shadow:
-      0 30px 80px rgba(0, 0, 0, 0.12),
-      0 0 50px var(--color-accent-glow),
-      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    box-shadow: 0 14px 30px -16px rgba(0, 0, 0, 0.4);
   }
 
   .card-glow {
@@ -149,14 +145,12 @@ const badgeColors = {
     width: 160px; height: 160px;
     object-fit: cover;
     border-radius: 14px;
-    filter: drop-shadow(0 0 14px var(--color-accent-glow));
-    transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
     z-index: 2;
     position: relative;
   }
   .product-card:hover .card-image {
-    filter: drop-shadow(0 0 28px var(--color-accent-shadow));
-    transform: scale(1.08) translateY(-4px);
+    transform: scale(1.06) translateY(-4px);
   }
  
   .card-image-overlay {
@@ -195,7 +189,6 @@ const badgeColors = {
     background: var(--color-accent-soft);
     border: 1px solid var(--color-border);
     color: var(--color-cyan);
-    box-shadow: 0 0 12px var(--color-accent-glow);
   }
   .badge-cyan .badge-dot { background: var(--color-cyan); }
 
@@ -203,23 +196,20 @@ const badgeColors = {
     background: var(--color-accent-soft);
     border: 1px solid var(--color-border);
     color: var(--color-blue);
-    box-shadow: 0 0 12px var(--color-accent-glow);
   }
   .badge-blue .badge-dot { background: var(--color-blue); }
 
   .badge-amber {
-    background: rgba(245, 158, 11, 0.1);
-    border: 1px solid rgba(245, 158, 11, 0.3);
-    color: #fbbf24;
-    box-shadow: 0 0 12px rgba(245, 158, 11, 0.08);
+    background: rgba(251, 113, 133, 0.1);
+    border: 1px solid rgba(251, 113, 133, 0.3);
+    color: var(--color-purple);
   }
-  .badge-amber .badge-dot { background: #fbbf24; }
+  .badge-amber .badge-dot { background: var(--color-purple); }
 
   .badge-sky {
     background: var(--color-accent-soft);
     border: 1px solid var(--color-border);
     color: var(--color-sky);
-    box-shadow: 0 0 12px var(--color-accent-glow);
   }
   .badge-sky .badge-dot { background: var(--color-sky); }
 
@@ -306,7 +296,6 @@ const badgeColors = {
     background: linear-gradient(135deg, var(--color-cyan) 0%, var(--color-blue) 100%);
     border-color: transparent;
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px var(--color-accent-shadow);
   }
   .card-btn-premium:hover .card-btn-icon { transform: translateX(3px); }
 
@@ -327,7 +316,6 @@ const badgeColors = {
     border-color: var(--color-cyan);
     color: var(--color-cyan);
     transform: rotate(-8deg) scale(1.12);
-    box-shadow: 0 0 15px var(--color-accent-glow);
   }
 
   .fade-in-element {

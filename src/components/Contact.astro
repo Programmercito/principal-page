@@ -75,8 +75,6 @@ const waLink = site.whatsapp ? `https://wa.me/${site.whatsapp}?text=${waText}` :
       </div>
 
       <!-- Decorative elements inside the card -->
-      <div class="contact-deco-1"></div>
-      <div class="contact-deco-2"></div>
     </div>
   </div>
 </section>
@@ -94,7 +92,6 @@ const waLink = site.whatsapp ? `https://wa.me/${site.whatsapp}?text=${waText}` :
     max-width: 680px;
     margin: 0 auto;
     background: var(--color-card-bg);
-    backdrop-filter: blur(24px);
     border: 1px solid var(--color-card-border);
     border-radius: 24px;
     padding: 3.5rem;
@@ -102,12 +99,12 @@ const waLink = site.whatsapp ? `https://wa.me/${site.whatsapp}?text=${waText}` :
     position: relative;
     overflow: hidden;
     transition: border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
   }
 
   .contact-wrapper:hover {
     border-color: var(--color-cyan);
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.12), 0 0 40px var(--color-accent-glow);
+    box-shadow: 0 16px 32px -18px rgba(0, 0, 0, 0.4);
   }
 
   .contact-top-line {
@@ -279,29 +276,6 @@ const waLink = site.whatsapp ? `https://wa.me/${site.whatsapp}?text=${waText}` :
     color: var(--color-cyan);
     transform: translateY(-3px) scale(1.05);
     box-shadow: 0 8px 20px var(--color-accent-glow);
-  }
-
-  /* Decorative blobs inside card */
-  .contact-deco-1 {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background: radial-gradient(circle, var(--color-accent-glow), transparent);
-    top: -80px;
-    right: -60px;
-    pointer-events: none;
-  }
-
-  .contact-deco-2 {
-    position: absolute;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    background: radial-gradient(circle, var(--color-accent-glow), transparent);
-    bottom: -60px;
-    left: -40px;
-    pointer-events: none;
   }
 
   /* WhatsApp accent */

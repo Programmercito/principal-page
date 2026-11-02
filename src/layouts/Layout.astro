@@ -120,7 +120,7 @@ const jsonLd = {
   <meta name="geo.region" content="BO" />
   <meta name="geo.placename" content="Bolivia" />
   <!-- Theme Color para móviles -->
-  <meta name="theme-color" content="#030712" />
+  <meta name="theme-color" content="#0b0a14" />
 
   <!-- Canonical URL -->
   <link rel="canonical" href={canonicalURL} />
@@ -181,106 +181,101 @@ const jsonLd = {
 
     /* Light Theme */
     html.light {
-      --color-bg-primary: #ffffff;
-      --color-bg-secondary: #f8fafc;
-      --color-bg-tertiary: #f1f5f9;
-      --color-text-primary: #0f172a;
-      --color-text-secondary: #475569;
-      --color-text-muted: #64748b;
-      --color-border: rgba(15, 23, 42, 0.08);
-      --color-card-bg: rgba(255, 255, 255, 0.85);
-      --color-card-border: rgba(15, 23, 42, 0.05);
+      --color-bg-primary: #fbfaf7;
+      --color-bg-secondary: #f4f2ec;
+      --color-bg-tertiary: #ece9e0;
+      --color-text-primary: #1c1917;
+      --color-text-secondary: #57534e;
+      --color-text-muted: #78716c;
+      --color-border: rgba(28, 25, 23, 0.1);
+      --color-card-bg: #ffffff;
+      --color-card-border: rgba(28, 25, 23, 0.07);
 
-      /* Monochromatic Blues: Deep Blue, Royal Blue, Sky Blue */
-      --color-cyan: #0284c7;      /* Ocean Blue */
-      --color-blue: #2563eb;      /* Royal Blue */
-      --color-purple: #0ea5e9;    /* Sky Blue */
-      --color-pink: #1e40af;      /* Deep Cobalt Blue */
-      --color-sky: #0ea5e9;       /* Sky Blue */
+      /* Esmeralda + Violeta + Coral */
+      --color-cyan: #059669;      /* Esmeralda */
+      --color-blue: #7c3aed;      /* Violeta */
+      --color-purple: #4f46e5;    /* Índigo */
+      --color-pink: #0d9488;      /* Teal */
+      --color-sky: #0d9488;       /* Teal */
 
-      --color-accent-shadow: rgba(37, 99, 235, 0.15);
-      --color-accent-glow: rgba(37, 99, 235, 0.06);
-      --color-accent-soft: rgba(37, 99, 235, 0.04);
+      --color-accent-shadow: rgba(5, 150, 105, 0.2);
+      --color-accent-glow: rgba(5, 150, 105, 0.07);
+      --color-accent-soft: rgba(5, 150, 105, 0.06);
 
-      --color-cyan-glow: rgba(2, 132, 199, 0.07);
-      --color-blue-glow: rgba(37, 99, 235, 0.06);
-      --color-purple-glow: rgba(14, 165, 233, 0.05);
-      --color-sky-glow: rgba(14, 165, 233, 0.06);
+      --color-cyan-glow: rgba(5, 150, 105, 0.07);
+      --color-blue-glow: rgba(124, 58, 237, 0.06);
+      --color-purple-glow: rgba(79, 70, 229, 0.05);
+      --color-sky-glow: rgba(13, 148, 136, 0.06);
 
       /* Aurora glow orbs (Hero shapes + About orbs) */
-      --color-glow-1: rgba(37, 99, 235, 0.06);
-      --color-glow-2: rgba(14, 165, 233, 0.05);
-      --color-glow-3: rgba(2, 132, 199, 0.05);
+      --color-glow-1: rgba(5, 150, 105, 0.1);
+      --color-glow-2: rgba(124, 58, 237, 0.08);
+      --color-glow-3: rgba(225, 29, 72, 0.06);
 
       /* Named accents */
-      --color-cobalt: #1e40af;
+      --color-cobalt: #6d28d9;
 
-      /* Aurora orbs (Hero / About) */
-      --color-glow-1: rgba(37, 99, 235, 0.12);
-      --color-glow-2: rgba(14, 165, 233, 0.10);
-      --color-glow-3: rgba(2, 132, 199, 0.09);
+      --gradient-glow-top: rgba(5, 150, 105, 0.05);
+      --gradient-glow-right: rgba(124, 58, 237, 0.04);
+      --gradient-glow-left: rgba(13, 148, 136, 0.04);
+      --gradient-body-orb: rgba(5, 150, 105, 0.04);
 
-      --gradient-glow-top: rgba(37, 99, 235, 0.04);
-      --gradient-glow-right: rgba(14, 165, 233, 0.03);
-      --gradient-glow-left: rgba(56, 189, 248, 0.03);
-      --gradient-body-orb: rgba(37, 99, 235, 0.03);
-
-      --scroll-track: #f1f5f9;
-      --scroll-thumb-start: #0284c7;
-      --scroll-thumb-end: #0ea5e9;
+      --scroll-track: #ece9e0;
+      --scroll-thumb-start: #059669;
+      --scroll-thumb-end: #7c3aed;
       
-      --bg-dots: url("data:image/svg+xml,%3csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='1' cy='1' r='0.6' fill='rgba(37,99,235,0.03)'/%3e%3c/svg%3e");
-      --grid-line-color: rgba(37, 99, 235, 0.015);
-      --grid-dot-opacity: 0.015;
+      --bg-dots: url("data:image/svg+xml,%3csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='1' cy='1' r='0.6' fill='rgba(5,150,105,0.04)'/%3e%3c/svg%3e");
+      --grid-line-color: rgba(5, 150, 105, 0.02);
+      --grid-dot-opacity: 0.02;
     }
 
     /* Dark Theme */
     html.dark {
-      --color-bg-primary: #020617; /* Deep Slate/Navy Black */
-      --color-bg-secondary: #0b0f19;
-      --color-bg-tertiary: #131a26;
-      --color-text-primary: #f8fafc;
-      --color-text-secondary: #94a3b8;
-      --color-text-muted: #64748b;
-      --color-border: rgba(255, 255, 255, 0.08);
-      --color-card-bg: rgba(11, 15, 25, 0.65);
-      --color-card-border: rgba(255, 255, 255, 0.05);
+      --color-bg-primary: #0b0a14; /* Índigo carbón */
+      --color-bg-secondary: #120f1f;
+      --color-bg-tertiary: #1a1630;
+      --color-text-primary: #f5f3ff;
+      --color-text-secondary: #a8a3c0;
+      --color-text-muted: #7c7797;
+      --color-border: rgba(255, 255, 255, 0.09);
+      --color-card-bg: #15122a;
+      --color-card-border: rgba(255, 255, 255, 0.07);
 
-      /* Electric Cyan & Ocean Blues (NO purple, NO green, NO pink) */
-      --color-cyan: #00f5ff;      /* Electric Cyan */
-      --color-blue: #38bdf8;      /* Sky Blue */
-      --color-purple: #2563eb;    /* Royal Blue */
-      --color-pink: #1d4ed8;      /* Cobalt Blue */
-      --color-sky: #38bdf8;       /* Sky Blue */
+      /* Esmeralda + Violeta + Coral */
+      --color-cyan: #34d399;      /* Esmeralda */
+      --color-blue: #a78bfa;      /* Violeta */
+      --color-purple: #818cf8;    /* Índigo */
+      --color-pink: #2dd4bf;      /* Teal */
+      --color-sky: #2dd4bf;       /* Teal */
 
-      --color-accent-shadow: rgba(0, 245, 255, 0.3);
-      --color-accent-glow: rgba(0, 245, 255, 0.15);
-      --color-accent-soft: rgba(0, 245, 255, 0.06);
+      --color-accent-shadow: rgba(52, 211, 153, 0.25);
+      --color-accent-glow: rgba(52, 211, 153, 0.1);
+      --color-accent-soft: rgba(52, 211, 153, 0.07);
 
-      --color-cyan-glow: rgba(0, 245, 255, 0.15);
-      --color-blue-glow: rgba(56, 189, 248, 0.12);
-      --color-purple-glow: rgba(37, 99, 235, 0.12);
-      --color-sky-glow: rgba(56, 189, 248, 0.12);
+      --color-cyan-glow: rgba(52, 211, 153, 0.1);
+      --color-blue-glow: rgba(167, 139, 250, 0.1);
+      --color-purple-glow: rgba(129, 140, 248, 0.08);
+      --color-sky-glow: rgba(45, 212, 191, 0.08);
 
       /* Aurora glow orbs (Hero shapes + About orbs) */
-      --color-glow-1: rgba(0, 245, 255, 0.16);
-      --color-glow-2: rgba(56, 189, 248, 0.13);
-      --color-glow-3: rgba(37, 99, 235, 0.15);
+      --color-glow-1: rgba(52, 211, 153, 0.14);
+      --color-glow-2: rgba(167, 139, 250, 0.13);
+      --color-glow-3: rgba(251, 113, 133, 0.1);
 
       /* Named accents */
-      --color-cobalt: #1d4ed8;
+      --color-cobalt: #7c3aed;
 
-      --gradient-glow-top: rgba(0, 245, 255, 0.12);
-      --gradient-glow-right: rgba(14, 165, 233, 0.08);
-      --gradient-glow-left: rgba(59, 130, 246, 0.08);
-      --gradient-body-orb: rgba(0, 245, 255, 0.06);
+      --gradient-glow-top: rgba(52, 211, 153, 0.1);
+      --gradient-glow-right: rgba(167, 139, 250, 0.07);
+      --gradient-glow-left: rgba(45, 212, 191, 0.06);
+      --gradient-body-orb: rgba(52, 211, 153, 0.05);
 
-      --scroll-track: #020617;
-      --scroll-thumb-start: #00f5ff;
-      --scroll-thumb-end: #3b82f6;
+      --scroll-track: #0b0a14;
+      --scroll-thumb-start: #34d399;
+      --scroll-thumb-end: #a78bfa;
 
-      --bg-dots: url("data:image/svg+xml,%3csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='1' cy='1' r='0.6' fill='rgba(0,245,255,0.02)'/%3e%3c/svg%3e");
-      --grid-line-color: rgba(0, 245, 255, 0.025);
+      --bg-dots: url("data:image/svg+xml,%3csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='1' cy='1' r='0.6' fill='rgba(52,211,153,0.03)'/%3e%3c/svg%3e");
+      --grid-line-color: rgba(52, 211, 153, 0.025);
       --grid-dot-opacity: 0.02;
     }
 
@@ -321,9 +316,8 @@ const jsonLd = {
                   height 0.25s cubic-bezier(0.25, 1, 0.5, 1), 
                   background-color 0.25s cubic-bezier(0.25, 1, 0.5, 1), 
                   box-shadow 0.25s cubic-bezier(0.25, 1, 0.5, 1);
-      mix-blend-mode: difference;
+      mix-blend-mode: normal;
       transform: translate3d(-100px, -100px, 0);
-      box-shadow: 0 0 8px var(--color-cyan);
     }
 
     #cursor-outer::after {
@@ -341,7 +335,6 @@ const jsonLd = {
       height: 48px;
       border-color: var(--color-cyan);
       background-color: var(--color-accent-soft);
-      box-shadow: 0 0 20px var(--color-accent-glow);
     }
 
     body.cursor-hover #cursor-outer::after {
@@ -355,7 +348,6 @@ const jsonLd = {
       height: 20px;
       border-color: var(--color-cyan);
       background-color: var(--color-accent-glow);
-      box-shadow: 0 0 25px var(--color-cyan);
     }
     
     body.cursor-clicking #cursor-outer::after {
@@ -535,15 +527,7 @@ const jsonLd = {
         outerX += dx * 0.12;
         outerY += dy * 0.12;
 
-        const velocity = Math.sqrt(dx * dx + dy * dy);
-        const angle = Math.atan2(dy, dx) * (180 / Math.PI);
-        
-        // Stretch based on velocity, limit maximum stretch to 40%
-        const stretch = Math.min(velocity * 0.015, 0.4);
-        const scaleX = 1 + stretch;
-        const scaleY = 1 - stretch;
-
-        outer.style.transform = `translate3d(${outerX}px, ${outerY}px, 0) translate3d(-50%, -50%, 0) rotate(${angle}deg) scale(${scaleX}, ${scaleY})`;
+        outer.style.transform = `translate3d(${outerX}px, ${outerY}px, 0) translate3d(-50%, -50%, 0)`;
       }
       requestAnimationFrame(animateCursor);
     };

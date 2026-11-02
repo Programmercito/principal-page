@@ -213,6 +213,7 @@ import { Icon } from 'astro-icon/components';
     border: 1px solid transparent;
     transition: all 0.25s ease;
     letter-spacing: 0.01em;
+    white-space: nowrap;
   }
 
   .nav-link:hover, .nav-link-active {
@@ -226,6 +227,7 @@ import { Icon } from 'astro-icon/components';
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    white-space: nowrap;
   }
 
   .nav-cta {
@@ -238,7 +240,6 @@ import { Icon } from 'astro-icon/components';
   .nav-cta:hover {
     background: var(--color-accent-soft) !important;
     border-color: var(--color-border) !important;
-    box-shadow: 0 0 20px var(--color-accent-glow);
   }
 
   /* Hamburger -- hidden on desktop, shown only on mobile */
