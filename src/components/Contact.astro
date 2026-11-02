@@ -1,6 +1,10 @@
 ---
 import { Icon } from 'astro-icon/components';
 import Button from './Button.astro';
+import { site } from '../config/site';
+
+const waText = encodeURIComponent('Hola Devcito, quiero cotizar un proyecto web para mi negocio');
+const waLink = site.whatsapp ? `https://wa.me/${site.whatsapp}?text=${waText}` : null;
 ---
 
 <section id="contact" class="py-28 relative overflow-hidden">
@@ -23,13 +27,30 @@ import Button from './Button.astro';
 
       <!-- Contact options -->
       <div class="contact-options">
-        <a href="mailto:devcitobo@outlook.com" class="contact-opt-primary" id="email-contact-btn">
+        {waLink && (
+          <a href={waLink} target="_blank" rel="noopener noreferrer" class="contact-opt-primary contact-opt-whatsapp" id="whatsapp-contact-btn">
+            <div class="contact-opt-icon">
+              <Icon name="mdi:whatsapp" class="w-6 h-6" />
+            </div>
+            <div class="contact-opt-info">
+              <span class="contact-opt-label">WhatsApp</span>
+              <span class="contact-opt-value">Respuesta rápida, sin vueltas</span>
+            </div>
+            <div class="contact-opt-arrow">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14m-7-7 7 7-7 7"/>
+              </svg>
+            </div>
+          </a>
+        )}
+
+        <a href={`mailto:${site.email}`} class="contact-opt-primary" id="email-contact-btn">
           <div class="contact-opt-icon">
             <Icon name="mdi:email-outline" class="w-6 h-6" />
           </div>
           <div class="contact-opt-info">
             <span class="contact-opt-label">Correo electrónico</span>
-            <span class="contact-opt-value">devcitobo@outlook.com</span>
+            <span class="contact-opt-value">{site.email}</span>
           </div>
           <div class="contact-opt-arrow">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -281,6 +302,20 @@ import Button from './Button.astro';
     bottom: -60px;
     left: -40px;
     pointer-events: none;
+  }
+
+  /* WhatsApp accent */
+  .contact-opt-whatsapp {
+    background: rgba(37, 211, 102, 0.07);
+    border-color: rgba(37, 211, 102, 0.25);
+  }
+  .contact-opt-whatsapp .contact-opt-icon { color: #25d366; }
+  .contact-opt-whatsapp .contact-opt-label { color: #25d366; }
+  .contact-opt-whatsapp .contact-opt-arrow { color: #25d366; }
+  .contact-opt-whatsapp:hover {
+    background: rgba(37, 211, 102, 0.13);
+    border-color: #25d366;
+    box-shadow: 0 0 30px rgba(37, 211, 102, 0.18);
   }
 
   @media (max-width: 640px) {

@@ -1,4 +1,7 @@
 ---
+import { site } from '../config/site';
+import { faqs } from '../data/faq';
+
 interface Props {
 	title: string;
   description?: string;
@@ -8,16 +11,82 @@ interface Props {
 
 const { 
   title, 
-  description = "Desarrollador Web Full-Stack y Consultor de TI. Creando soluciones a medida, automatización de procesos y páginas web modernas para impulsar tu negocio.", 
-  image = "/og-image.svg",
+  description = "Desarrollador web en Bolivia. Creamos páginas web, sistemas ERP y automatización de procesos a medida para que tu empresa venda más. Consulta gratuita.", 
+  image = "/og-image.png",
   type = "website"
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url);
+
+// Structured data (JSON-LD) — SEO local para Bolivia
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${site.url}/#website`,
+      url: `${site.url}/`,
+      name: site.name,
+      description,
+      inLanguage: 'es-BO',
+      publisher: { '@id': `${site.url}/#business` },
+    },
+    {
+      '@type': 'ProfessionalService',
+      '@id': `${site.url}/#business`,
+      name: site.name,
+      url: `${site.url}/`,
+      description,
+      email: site.email,
+      image: `${site.url}/og-image.png`,
+      logo: `${site.url}/favicon.svg`,
+      priceRange: '$$',
+      address: {
+        '@type': 'PostalAddress',
+        addressCountry: 'BO',
+      },
+      areaServed: site.cities.map((city) => ({
+        '@type': 'City',
+        name: `${city}, Bolivia`,
+      })),
+      knowsAbout: [
+        'Desarrollo web',
+        'Sistemas ERP',
+        'Automatización de procesos',
+        'Consultoría TI',
+        'Marketing digital',
+        'SEO',
+        'Aplicaciones web a medida',
+      ],
+      sameAs: [
+        'https://github.com/programmercito',
+        'https://www.linkedin.com/in/joaquin-h-m/',
+        'https://x.com/programmercito',
+        'https://portafolio.devcito.org/',
+        'https://blog.devcito.org/',
+      ],
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'customer service',
+        email: site.email,
+        availableLanguage: ['Spanish'],
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${site.url}/#faq`,
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ],
+};
 ---
 
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es-BO" class="scroll-smooth">
 <head>
   
 	<meta charset="UTF-8" />
@@ -41,24 +110,38 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url);
     })();
   </script>
   
-  <!-- SEO Básico -->
+  <!-- SEO Básico — Bolivia -->
 	<title>{title}</title>
   <meta name="description" content={description} />
   <meta name="author" content="Devcito" />
-  <meta name="keywords" content="desarrollador web, full-stack, automatización de procesos, consultoría ti, diseño web, desarrollo de software, landing pages, devcito" />
+  <meta name="keywords" content="desarrollador web bolivia, páginas web bolivia, diseño web santa cruz, desarrollo de software bolivia, sistemas ERP bolivia, automatización de procesos, consultoría ti, landing pages, desarrollador web la paz, devcito" />
   <meta name="robots" content="index, follow" />
+  <!-- Región objetivo: Bolivia -->
+  <meta name="geo.region" content="BO" />
+  <meta name="geo.placename" content="Bolivia" />
   <!-- Theme Color para móviles -->
   <meta name="theme-color" content="#030712" />
 
   <!-- Canonical URL -->
   <link rel="canonical" href={canonicalURL} />
 
+  <!-- Hreflang: español de Bolivia -->
+  <link rel="alternate" hreflang="es-bo" href={canonicalURL} />
+  <link rel="alternate" hreflang="es" href={canonicalURL} />
+  <link rel="alternate" hreflang="x-default" href={canonicalURL} />
+
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content={type} />
   <meta property="og:url" content={canonicalURL} />
+  <meta property="og:site_name" content="Devcito Solutions" />
+  <meta property="og:locale" content="es_BO" />
+  <meta property="og:locale:alternate" content="es_419" />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:image" content={new URL(image, canonicalURL)} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Devcito Solutions — Desarrollo web y sistemas a medida" />
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
@@ -66,6 +149,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url);
   <meta property="twitter:title" content={title} />
   <meta property="twitter:description" content={description} />
   <meta property="twitter:image" content={new URL(image, canonicalURL)} />
+  <meta property="twitter:image:alt" content="Devcito Solutions — Desarrollo web y sistemas a medida" />
+
+  <!-- JSON-LD: WebSite + ProfessionalService + FAQPage -->
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-WG7WJG9NE3"></script>
@@ -118,6 +205,20 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url);
       --color-cyan-glow: rgba(2, 132, 199, 0.07);
       --color-blue-glow: rgba(37, 99, 235, 0.06);
       --color-purple-glow: rgba(14, 165, 233, 0.05);
+      --color-sky-glow: rgba(14, 165, 233, 0.06);
+
+      /* Aurora glow orbs (Hero shapes + About orbs) */
+      --color-glow-1: rgba(37, 99, 235, 0.06);
+      --color-glow-2: rgba(14, 165, 233, 0.05);
+      --color-glow-3: rgba(2, 132, 199, 0.05);
+
+      /* Named accents */
+      --color-cobalt: #1e40af;
+
+      /* Aurora orbs (Hero / About) */
+      --color-glow-1: rgba(37, 99, 235, 0.12);
+      --color-glow-2: rgba(14, 165, 233, 0.10);
+      --color-glow-3: rgba(2, 132, 199, 0.09);
 
       --gradient-glow-top: rgba(37, 99, 235, 0.04);
       --gradient-glow-right: rgba(14, 165, 233, 0.03);
@@ -159,6 +260,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url);
       --color-cyan-glow: rgba(0, 245, 255, 0.15);
       --color-blue-glow: rgba(56, 189, 248, 0.12);
       --color-purple-glow: rgba(37, 99, 235, 0.12);
+      --color-sky-glow: rgba(56, 189, 248, 0.12);
+
+      /* Aurora glow orbs (Hero shapes + About orbs) */
+      --color-glow-1: rgba(0, 245, 255, 0.16);
+      --color-glow-2: rgba(56, 189, 248, 0.13);
+      --color-glow-3: rgba(37, 99, 235, 0.15);
+
+      /* Named accents */
+      --color-cobalt: #1d4ed8;
 
       --gradient-glow-top: rgba(0, 245, 255, 0.12);
       --gradient-glow-right: rgba(14, 165, 233, 0.08);
